@@ -1,0 +1,25 @@
+﻿@model MonitoringTourSystem.ViewModel.HomeViewModel
+
+@{
+    if (Model == null || Model.ListWarningWithReceiver == null || Model.ListWarningWithReceiver.Count == 0)
+    {
+        <div class="alert alert-info" style="margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+            Không có cảnh báo nào.
+        </div>
+    }
+    else
+    {
+        foreach (var item in Model.ListWarningWithReceiver)
+        {
+            <ul class="list-tour" id="nav-accordion">
+                <li class="sub-menu">
+                    <a onclick="selectMarkerWarning(@item.Warning.warning_id);" href="javascript:;">
+                        <h4 style="color: black; font-size: 14px;">@item.Warning.warning_name</h4>
+                        <span style="font-size: 12px;">@item.QuanityRecevied / @item.ListWarningReceiver.Count Tour</span> <a style="color: blue" href="http://google.com" > Xem chi tiết</a>
+                    </a>
+                </li>
+            </ul>
+        }
+    }
+}
+

@@ -1,0 +1,168 @@
+﻿@model MonitoringTourSystem.ViewModel.HomeViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+<div id="main-content" style="background-color: #1FB5AD; height: 100%;">
+    <div class="wrapper" style="background-color: white; height: 87.5%; padding-top: 15px;">
+        <div class='row' style="height: 100%; width: 100%; margin: 0px;">
+            <div class="col-sm-3" style="height:100%; ">
+                <div style="width:100%; background-color: white; height: 100%; border-radius: 3px; border: 1px solid #EAEBED">
+                    <div style="height: 7%;  border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                        <p style="padding-top: 16px; margin-left: 12px; font-size: 16px;">Tìm kiếm nhanh</p>
+                    </div>
+                    <div style="height: 1%;">
+
+                    </div>
+                    <div class="dropdown" style="height: 7%;  padding-left: 4px; padding-right: 4px;">
+                        <button class="btn" style="width: 100% ;" type="button" data-toggle="dropdown">
+                            <span>Tìm Theo Tỉnh Thành</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="width: 97.5%; margin-top: -1px; margin-left: 4px; ">
+                            <li><a href="#">Hà Nội</a></li>
+                            <li><a href="#">Đà Nẵng</a></li>
+                            <li><a href="#">Hồ Chí Minh</a></li>
+                            <li><a href="#">Đà Lạt</a></li>
+                            <li><a href="#">Quảng Bình</a></li>
+                            <li><a href="#">Quảng Nam</a></li>
+                            <li><a href="#">Cần Thơ</a></li>
+                            <li><a href="#">Phú Quốc</a></li>
+
+                        </ul>
+                    </div>
+                    <div style="height: 1%;">
+
+                    </div>
+                    <div style="height: 7%; padding-left: 4px; padding-right: 4px;">
+                        <div id="searchform">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Tìm kiếm tour theo mã..." id="nametour" name="query" value="">
+                                <div class="input-group-btn">
+                                    <button type="submit" id="Search" class="btn">
+                                        <i class="fa fa-search" style="color: gray" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="group-list-tour" style="height: 77%;">
+                        <div id="list-tour" style="height: 100% ; overflow-y: hidden">
+                            @{
+                                Html.RenderPartial("ListTourGuide", Model);
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9" style="height: 100%;  ">
+                <div style="height: 10%; background-color: transparent;">
+
+                    <div style="height: 98%; width: 47.5%; background-color: #FAFAFA;  border-radius: 1px;   border: 1px solid #EAEBED; float: left;">
+                        <p style="padding-top: 14px; margin-left: 12px; font-size: 20px;">TRACKING TOURGUIDE</p>
+                    </div>
+
+                    <div id="message-content" onclick="messageClick();" style="height: 98%; width: 15%">
+                        <a href="#">
+                            <div style="height: 100%; float: left; width: 30%; display:table-cell; vertical-align:central; text-align:center; padding-top: 18px;">
+                                <img alt="" src="~/Content/Images/ic_message.png" height="20" width="20">
+                            </div>
+                            <div style="height: 100%; float: left; width: 70%;">
+                                <p style="color: white; vertical-align:top; font-size: 20px; padding-left: 55px;">12</p>
+                                <p style="color: white; font-size: 12px; padding-left: 5px;">Tin nhắn mới</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div id="map-content" onclick="mapClick();" style="height: 98%; width: 15%">
+                        <div style="height: 100%; float: left; width: 30%; display:table-cell; vertical-align:central; text-align:center; padding-top: 18px;">
+                            <img alt="" src="~/Content/Images/loading-process.png" height="20" width="20">
+                        </div>
+
+                        <div style="height: 100%; float: left; width: 70%;">
+                            <p style="color: white; vertical-align:top; font-size: 20px; padding-left: 55px;">50</p>
+                            <p style="color: white; font-size: 12px; padding-left: 22px;"> Hoạt động</p>
+                        </div>
+                    </div>
+                    <div id="right" style="height: 98%; width: 15%">
+                        <div style="height: 100%; float: left; width: 30%; display:table-cell; vertical-align:central; text-align:center; padding-top: 18px;">
+                            <img alt="" src="~/Content/Images/support.png" height="20" width="20">
+                        </div>
+
+                        <div style="height: 100%; float: left; width: 70%;">
+                            <p style="color: white; vertical-align:top; font-size: 20px; padding-left: 55px;">3</p>
+                            <p style="color: white; font-size: 12px; padding-left: 22px;">Trợ giúp</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="height: 2%;">
+                </div>
+                <div id="primary-div" style="height: 87%;background-color: white; border: 1px solid #EAEBED; border-radius: 3px;">
+                    @{
+                        var item = Model;
+                        if (item.OptionRenderView == 1)
+                        {
+                            Html.RenderPartial("Map", Model);
+                        }
+                        if (item.OptionRenderView == 2)
+                        {
+                            Html.RenderPartial("Message", Model);
+                        }
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="closepopup">×</span>
+                <h4>CẢNH BÁO</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="comment">Tin nhắn:</label>
+                    <textarea class="form-control" style="resize: none;" rows="4" id="comment"></textarea>
+                    <button style="margin-top: 8px;" class="btn">Gửi Cảnh Báo </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .mini-stat > a {
+            text-decoration: none;
+        }
+
+        .mini-stat {
+            text-align: center;
+        }
+
+            .mini-stat img {
+                margin: 0 auto;
+                text-align: center;
+            }
+
+        .mini-stat-info span {
+            color: #1FB5AD;
+            font-size: 16px;
+            padding-top: 17px;
+            text-align: center;
+        }
+
+        .mini-stat-info a {
+            text-decoration: none;
+        }
+
+        .mini-stat .hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+        }
+
+        .mini-stat .hvr-glow {
+            border-radius: 50%;
+        }
+    </style>
+</div>

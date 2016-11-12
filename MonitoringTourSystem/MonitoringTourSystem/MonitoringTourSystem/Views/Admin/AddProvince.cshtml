@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Thêm Tỉnh Thành";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<title>@ViewBag.Title</title>
+
+<script type="text/javascript" src="~/Scripts/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="~/Scripts/sweetalert.css">
+<link rel="stylesheet" type="text/css" href="http://loudbeacon.demo.beesightsoft.com/bs3/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+
+    function addNewProvince() {
+
+        var provinceid = $("#provinceid").val();
+        var provincename = $("#provincename").val();
+        var description = $("#description").val();
+        if (provinceid == null || provinceid == "")
+        {
+            swal("Vui lòng nhập mã tỉnh thành!")
+            return;
+        }
+        else if (provincename == null || provincename == "")
+        {
+            swal("Vui lòng nhập tên tỉnh thành!")
+            return;
+        }
+        else if (description == null || description == "") {
+            swal("Vui lòng nhập mô tả về nước!")
+            return;
+        }
+
+        $.ajax({
+            url: "/Admin/AddNewProvince",
+            type: "POST",
+            data: {
+
+                province_id: provinceid,
+                province_name: provincename,
+                description: description,
+            },
+            success: function (result) {
+                var message = result.Message;
+                var success = result.Success;
+                if (success == true) {
+
+                    swal("Thêm tỉnh thành!", message, "success")
+                }
+                else
+                {
+                    sweetAlert("Oops...", message , "error");
+                }
+            },
+            error: function (xhr) {
+                sweetAlert("Oops...", "Thêm tỉnh thành thất bại, vui lòng thử lại", "error");
+            }
+        });
+    }
+</script>
+<section id="main-content">
+
+    <style>
+        .error-message {
+            color: red;
+        }
+    </style>
+    <section class="wrapper" style="background: #f1f2f7">
+        <div class="row" style="margin: 0px;">
+
+            <section class="panel" style="margin: 20px;">
+                <header class="panel-heading">
+                    <h3>Thêm tỉnh thành</h3>
+                </header>
+                <div class="panel-body">
+                    <div class="position-center" style="width: 62%">
+
+                        <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mã tỉnh thành</label>
+                            <div class="input text"><input class="form-control" id="provinceid" placeholder="Nhập mã biển số xe" maxlength="255" type="number"></div>                            <div id="UnameErr" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tên tình thành</label>
+                            <div class="input text"><input class="form-control" id="provincename" placeholder="Nhập tên tỉnh thành" maxlength="255" type="text"></div>                            <div id="nameErr" class="error-message"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mô tả về tỉnh thành</label>
+                            <div class="input email"><input class="form-control" id="description" placeholder="Mô tả về tình thành" maxlength="255" type="text"></div>                            <div id="emailErr" class="error-message"></div>
+                        </div>
+                        <button type="submit" onclick="addNewProvince();" id="submit" class="btn btn-info">Submit</button>
+
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </section>
+</section>

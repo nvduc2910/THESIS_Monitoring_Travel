@@ -1,0 +1,122 @@
+﻿@model MonitoringTourSystem.ViewModel.CreateTourViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<div id="main-content" style="background-color: white; height: 100%">
+    <div class="row" style="padding-top: 100px;margin-right: 50px; margin-left: 50px;">
+        <div class='row'>
+                <header class="panel-heading" style="border: 1px solid #EAEBED;">
+                    <h3>CHỌN TOUR</h3>
+                </header>
+        </div>
+
+        <div class="row" >
+            <div class="panel-body" style="background-color: white; border: 1px solid #EAEBED; ">
+                <div class="col-lg-3 col-xs-6" style="margin-top: 50px; margin-bottom: 50px;">
+                    <!-- small box -->
+                    <div class="small-box bg-primary" style="border-radius: 4px;">
+                        <div class="inner">
+                            <h4 style="color: white">TRONG NƯỚC</h4>
+                            <p>TOUR</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="/createTour/tourVietNam" class="small-box-footer">THÊM TOUR <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-xs-6" style="margin-top: 50px; margin-bottom: 50px;">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua" style="border-radius: 4px;">
+                        <div class="inner">
+                            <h4 style="color: white">NGOÀI NƯỚC</h4>
+
+                            <p style="color: white">TOUR</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="/createTour/tourForeign" class="small-box-footer">THÊM TOUR <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .col-lg-3 {
+        width: 25%;
+    }
+
+    .bg-aqua, .callout.callout-info, .alert-info, .label-info, .modal-info .modal-body {
+        background-color: #1FB5AD !important;
+    }
+
+    .small-box > .inner {
+        padding: 10px;
+    }
+
+    .small-box h3, .small-box p {
+        z-index: 5;
+    }
+
+    p {
+        z-index: 5;
+    }
+
+    .small-box p {
+        font-size: 15px;
+    }
+
+    .small-box h3 {
+        font-size: 38px;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+        white-space: nowrap;
+        padding: 0;
+    }
+
+    p {
+        margin: 0 0 10px;
+    }
+
+    .small-box .icon {
+        -webkit-transition: all .3s linear;
+        -o-transition: all .3s linear;
+        transition: all .3s linear;
+        position: absolute;
+        top: -10px;
+        right: 10px;
+        z-index: 0;
+        font-size: 90px;
+        color: rgba(0,0,0,0.15);
+    }
+
+    .small-box > .small-box-footer {
+        position: relative;
+        text-align: center;
+        padding: 3px 0;
+        color: #fff;
+        color: rgba(255,255,255,0.8);
+        display: block;
+        z-index: 10;
+        background: rgba(0,0,0,0.1);
+        text-decoration: none;
+    }
+
+    .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+</style>

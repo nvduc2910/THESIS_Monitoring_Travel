@@ -1,0 +1,401 @@
+﻿@{
+    ViewBag.Title = "Thêm Địa Điểm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<title>@ViewBag.Title</title>
+<script type="text/javascript" src="~/Scripts/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="~/Scripts/sweetalert.css">
+<link rel="stylesheet" type="text/css" href="http://loudbeacon.demo.beesightsoft.com/bs3/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="~/Content/DropdowSelect/select2.min.css" rel="stylesheet" />
+<script src="~/Content/DropdowSelect/select2.min.js" type="text/javascript"></script>
+
+<script>
+
+    var pathImageUpload;
+    $(document).ready(function () {
+        getProvince();
+
+        function sendFile(file) {
+            var formData = new FormData();
+            formData.append('file', $('#f_UploadImage')[0].files[0]);
+            $.ajax({
+                type: 'post',
+                url: '/CreateTour/FileUpload',
+                data: formData,
+                success: function (result) {
+                    var pathImage = result.PathImage;
+                    var success = result.Success;
+                    if (success == true) {
+
+                        console.log(pathImage);
+                        pathImageUpload = pathImage;
+                    }
+                    else {
+
+                        sweetAlert("Oops...", message, "error");
+                    }
+                },
+                processData: false,
+                contentType: false,
+                error: function () {
+                    alert("Whoops something went wrong!");
+                }
+            });
+        }
+        var _URL = window.URL || window.webkitURL;
+        $("#f_UploadImage").on('change', function () {
+
+            var file, img;
+            if ((file = this.files[0])) {
+                img = new Image();
+                img.onload = function () {
+                    sendFile(file);
+                };
+                img.onerror = function () {
+                    alert("Not a valid file:" + file.type);
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+    });
+    function getProvince()
+    {
+        $.ajax({
+            url: "/CreateTour/GetProvince",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (result) {
+                var results = $.parseJSON(result);
+                $(results).each(function (index, value) {
+                    var provinceName = this['province_name'];
+                    var provinceID = this['province_id'];
+                    $("#province").append(new Option(provinceName, provinceID))
+                });
+                $("#province").select2({
+
+                });
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    }
+    function addPlace()
+    {
+        var placename = $("#placename").val();
+        var contact = $("#contact").val();
+        var address = $("#address").val();
+        var lat = $("#lat").val();
+        var lang = $("#lang").val();
+        var provinceid = $("#province").val();
+
+        
+        if (provinceid == null || provinceid == "") {
+            swal("Vui lòng chọn tỉnh thành!")
+            return;
+        }
+        if (contact == null || contact == "") {
+
+            swal("Vui lòng nhập đại chỉ liên hệ!")
+            return;
+        }
+        if (address == null || address == "") {
+            swal("Vui lòng nhập địa chỉ");
+            return;
+        }
+        if (lat == null || lat == "") {
+            swal("Vui lòng chọn địa điểm vào map");
+            return;
+        }
+        if (lang == null || lang == "") {
+            swal("Vui lòng chọn địa điểm vào map");
+            return;
+        }
+        if (f_UploadImage == null || f_UploadImage == "") {
+            swal("Vui lòng chọn hình đại diện cho địa điểm");
+            return;
+        }
+
+        if (pathImageUpload == null || pathImageUpload == "")
+        {
+            swal("Vui lòng upload hình đại diện!");
+            return;
+        }
+
+        $.ajax({
+            url: "/Admin/AddNewPlace",
+            type: "POST",
+            data: {
+
+                province_id: provinceid,
+                country_id: 84,
+                place_name: placename,
+                contact: contact,
+                address: address,
+                latitude: lat,
+                longitude: lang,
+                cover_photo: pathImageUpload,
+            },
+            success: function (result) {
+                var message = result.Message;
+                var success = result.Success;
+                if (success == true) {
+
+                    swal("Thêm địa điểm!", message, "success")
+                }
+                else {
+                    sweetAlert("Oops...", message, "error");
+                }
+            },
+            error: function (xhr) {
+                sweetAlert("Oops...", "Thêm địa điểm thất bại, vui lòng thử lại", "error");
+            }
+        });
+
+    }
+</script>
+
+<section id="main-content" style="background: #F1F2F7">
+    <style>
+        .error-message {
+            color: red;
+        }
+         .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+        #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        border-radius: 4px;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+        }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+
+        .pac-container {
+            font-family: Roboto;
+        }
+
+        #type-selector {
+            color: #fff;
+            background-color: #4d90fe;
+            padding: 5px 11px 0px 11px;
+        }
+
+            #type-selector label {
+                font-family: Roboto;
+                font-size: 13px;
+                font-weight: 300;
+            }
+
+        #target {
+            width: 345px;
+        }
+    </style>
+    <section class="wrapper">
+        <div class="row" style="margin: 0px;">
+            <div class="col-sm-4">
+                <section class="panel" style="margin: 20px;">
+                    <header class="panel-heading">
+                        <h3>Thêm Địa Điểm</h3>
+                    </header>
+                    <div class="panel-body">
+                        <div class="position-center">
+                           
+                            <div style="display:none;"><input type="hidden" name="_method" value="POST"></div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tên địa điểm</label>
+                                <div class="input text required"><input class="form-control" id="placename" required="required" placeholder="Nhập tên địa điểm" maxlength="255" type="text"></div>                            <div id="UnameErr" class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tỉnh thành</label>
+                                <select id="province" style="width: 100%; height: 34px; border-radius: 5px;">
+                                    <option selected disabled value="0">Chọn tỉnh thành</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Liên hệ</label>
+                                <div class="input email"><input  class="form-control" id="contact" placeholder="Nhập liên hệ" maxlength="255" type="text"></div>                            <div id="emailErr" class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Địa chỉ</label>
+                                <div class="input text"><input class="form-control" id="address"  placeholder="nhập địa chỉ" maxlength="255" type="text"></div>                            <div id="emailErr" class="error-message"></div>
+                            </div>       
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Latitude</label>
+                                <div class="input text"><input readonly class="form-control" id="lat" maxlength="255" type="text"></div>                            <div id="emailErr" class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Longitude</label>
+                                <div class="input text"><input  readonly class="form-control" id="lang" maxlength="255" type="text"></div>                            <div id="emailErr" class="error-message"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Hình đại diện cho địa điểm</label>
+                                <input type="file" class="upload" id="f_UploadImage"><br />
+                                
+                            </div>
+                            <button type="submit" onclick="addPlace();" id="submit" class="btn btn-info">Submit</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="col-sm-8" style="height: 600px">
+                <input id="pac-input" class="controls" type="text" placeholder="Tìm địa điểm" style="font-family: Roboto,Arial,sans-serif; border-radius: 4px;font-size: 12px;">
+                <div id="map" style="height: 600px; position: relative; overflow: hidden; margin-top: 22px;"> </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        var marker1;
+        var map1;
+        var geocoder;
+        var infowindow;
+    function initMap() {
+        //var map;
+        //var marker = null;
+        //map = new google.maps.Map(document.getElementById('map'), {
+        //    center: {lat: 0, lng: 0},
+        //    zoom: 1
+        //});
+        //google.maps.event.addListener(map, "click", function (e) {
+        //    var latLng = e.latLng;
+        //    if (marker){
+        //        marker.setMap(null);
+        //    }
+        //    marker = new google.maps.Marker({
+        //        position: {lat: latLng.lat(), lng: latLng.lng()},
+        //        map: map
+        //    });
+
+        //    $('#lat').val(latLng.lat());
+        //    $('#lang').val(latLng.lng());
+        //});
+
+        map1 = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 10.823099, lng: 106.629664 },
+            zoom: 16,
+            mapTypeId: 'roadmap'
+        });
+
+        geocoder = new google.maps.Geocoder;
+        infowindow = new google.maps.InfoWindow;
+
+        google.maps.event.addListener(map1, "click", function (event) {
+
+            placeMarker(event.latLng);
+            var latitude = event.latLng.lat();
+            var longitude = event.latLng.lng();
+            geocodeLatLng(geocoder, map1, infowindow, latitude, longitude);
+
+            $('#lat').val(latitude);
+            $('#lang').val(longitude);
+
+            //myHub.server.updateLocation(location);
+        });
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map1.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map1.addListener('bounds_changed', function () {
+            searchBox.setBounds(map1.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function () {
+            var places = searchBox.getPlaces();
+
+            if (places.length == 0) {
+                return;
+            }
+
+            // Clear out the old markers.
+            markers.forEach(function (marker1) {
+                marker.setMap(null);
+            });
+            markers = [];
+
+            // For each place, get the icon, name and location.
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function (place) {
+                if (!place.geometry) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+                infowindow.close();
+                placeMarker(place.geometry.location);
+                // Create a marker for each place.
+
+
+                if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map1.fitBounds(bounds);
+        });
+
+    }
+
+    function placeMarker(location) {
+
+        var latMarker = location.toString().replace("(", "").replace(")", "").split(",")[0];
+        var longMarker = location.toString().replace("(", "").replace(")", "").split(",")[1];
+        if (marker1) {
+
+            marker1.setPosition(location);
+
+        } else {
+            marker1 = new google.maps.Marker({
+                position: location,
+                map: map1
+            });
+        }
+    }
+    function geocodeLatLng(geocoder, map, infowindow, latClick, longClick) {
+
+        var latlng = { lat: latClick, lng: longClick };
+        geocoder.geocode({ 'location': latlng }, function (results, status) {
+            if (status === 'OK') {
+                if (results[1]) {
+                    //
+                    infowindow.setContent(results[1].formatted_address);
+                    $('#address').val(results[1].formatted_address);
+                    infowindow.open(map1, marker1);
+                } else {
+                    //window.alert('No results found');
+                }
+            } else {
+                //window.alert('Geocoder failed due to: ' + status);
+            }
+        });
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGdBwIy95layOTnAy1Ovp07urh0OxQrp4&libraries=places&callback=initMap" async defer></script>
+</section>
+

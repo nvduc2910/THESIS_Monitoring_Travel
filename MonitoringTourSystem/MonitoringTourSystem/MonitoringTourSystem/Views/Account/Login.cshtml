@@ -1,0 +1,119 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng Nhập - Tour Tracking</title>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/Scripts/Account/css/normalize.css">
+    <link rel="stylesheet" href="~/Scripts/Account/css/style.css">
+
+
+
+
+</head>
+
+<body>
+
+    <div class="form">
+        <ul class="tab-group">
+            <li class="tab active"><a href="#signup">Đăng Nhập</a></li>
+            <li class="tab"><a href="#login">Đăng Ký</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="signup">
+
+                @{
+                    string action;
+                    if (Request.Url.OriginalString.Contains("?"))
+                    {
+                        int pos = Request.Url.OriginalString.IndexOf('?');
+                        action = "Login" + Request.Url.OriginalString.Substring(pos);
+                    }
+                    else
+                    {
+                        action = "Login";
+                    }
+                }
+                <h1>Bộ Phận Giám Sát!</h1>
+                @{
+                    if (ViewBag.Message != null)
+                    {
+                        if (ViewBag.Message == "Đăng ký thành công, Đăng nhập ngay bây giờ!")
+                        {
+                        <div class="alert alert-danger" style="color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6;     padding: 15px;
+                         margin-bottom: 20px;
+                         border: 1px solid transparent;">
+                            <strong></strong>@ViewBag.Message
+                        </div>
+                        }
+                        else
+                        {
+                        <div class="alert alert-danger" style="color: #a94442;background-color: #f2dede; padding: 15px; margin-bottom: 20px;border: 1px solid transparent; border-radius: 4px; border-color: #ebccd1;">
+                            <strong></strong>@ViewBag.Message
+                        </div>
+                            }
+                        }
+                    }
+                <form action="/Account/@action" method="post" class="form-signin">
+                    <div class="field-wrap">
+                        <label>
+                            Nhập Email<span class="req">*</span>
+                        </label>
+                        <input type="email" name="username" required autocomplete="off" />
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Mật Khẩu<span class="req">*</span>
+                        </label>
+                        <input type="password" name="password" required autocomplete="off" />
+                    </div>
+                    <p class="forgot"><a href="#">Quên Mật Khẩu?</a></p>
+                    <button class="button button-block" />Đăng Nhập</button>
+                </form>
+            </div>
+            <div id="login">
+                <h1>Tài Khoản Bộ Phận Giám Sát</h1>
+                <form action="/Account/Register" method="post">
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                Họ Và Tên<span class="req">*</span>
+                            </label>
+                            <input type="text" name="fullname" required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap">
+                            <label>
+                                Chức Danh<span class="req">*</span>
+                            </label>
+                            <input type="text" name="position" required autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Địa Chỉ Email<span class="req">*</span>
+                        </label>
+                        <input type="email" name="email" required autocomplete="off" />
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Số Điện Thoại<span class="req">*</span>
+                        </label>
+                        <input type="text" name="phone" required autocomplete="off" />
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Đặt Mật Khẩu<span class="req">*</span>
+                        </label>
+                        <input type="password" name="password" required autocomplete="off" />
+                    </div>
+                    <button type="submit" class="button button-block" />Đăng Ký</button>
+                </form>
+            </div>
+        </div><!-- tab-content -->
+    </div> <!-- /form -->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="~/Scripts/Account/index.js"></script>
+</body>
+</html>

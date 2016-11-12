@@ -1,0 +1,2137 @@
+﻿@model MonitoringTourSystem.ViewModel.HomeViewModel
+@{
+    ViewBag.Title = "TRACKING TOUR";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link href="~/Content/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Scripts/Home/css/homestyle.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+</head>
+
+<title>@ViewBag.Title</title>
+<section id="container" style="background: #F1F2F7">
+    <header class="header fixed-top clearfix">
+       
+        <div class="top-nav clearfix" style="margin-top: 0px;">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar" style="margin-left: 240px;">
+                <!-- navbar-top-links -->
+                <ul class="nav navbar-top-links navbar-right">
+                    <!-- main dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="top-label label label-danger">3</span><i class="fa fa-envelope fa-1x"></i>
+                        </a>
+                        <!-- dropdown-messages -->
+                        <ul class="dropdown-menu dropdown-messages">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <strong><span class=" label label-danger">Andrew Smith</span></strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <strong><span class=" label label-info">Jonney Depp</span></strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <strong><span class=" label label-success">Jonney Depp</span></strong>
+                                        <span class="pull-right text-muted">
+                                            <em>Yesterday</em>
+                                        </span>
+                                    </div>
+                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>Read All Messages</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- end dropdown-messages -->
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="top-label label label-success">4</span>  <i class="fa fa-tasks fa-1x"></i>
+                        </a>
+                        <!-- dropdown tasks -->
+                        <ul class="dropdown-menu dropdown-tasks">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 1</strong>
+                                            <span class="pull-right text-muted">40% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                <span class="sr-only">40% Complete (success)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 2</strong>
+                                            <span class="pull-right text-muted">20% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                                <span class="sr-only">20% Complete</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 3</strong>
+                                            <span class="pull-right text-muted">60% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                                <span class="sr-only">60% Complete (warning)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <p>
+                                            <strong>Task 4</strong>
+                                            <span class="pull-right text-muted">80% Complete</span>
+                                        </p>
+                                        <div class="progress progress-striped active">
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                                <span class="sr-only">80% Complete (danger)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>See All Tasks</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- end dropdown-tasks -->
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="top-label label label-warning">5</span>  <i class="fa fa-bell fa-1x"></i>
+                        </a>
+                        <!-- dropdown alerts-->
+                        <ul  id ="div-alert" class="dropdown-menu dropdown-alerts">
+                            
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-twitter fa-fw"></i>3 New Followers
+                                        <span class="pull-right text-muted small">12 minutes ago</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                       
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding: 13.5px; background: #ffffff;">
+                                <img alt="" src="/Content/Images/user.png">
+                                <span class="username">Đức Nguyễn</span>
+                                <b class="caret"></b>
+                            </a>
+                       
+                        <!-- dropdown user-->
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                            </li>
+                        </ul>
+                        <!-- end dropdown-user -->
+                    </li>
+                    <!-- end main dropdown -->
+                </ul>
+                <!-- end navbar-top-links -->
+
+            </nav>
+        </div>
+        <div class="brand">
+
+     
+          <img style="margin-left: 20px; margin-top: 10px;" src="~/Content/Images/M_logo.png" width="200" height="37" />
+           
+           
+        </div>
+    </header>
+    <div id="sidebar" class="nav-collapse">
+        <div class="leftside-navigation">
+            <ul class="sidebar-menu" id="nav-accordion">
+                <li>
+                    <a href="/admin">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Admin</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="/home">
+                        <i class="fa fa-users"></i>
+                        <span>Giám Sát Tour</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-user-secret"></i>
+                        <span>Quản Lý Tour</span>
+                    </a>
+                    <ul class="sub" style="overflow: hidden; display: none;">
+
+                        <li>
+                            <a href="/tourdetail">
+                                Danh Sách Tour
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/createtour/createtourchoose">Thêm Tour</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>Thông Kê</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-info-circle"></i>
+                        <span>Giới Thiệu</span>
+                    </a>
+                    <ul class="sub" style="overflow: hidden; display: none;">
+                        <li>
+                            <a href="#">Sản Phẩm</a>
+                        </li>
+                        <li>
+                            <a href="#">Về Chúng Tôi</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="main-content" style="background-color: #1FB5AD; height: 100%;">
+        <div class="wrapper" style="background-color: white; height: 91%; padding-top: 15px;">
+            <div class='row' style="height: 100%; width: 100%; margin: 0px;">
+                <div class="col-sm-3" style="height:100%; ">
+                    <div style="width:100%; background-color: white; height: 100%; ">
+                        <div class="container-tabbar" style="width:100%; height:100%;">
+                            <p style="padding-top: 14px; font-size: 20px;">QUẢN LÝ TOUR</p>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#home">Tour</a></li>
+                                <li><a data-toggle="tab" href="#menu1">Cảnh báo</a></li>
+                                <li><a data-toggle="tab" href="#menu2">Trợ giúp</a></li>
+                            </ul>
+                            <div class="tab-content" style="border-radius: 3px; border-left: 1px solid #EAEBED; border-right: 1px solid #EAEBED; border-bottom: 1px solid #EAEBED; margin-top: -11px; height: 83%;">
+                                <div id="home" class="tab-pane fade in active" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px; height: 100%;">
+                                    <div id="searchform" style="height: 100%;">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Tìm kiếm tour theo mã..." id="nametour" onkeyup="searchTour();" name="query" value="">
+                                            <div class="input-group-btn">
+                                                <button type="submit" id="Search" class="btn" style="height: 34px;">
+                                                    <i class="fa fa-search" style="color: gray" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="input-group" style="margin-top: 10px; width: 100%;">
+                                            <select id="region" style="width: 100%; margin-right: 10px; height: 34px; border-radius: 4px;">
+                                                <option style="font-size: 18px;" value="0" disabled selected>Chọn miền</option>
+                                            </select>
+                                        </div>
+                                        <div id="DemoAjaxClick" class="alert alert-success" style="margin-top: 10px;">
+                                            Tour đang hoạt động
+                                        </div>
+                                        <div id="list-tour" style="height: 65% ; overflow-y: auto">
+                                            @{
+                                                Html.RenderPartial("ListTourGuide", Model);
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="menu1" class="tab-pane fade" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px; height: 100%">
+                                    <div class="alert alert-success" style="margin-top: 10px; height: 10%">
+                                        Danh sách cảnh báo
+                                    </div>
+                                    <div id="list-warning-reciver" style="height: 84% ; overflow-y: scroll">
+                                        @{
+                                            Html.RenderPartial("ListWarning", Model);
+                                        }
+                                    </div>
+
+                                </div>
+                                <div id="menu2" class="tab-pane fade" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px;">
+                                    <h3>Menu 2</h3>
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-9" style="height: 100%;  ">
+                    <div class="row" style="height: 12%; margin-bottom: 23px">
+
+                        <div class="col-sm-4" style="padding-top:20px;">
+                            <div class="col-sm-6" style="margin-left: -15px;">
+                                <div style="border-bottom: 3px solid #00C377; float: left;">
+                                    <a href="#" data-toggle="modal" data-target="#myModal" style="padding-top: 14px; font-size: 12px; color: #F69E22; font-weight: bold; text-decoration:none">GỬI CẢNH BÁO</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" style="margin-left: -15px;">
+                                <div style="border-bottom: 3px solid #00C377; float: left;">
+                                    <a href="#" onclick="sendTo(2);" style="padding-top: 14px; font-size: 12px; color: #FF5722; font-weight: bold; text-decoration: none">GỬI TIN NHẮN</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <div id="map-content" onclick="mapClick();" style="height: 98%; width: 30%">
+                                <div style="height: 100%; float: left; width: 30%; display:table-cell; vertical-align:central; text-align:center; padding-top: 18px;">
+                                    <img alt="" src="~/Content/Images/loading-process.png" height="20" width="20">
+                                </div>
+                                <div style="height: 100%; float: left; width: 70%;">
+                                    <p id="numberofuseronline" style="color: white; vertical-align:top; font-size: 20px; text-align: right; padding-right: 12px;">0</p>
+                                    <p style="color: white; font-size: 12px; text-align: right; padding-right: 12px;"> Hoạt động</p>
+                                </div>
+                            </div>
+                            <div id="right" style="height: 98%; width: 30%">
+                                <div style="height: 100%; float: left; width: 30%; display:table-cell; vertical-align:central; text-align:center; padding-top: 18px;">
+                                    <img alt="" src="~/Content/Images/support.png" height="20" width="20">
+                                </div>
+
+                                <div style="height: 100%; float: left; width: 70%;">
+                                    <p style="color: white; vertical-align:top; font-size: 20px; text-align: right; padding-right: 12px;">0</p>
+                                    <p style="color: white; font-size: 12px; text-align: right; padding-right: 12px;">Trợ giúp</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="primary-div" style="height: 83.5%; background-color: white; border: 1px solid #EAEBED; border-radius: 3px;">
+                        @{
+                            var item = Model;
+                            if (item.OptionRenderView == 1)
+                            {
+                                Html.RenderPartial("Map", Model);
+                            }
+                            if (item.OptionRenderView == 2)
+                            {
+                                Html.RenderPartial("Message", Model);
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="containr">
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" style="height: 100%" role="dialog">
+            <div class="modal-dialog" style="width: 90%; height: 90%">
+                <!-- Modal content-->
+                <div class="modal-content" style="height: 100%;">
+                    <div class="modal-header" style="background: #1FB5AD;border-top-left-radius: 6px; border-top-right-radius: 6px; height: 10%;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="color: #FFFFFF">CẢNH BÁO</h4>
+                    </div>
+                    <div class="modal-body" style="background: #FAFAFA; height: 80%">
+
+                        <div class="row" style="height: 100%">
+                            <div class="col-sm-9" style="height: 100%">
+                                <div class="row" style="background: #FAFAFA;">
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group" style="margin-bottom: 5px;">
+                                            <label for="exampleInputEmail1">Tên cảnh báo</label>
+                                            <div class="input text required"><input class="form-control" id="warningName" required="required" placeholder="Nhập tên tour" maxlength="255" type="text"></div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 5px;">
+                                            <label for="exampleInputEmail1">Loại cảnh báo</label>
+                                            <select id="categoriesWarning" style="width: 100%; height: 33px;">
+                                                <option selected disabled>-Chọn thể loại-</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group" style="margin-bottom: 5px;">
+                                            <label for="exampleInputEmail1">Chi tiết cảnh báo</label>
+                                            <textarea class="form-control" style="resize: none;" rows="4" id="descriptionWarning" placeholder="Nhập chi tiết cảnh báo..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group" style="margin-bottom: 5px; border-radius: 5px;">
+                                            <label for="exampleInputEmail1">Bán kính</label>
+                                            <select id="distanceWarning" style="width: 100%; height: 33px;">
+                                                <option selected disabled value="0">-Bán Kính-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="height: 74.5%; display: flex;" ;>
+                                    <input id="pac-input" class="controls" type="text" placeholder="Tìm địa điểm cảnh báo" style="font-family: Roboto,Arial,sans-serif; border-radius: 4px;font-size: 12px; flex: 1;">
+                                    <div id="map_canvas1" style="height:100%; width: 100%; position: relative;">
+
+                                    </div>
+                                    <div id="processwaning" style="height:80%; width: 100%; position: absolute; display: none">
+                                        <img src='~/Content/sending.gif' style='display: block; margin: auto;'>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3" style="margin-top: 15px;height: 100%;">
+                                <div class="row" style="margin-right: -5px; height: 10%">
+                                    <div class="alert alert-success">
+                                        Danh sách tour nhận cảnh báo
+                                    </div>
+                                </div>
+                                <div class="row" style="background: #FFFFFF; margin-right: -5px;  height: 90%;">
+                                    <div id="list-tour-warning" style="height: 100% ; overflow-y: scroll">
+                                        @{
+                                            Html.RenderPartial("ListTourGuideWarning", Model);
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="height: 10%;">
+                        <div id="processwaning" style="height: 100%; width: 100px; float: left"></div>
+                        <button type="button" onclick="sendWarning();" class="btn btn-primary">Gửi cảnh báo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="myModal1" class="modal fade" style="height: 100%" role="dialog">
+            <div class="modal-dialog" style="width: 90%; height: 90%">
+                <!-- Modal content-->
+                <div class="modal-content" style="height: 100%;">
+                    <div class="modal-header" style="background: #1FB5AD;border-top-left-radius: 6px; border-top-right-radius: 6px; height: 10%;">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="color: #FFFFFF">CẢNH BÁO RIÊNG</h4>
+                    </div>
+                    <div class="modal-body" style="background: #FAFAFA; height: 80%">
+                        <div class="row" style="height: 100%">
+                            <div class="col-sm-12" style="height: 100%">
+                                <div class="row" style="background: #FAFAFA;">
+                                    <div class="col-sm-4">
+                                        <div class="form-group" style="margin-bottom: 5px;">
+                                            <label for="exampleInputEmail1">Tên cảnh báo</label>
+                                            <div class="input text required"><input class="form-control" id="warningName1" required="required" placeholder="Nhập tên tour" maxlength="255" type="text"></div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 5px;">
+                                            <label for="exampleInputEmail1">Loại cảnh báo</label>
+                                            <select id="categoriesWarning1" style="width: 100%; height: 33px;">
+                                                <option selected disabled>-Chọn thể loại-</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group" style="margin-bottom: 5px;">
+                                            <label for="exampleInputEmail1">Chi tiết cảnh báo</label>
+                                            <textarea class="form-control" style="resize: none;" rows="4" id="descriptionWarning1" placeholder="Nhập chi tiết cảnh báo..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group" style="margin-bottom: 5px; border-radius: 5px;">
+                                            <label for="exampleInputEmail1">Bán kính</label>
+                                            <select id="distanceWarning1" style="width: 100%; height: 33px;">
+                                                <option selected disabled value="0">-Bán Kính-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="height: 74.5%" ;>
+                                    <input id="pac-input1" class="controls" type="text" placeholder="Tìm địa điểm cảnh báo" style="font-family: Roboto,Arial,sans-serif; border-radius: 4px;font-size: 12px;">
+                                    <div id="map_canvas2" style="height:100%; width: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="height: 10%;">
+                        <button type="button" onclick="sendWarningForUser();" class="btn btn-primary">Gửi cảnh báo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $(".sub-menu").children('ul').slideUp();
+
+            if ($(".sub-menu").children('a').hasClass('active')) {
+                $(this).children('ul').css("display", 'block');
+            }
+
+            $(".sub-menu").click(function () {
+                var me = $(this);
+                if (me.children('a').hasClass('active')) {
+                    if ($(this).hasClass('open')) {
+                        $(this).children('ul').slideUp();
+                        $(this).removeClass("open");
+                    } else {
+                        $(this).addClass("open");
+                        $(this).children('ul').slideDown();
+                    }
+                } else {
+                    if ($(this).hasClass('open')) {
+                        $(this).children('ul').slideUp();
+                        $(this).removeClass("open");
+                    } else {
+                        $(this).addClass("open");
+                        $(this).children('ul').slideDown();
+                    }
+                }
+            });
+        });
+        function CreateTourClick() {
+            $.ajax({
+                url: "/Home/GetPlaceForTourSchedule/",
+                type: "GET",
+            })
+                .done(function (partialViewResult) {
+                    $("#bodyMain").html(partialViewResult);
+                });
+        }
+    </script>
+</section>
+<script>
+    function searchTour() {
+        var id = $('#nametour').val();
+        $("#list-tour").html("<img src='/Content/loading.gif' style='display: block; margin: auto;'> ");
+        $.ajax({
+            url: "/Home/SearchTourGuide/" + id,
+            type: "GET",
+        })
+        .done(function (partialViewResult) {
+            $("#list-tour").html(partialViewResult);
+        });
+    }
+
+    //var userId;
+
+    var connection = $.hubConnection('http://192.168.0.104:3407');
+    connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1' };
+    var myHub = connection.createHubProxy('hubServer');
+
+    // for listening
+    myHub.on('updateNumberOfOnline', function (numberOfOnline) {
+
+        alert(numberOfOnline);
+
+        $("#numberofuseronline").text(numberOfOnline);
+    });
+
+
+    myHub.on('locationForAddMarker', function (latitude, longitude) {
+        var lastIndex = listMarker.length;
+        var latlng = new google.maps.LatLng(latitude, longitude);
+        var pinImage = {
+            url: '/Content/Images/icon_marker.png', // image is 512 x 512
+            scaledSize: new google.maps.Size(48, 64)
+        };
+
+        listMarker[lastIndex] = new SlidingMarker({
+            position: latlng,
+            map: map,
+            animation: google.maps.Animation.Gp,
+            icon: pinImage,
+            //tourguiderid: tourguideID
+
+        });       
+    });
+
+    myHub.on('receiveLoaction', function (user, lat, lng) {
+        console.log("dfdfdsf");
+        for (i = 0; i < listMarker.length; i++) {
+
+            if (listMarker[i].tourguiderid == user) {
+                var longitude = lng;
+                var laitude = lat;
+                var newLocation = new google.maps.LatLng(laitude, longitude);
+                MoverMarker(newLocation, i);
+                break;
+            }
+            
+        }
+
+    });
+    myHub.on('pushAlert', function (message) {
+        var contentHtml = '<li>' +
+                         '<a href="#">' +
+                         '<div>' +
+                         '<i class="fa fa-comment fa-fw"></i>' + message +
+                         '<span class="pull-right text-muted small">4 minu</span>' +
+                         '</div>' +
+                         '</a>' +
+                         '</li>' +
+                         '<li class="divider"></li>';
+        $("#div-alert").prepend(contentHtml);
+    });
+
+    // start connection
+    connection.start().done(function () {
+       // doing after connected
+    });
+
+
+    // For add marker tourguide first connect
+
+    
+
+</script>
+
+<script>
+    // For Warning POPUP GROUP
+    var marker1;
+    var map1;
+    var geocoder;
+    var infowindow;
+
+
+    // FOR WARNING POPUP PRIVATE
+
+    var userID;
+    var marker2;
+    var map2;
+    var geocoder1;
+    var infowindow1;
+
+    
+    //For Home
+    var marker, map;
+    var pinColor = "FE7569";
+    var pinColorSelect = "1FB5AD"
+    var pinImage;
+    var pinImageSelect;
+    var listMarker = new Array();
+    var longfake = 0.0000000001;
+    var lagfake = 0.0000000001
+    var listPosition = [];
+    var listInforwindow = [];
+  
+
+    // FOR WARNING PROPERTY
+    var Circle = null;
+    var listInfowindowWarning = [];
+    var listMarkerWarning = new Array();
+    var listCircle = new Array();
+
+    function initAutocomplete() {
+
+
+        // FOR WARNING GROUP
+
+           map1 = new google.maps.Map(document.getElementById('map_canvas1'), {
+            center: { lat: 10.823099, lng: 106.629664 },
+            zoom: 16,
+            mapTypeId: 'roadmap'
+          });
+
+          geocoder = new google.maps.Geocoder;
+          infowindow = new google.maps.InfoWindow;
+
+          google.maps.event.addListener(map1, "click", function (event) {
+                  
+            placeMarker(event.latLng);
+            var latitude = event.latLng.lat();
+            var longitude = event.latLng.lng();
+            geocodeLatLng(geocoder, map1, infowindow, latitude, longitude);
+
+            var location = {
+                Laitude: latitude,
+                Longitude: longitude,
+            }
+            
+            //myHub.server.updateLocation(location);
+          });
+          // Create the search box and link it to the UI element.
+          var input = document.getElementById('pac-input');
+          var searchBox = new google.maps.places.SearchBox(input);
+          map1.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+          // Bias the SearchBox results towards current map's viewport.
+          map1.addListener('bounds_changed', function() {
+            searchBox.setBounds(map1.getBounds());
+          });
+
+          var markers = [];
+          // Listen for the event fired when the user selects a prediction and retrieve
+          // more details for that place.
+          searchBox.addListener('places_changed', function() {
+            var places = searchBox.getPlaces();
+
+            if (places.length == 0) {
+              return;
+            }
+
+            // Clear out the old markers.
+            markers.forEach(function(marker1) {
+              marker.setMap(null);
+            });
+            markers = [];
+
+            // For each place, get the icon, name and location.
+            var bounds = new google.maps.LatLngBounds();
+            places.forEach(function(place) {
+              if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+              }
+              infowindow.close();
+              placeMarker(place.geometry.location);
+              // Create a marker for each place.
+
+
+              if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+              } else {
+                bounds.extend(place.geometry.location);
+              }
+            });
+            map1.fitBounds(bounds);
+        });
+
+
+        // FOR WARNING PRIVATE
+
+          map2 = new google.maps.Map(document.getElementById('map_canvas2'), {
+              center: { lat: 10.823099, lng: 106.629664 },
+              zoom: 16,
+              mapTypeId: 'roadmap'
+          });
+
+          geocoder1 = new google.maps.Geocoder;
+          infowindow1 = new google.maps.InfoWindow;
+
+          google.maps.event.addListener(map2, "click", function (event) {
+
+              placeMarker1(event.latLng);
+              var latitude1 = event.latLng.lat();
+              var longitude1 = event.latLng.lng();
+              latSendWarningPrivate = latitude1;
+              longSendWarningPrivate = longitude1;
+              geocodeLatLng1(geocoder1, map2, infowindow1, latitude1, longitude1);
+
+          });
+        // Create the search box and link it to the UI element.
+          var input1 = document.getElementById('pac-input1');
+          var searchBox1 = new google.maps.places.SearchBox(input1);
+          map2.controls[google.maps.ControlPosition.TOP_LEFT].push(input1);
+
+        // Bias the SearchBox results towards current map's viewport.
+          map2.addListener('bounds_changed', function () {
+              searchBox1.setBounds(map2.getBounds());
+          });
+
+          var markers1 = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+          searchBox1.addListener('places_changed', function () {
+              var places1 = searchBox1.getPlaces();
+
+              if (places1.length == 0) {
+                  return;
+              }
+
+              // Clear out the old markers.
+              markers1.forEach(function (marker2) {
+                  marker1.setMap(null);
+              });
+              markers1 = [];
+
+              // For each place, get the icon, name and location.
+              var bounds1 = new google.maps.LatLngBounds();
+              places1.forEach(function (place) {
+                  if (!place.geometry) {
+                      console.log("Returned place contains no geometry");
+                      return;
+                  }
+                  infowindow1.close();
+                  placeMarker(place.geometry.location);
+                  // Create a marker for each place.
+
+
+                  if (place.geometry.viewport) {
+                      // Only geocodes have viewport.
+                      bounds1.union(place.geometry.viewport);
+                  } else {
+                      bounds1.extend(place.geometry.location);
+                  }
+              });
+              map2.fitBounds(bounds1);
+          });
+
+        // FOR HOME ONLY
+        var myLatlng = new google.maps.LatLng(10.824638, 106.627733);
+        var mapOptions = {
+            zoom: 4,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+        // SLIDING MARKER   
+        /* global define,module,require,google */
+        (function (root, factory) {
+            'use strict';
+            if (typeof define === 'function' && define.amd) {
+                // AMD. Register as an anonymous module.
+                define(['jquery', 'marker-animate'], factory.bind(null, root));
+            } else if (typeof module !== "undefined" && module !== null && module.exports != null) { // jshint ignore:line
+                // Node module.
+                module.exports = factory(root, require('jquery'), require('marker-animate'));
+            } else {
+                // Browser globals
+                root.SlidingMarker = factory(root, root.jQuery);
+            }
+        }(this,
+            function (root, $) {
+                'use strict';
+
+                //Let jQuery be soft dependency
+                $ = $ || {};
+                $.extend = $.extend || function extend(obj) {
+                    //Taken (and modified) from here: http://stackoverflow.com/a/14604815/1691132
+                    Array.prototype.slice.call(arguments, 1).forEach(function (source) {
+                        if (source) {
+                            for (var prop in source) {
+                                if (source[prop] && source[prop].constructor === Object) {
+                                    if (!obj[prop] || obj[prop].constructor === Object) {
+                                        obj[prop] = obj[prop] || {};
+                                        extend(obj[prop], source[prop]);
+                                    } else {
+                                        obj[prop] = source[prop];
+                                    }
+                                } else {
+                                    obj[prop] = source[prop];
+                                }
+                            }
+                        }
+                    });
+                    return obj;
+                };
+
+                var GoogleMarker = google.maps.Marker; //Store original in case it will be replaced in initializeGlobally().
+
+                var animateTo,
+                    markerAnimate_AnimateTo_Wrapper = function (destPosition, easing, duration) { //default implementation based on markerAnimate
+                        if (destPosition === null || destPosition === undefined) {
+                            //as markerAnimate provides no means to stop animation, do it manually, even though it leaks markerAnimate implementation.
+                            if (window.cancelAnimationFrame) {
+                                window.cancelAnimationFrame(this.AT_animationHandler);
+                            } else {
+                                clearTimeout(this.AT_animationHandler);
+                            }
+                            return;
+                        }
+                        google.maps.Marker.prototype.animateTo.apply(this, arguments);
+                    };
+
+                //default options
+                var defaultOptions = {
+                    easing: "easeInOutQuint",
+                    duration: 1000,
+                    animateFunctionAdapter: function (marker, destPosition, easing, duration) {
+                        if (!animateTo) {
+                            if (!google.maps.Marker.prototype.animateTo) {
+                                throw new Error("Please either reference markerAnimate.js, or provide an alternative animateFunctionAdapter");
+                            }
+                            animateTo = markerAnimate_AnimateTo_Wrapper;
+                        }
+                        animateTo.call(marker, destPosition, {
+                            easing: easing,
+                            duration: duration,
+                            complete: function () {
+                            }
+                        });
+                    }
+                };
+
+                var inherits = function (childCtor, parentCtor) {
+                 
+                    function TempCtor() { }
+
+                    TempCtor.prototype = parentCtor.prototype;
+                    childCtor.superClass_ = parentCtor.prototype;
+                    childCtor.prototype = new TempCtor();
+      
+                    childCtor.prototype.constructor = childCtor;
+                };
+
+                var decorates = function (childCtor, parentCtor) {
+                    inherits(childCtor, parentCtor);
+
+                    var parentPrototype = parentCtor.prototype;
+
+                    //TODO: google.maps.MVCObject.prototype.set if object instanceof GoogleMarker
+
+                    $.extend(childCtor.prototype, {
+                        _instance: null, //override it in constructor
+
+                        originalSet: function () {
+                            return parentPrototype.set.apply(this, arguments);
+                        },
+
+                        //from MVCObject
+                        set: function (key, value) {
+                            var that = this;
+
+                            that.originalSet.apply(that, arguments);
+
+                            if (key === "position" && that instanceof SlidingMarker) {
+                                that._setInstancePositionAnimated(value);
+                            } else {
+                                that.originalSet.apply(that._instance, arguments);
+                            }
+                        },
+
+                        _setInstancePositionAnimated: function (position) {
+                            var that = this;
+
+                            if (that._constructing) { //pass by
+                                return;
+                            }
+
+                            if (!position || !that._instance.getPosition()) { //If position is set for a first time, no animation should be applied
+                                if (that._instance.getPosition() !== position) {
+                                    that._instance.setPosition(position);
+                                }
+                                return;
+                            }
+
+                            //apply animation function
+                            //this will cause many animationposition_changed events
+                            that.get("animateFunctionAdapter").call(null, that._instance, position, that.get("easing"), that.get("duration"));
+                        },
+
+                        //setValues() will call set(), no need to override
+
+                        originalAddListener: function () {
+                            return parentPrototype.addListener.apply(this, arguments);
+                        },
+
+                        //from MVCObject
+                        addListener: function (eventName, handler) {
+                            var target = (eventName === "map_changed") ? this._instance : getEventTarget.call(this, eventName);
+                            return this.originalAddListener.apply(target, arguments);
+                        },
+
+                        map_changed: function () {
+                            //Should be empty
+                            //Prevents this marker from appearing on map. Only this._instance marker will appear.
+                        },
+
+                        //This will be called by binding created with marker.bindTo() method, instead of call to set("position").
+                        position_changed: function () {
+                            if (!this._suppress_animation) {
+                                this._setInstancePositionAnimated(this.getPosition());
+                            } else {
+                                delete this._suppress_animation;
+                            }
+                        }
+
+                    });
+
+                };
+
+                //call it on SlidingMarker
+                var getEventTarget = function (eventName) {
+                    //redirect _changed events to this, other events to _instance
+                    if (eventName.endsWith("_changed")) { //all _changed redirect to this
+                        return this;
+                    }
+                    return this._instance;
+                };
+
+                var originalAddListener = google.maps.event.addListener;
+                google.maps.event.addListener = function (instance, eventName, handler) {
+                    //Redirect listener to target
+                    if (instance instanceof SlidingMarker) {
+                        var target = (eventName === "map_changed") ? instance._instance : getEventTarget.call(instance, eventName);
+                        return originalAddListener.call(this, target, eventName, handler);
+                    }
+
+                    return originalAddListener.apply(this, arguments);
+                };
+
+                var originalTrigger = google.maps.event.trigger;
+                google.maps.event.trigger = function (instance, eventName) {
+                    //Replace instance parameter to target
+                    if (instance instanceof SlidingMarker) {
+                        var target = (eventName === "map_changed") ? instance : getEventTarget.call(instance, eventName),
+                            newArgs = [target].concat(Array.prototype.slice.call(arguments, 1)); //replaces instance parameter with target
+
+                        return originalTrigger.apply(this, newArgs);
+                    }
+
+                    return originalTrigger.apply(this, arguments);
+                };
+
+                //just string helper
+                String.prototype.endsWith = String.prototype.endsWith || function (suffix) {
+                    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+                };
+
+                //constructor
+                var SlidingMarker = function (opt_options) {
+
+                    opt_options = $.extend({}, defaultOptions, opt_options);
+
+                    this._instance = new GoogleMarker(opt_options);
+
+                    this.animationPosition = null;
+
+                    this._constructing = true;
+                    // Call the parent constructor.
+                    GoogleMarker.call(this, opt_options);
+                    delete this._constructing;
+
+                    this.bindTo("animationPosition", this._instance, "position");
+                    this.bindTo("anchorPoint", this._instance, "anchorPoint"); //This makes InfoWindow.open(map, marker) work.
+                    this.bindTo("internalPosition", this._instance, "internalPosition"); //This makes InfoWindow.open(map, marker) work.
+
+                };
+
+                decorates(SlidingMarker, GoogleMarker);
+
+                //Overrides
+                $.extend(SlidingMarker.prototype, {
+
+                    getAnimationPosition: function () {
+                        return this.get("animationPosition");
+                    },
+
+                    //Changes marker position immediately
+                    setPositionNotAnimated: function (position) {
+                        this._suppress_animation = true; //will be unset by position_changed handler
+                        this.get("animateFunctionAdapter").call(null, this._instance, null); //stop current animation
+                        this.originalSet("position", position);
+                        this._instance.setPosition(position);
+                    },
+
+                    setDuration: function (value) {
+                        this.set("duration", value);
+                    },
+
+                    getDuration: function () {
+                        return this.get("duration");
+                    },
+
+                    setEasing: function (value) {
+                        this.set("easing", value);
+                    },
+
+                    getEasing: function () {
+                        return this.get("easing");
+                    }
+
+                });
+
+                SlidingMarker.initializeGlobally = function () {
+                    google.maps.Marker = SlidingMarker;
+                };
+
+                return SlidingMarker;
+
+            }));
+        //FOR ANIMATION
+        google.maps.Marker.prototype.animateTo = function (newPosition, options) {
+            defaultOptions = {
+                duration: 1000,
+                easing: 'linear',
+                complete: null
+            }
+            options = options || {};
+
+            // complete missing options
+            for (key in defaultOptions) {
+                options[key] = options[key] || defaultOptions[key];
+            }
+
+            // throw exception if easing function doesn't exist
+            if (options.easing != 'linear') {
+                if (typeof jQuery == 'undefined' || !jQuery.easing[options.easing]) {
+                    throw '"' + options.easing + '" easing function doesn\'t exist. Include jQuery and/or the jQuery easing plugin and use the right function name.';
+                    return;
+                }
+            }
+
+            window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+            window.cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
+            // save current position. prefixed to avoid name collisions. separate for lat/lng to avoid calling lat()/lng() in every frame
+            this.AT_startPosition_lat = this.getPosition().lat();
+            this.AT_startPosition_lng = this.getPosition().lng();
+            var newPosition_lat = newPosition.lat();
+            var newPosition_lng = newPosition.lng();
+
+            // crossing the 180° meridian and going the long way around the earth?
+            if (Math.abs(newPosition_lng - this.AT_startPosition_lng) > 180) {
+                if (newPosition_lng > this.AT_startPosition_lng) {
+                    newPosition_lng -= 360;
+                } else {
+                    newPosition_lng += 360;
+                }
+            }
+
+            var animateStep = function (marker, startTime) {
+                var ellapsedTime = (new Date()).getTime() - startTime;
+                var durationRatio = ellapsedTime / options.duration; // 0 - 1
+                var easingDurationRatio = durationRatio;
+
+                // use jQuery easing if it's not linear
+                if (options.easing !== 'linear') {
+                    easingDurationRatio = jQuery.easing[options.easing](durationRatio, ellapsedTime, 0, 1, options.duration);
+                }
+
+                if (durationRatio < 1) {
+                    var deltaPosition = new google.maps.LatLng(marker.AT_startPosition_lat + (newPosition_lat - marker.AT_startPosition_lat) * easingDurationRatio,
+                                                                marker.AT_startPosition_lng + (newPosition_lng - marker.AT_startPosition_lng) * easingDurationRatio);
+                    marker.setPosition(deltaPosition);
+
+                    // use requestAnimationFrame if it exists on this browser. If not, use setTimeout with ~60 fps
+                    if (window.requestAnimationFrame) {
+                        marker.AT_animationHandler = window.requestAnimationFrame(function () { animateStep(marker, startTime) });
+                    } else {
+                        marker.AT_animationHandler = setTimeout(function () { animateStep(marker, startTime) }, 17);
+                    }
+
+                } else {
+
+                    marker.setPosition(newPosition);
+
+                    if (typeof options.complete === 'function') {
+                        options.complete();
+                    }
+
+                }
+            }
+
+            // stop possibly running animation
+            if (window.cancelAnimationFrame) {
+                window.cancelAnimationFrame(this.AT_animationHandler);
+            } else {
+                clearTimeout(this.AT_animationHandler);
+            }
+
+            animateStep(this, (new Date()).getTime());
+        }
+        LoadMarker();
+        loadMarkerWarning();
+    }
+    function addMarkerWarning(distance, lat, long)
+    {
+        closeAllOfInfoWindow();
+        if (Circle != null)
+        {
+            Circle.setMap(null);
+        }
+
+        var myLatlngWarning = new google.maps.LatLng(lat, long);
+        Circle = new google.maps.Circle({
+            map: map,
+            radius: distance * 1000,    // 10 miles in metres
+            fillColor: '#FF0000',
+            strokeWeight: 1,
+            strokeColor: "#f59d21",
+        });
+        Circle.bindTo('center', listMarkerWarning[listMarkerWarning.length - 1], 'position');
+        listInfowindowWarning[listMarkerWarning.length - 1].open(map, listMarkerWarning[listMarkerWarning.length - 1]);
+        map.setCenter(myLatlngWarning);
+        map.setZoom(15);
+    }
+    function closeAllOfInfoWindow()
+    {
+        for (j = 0; j < listInfowindowWarning.length; j++) {
+            listInfowindowWarning[j].close();
+        }
+        for (i = 0; i < listInforwindow.length; i++)
+        {
+            listInforwindow[i].close();
+        }
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGdBwIy95layOTnAy1Ovp07urh0OxQrp4&libraries=places&callback=initAutocomplete" async defer></script>
+<link href="~/Content/DropdowSelect/select2.min.css" rel="stylesheet" />
+<script src="~/Content/DropdowSelect/select2.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="~/Scripts/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="~/Scripts/sweetalert.css">
+<script>
+
+    // FOR POPUP WARNING
+    var optionDistance = ["3 KM", "5 KM", "10 KM ", "20 KM ", "30 KM"];
+    var categoriesWarning = ["Khủng Bố", "Thời Tiết", "Giao Thông", "Khác"];
+
+    var optionDistance1 = ["3 KM", "5 KM", "10 KM ", "20 KM ", "30 KM"];
+    var categoriesWarning1 = ["Khủng Bố", "Thời Tiết", "Giao Thông", "Khác"];
+
+    var lat;
+    var long;
+
+    var listTourGuideWarning = [];
+
+    $(document).on('change', '#distanceWarning', function () {
+
+        var distance = $("#distanceWarning").val();
+        if (distance == null)
+        {
+            distance = 0;
+        }
+        if (lat == null) {
+            swal("Vui lòng chọn địa điểm cảnh báo!");
+            return;
+        }
+        getListTourWarning(distance, lat, long);
+    });
+
+    $(document).ready(function()
+    {
+        $("#myModal").on("shown.bs.modal", function () {
+
+            google.maps.event.trigger(map1, "resize");
+
+            for (i = 0; i < optionDistance.length; i++)
+            {
+                $("#distanceWarning:last").append(new Option(optionDistance[i], optionDistance[i].split(" ")[0]));
+            }
+            $("#distanceWarning:last").select2({
+
+            });
+
+            for (i = 0; i < categoriesWarning.length; i++)
+            {
+                $("#categoriesWarning:last").append(new Option(categoriesWarning[i], i.toString()));
+            }
+            $("#categoriesWarning:last").select2({
+
+            });
+            if (optionDistance.length != 0) {
+                optionDistance.length = 0;
+            }
+
+            if (categoriesWarning.length != 0) {
+                categoriesWarning.length = 0;
+            }
+
+        });
+
+        $("#myModal1").on("shown.bs.modal", function () {
+            google.maps.event.trigger(map2, "resize");
+
+            for (i = 0; i < optionDistance1.length; i++) {
+                $("#distanceWarning1:last").append(new Option(optionDistance1[i], optionDistance1[i].split(" ")[0]));
+            }
+            $("#distanceWarning1:last").select2({
+
+            });
+
+            for (i = 0; i < categoriesWarning1.length; i++) {
+                $("#categoriesWarning1:last").append(new Option(categoriesWarning1[i], i.toString()));
+            }
+            $("#categoriesWarning1:last").select2({
+
+            });
+            if (optionDistance1.length != 0) {
+                optionDistance1.length = 0;
+            }
+
+            if (categoriesWarning1.length != 0) {
+                categoriesWarning1.length = 0;
+            }
+
+        });
+
+    }); 
+    function placeMarker(location) {
+
+        var latMarker = location.toString().replace("(", "").replace(")","").split(",")[0];
+        var longMarker = location.toString().replace("(", "").replace(")", "").split(",")[1];
+        if (marker) {
+
+            marker.setPosition(location);
+
+        } else {
+            marker = new google.maps.Marker({
+                position: location,
+                map: map1
+            });
+        }
+        var distance = $("#distanceWarning").val();
+        if (distance == null) {
+            distance = 0;
+            getListTourWarning(distance, latMarker, longMarker);
+        }
+    }
+    function placeMarker1(location) {
+
+        var latMarker = location.toString().replace("(", "").replace(")", "").split(",")[0];
+        var longMarker = location.toString().replace("(", "").replace(")", "").split(",")[1];
+        if (marker1) {
+
+            marker1.setPosition(location);
+
+        } else {
+            marker1 = new google.maps.Marker({
+                position: location,
+                map: map2
+            });
+        }
+        var distance = $("#distanceWarning").val();
+        if (distance == null) {
+            
+        }
+    }
+    function geocodeLatLng(geocoder, map, infowindow, latClick, longClick) {
+
+        var latlng = { lat: latClick, lng: longClick };
+        lat = latClick; // use when distance change
+        long = longClick;
+        geocoder.geocode({ 'location': latlng }, function (results, status) {
+            if (status === 'OK') {
+                if (results[1]) {
+                    //
+                    infowindow.setContent(results[1].formatted_address);
+                    infowindow.open(map1, marker);
+                } else {
+                    //window.alert('No results found');
+                }
+            } else {
+                //window.alert('Geocoder failed due to: ' + status);
+            }
+        });
+    }
+    function geocodeLatLng1(geocoder, map, infowindow, latClick, longClick) {
+
+        var latlng = { lat: latClick, lng: longClick };
+        lat = latClick; // use when distance change
+        long = longClick;
+        geocoder.geocode({ 'location': latlng }, function (results, status) {
+            if (status === 'OK') {
+                if (results[1]) {
+                    //
+                    infowindow1.setContent(results[1].formatted_address);
+                    infowindow1.open(map2, marker1);
+                } else {
+                    //window.alert('No results found');
+                }
+            } else {
+                //window.alert('Geocoder failed due to: ' + status);
+            }
+        });
+    }
+
+    function getListTourWarning(distance, latTemp, longTemp)
+    {
+        latSendWarning = latTemp;
+        longSendWarning = longTemp;
+
+        $("#list-tour-warning").html("<img src='/Content/loading.gif' style='display: block; margin: auto;'> ");
+        $.ajax({
+            url: "/Home/GetListForWarning",
+            type: "POST",
+            data: {
+
+                Distance: distance,
+                Lat: latTemp,
+                Long: longTemp,
+            },
+            
+        })
+        .done(function (partialViewResult) {
+            getListTourWarningJson(distance, latTemp, longTemp);
+            $("#list-tour-warning").html(partialViewResult);
+        });
+    }
+
+    function getListTourWarningJson(distance, latTemp, longTemp) {
+
+        latSendWarning = latTemp;
+        longSendWarning = longTemp;
+        listTourGuideWarning = [];
+        $.ajax({
+            url: "/Home/GetListForWarningJson",
+            type: "POST",
+            data: {
+
+                Distance: distance,
+                Lat: latTemp,
+                Long: longTemp,
+            },
+            success: function (result) {
+
+                var results = $.parseJSON(result);
+                for (i = 0; i < results.objectArray.length; i++) {
+
+                    var tourguideID = results.objectArray[i].Tour.tourguide_id;
+                    alert(tourguideID);
+                    listTourGuideWarning.push(tourguideID);
+                }
+                
+            },
+        })
+    }
+
+    // FOR WARNING GROUP IN HOME
+    var latSendWarning;
+    var longSendWarning;
+    function sendWarning()
+    {  
+        var warningName = $("#warningName").val();
+        var descriptionWarning = $("#descriptionWarning").val();
+        var categories = $("#categoriesWarning option:selected").text();
+        var distance = $("#distanceWarning").val();
+
+        if(warningName == null)
+        {
+            swal("Vui lòng nhập tiêu đề cảnh báo!");
+            return;
+        }
+        if (distance == null)
+        {
+            distance = 0;
+            warningName = "CẢNH BÁO TOÀN BỘ: " + warningName;
+        }
+        if(descriptionWarning == null)
+        {
+            swal("Vui lòng nhập mô tả cảnh báo!");
+            return;
+        }
+        if(categories == null)
+        {
+            swal("Vui lòng thể loại cảnh báo!");
+            return;
+        }
+
+        var dataSend = {
+            WarningName: warningName,
+            Description: descriptionWarning,
+            Categories: categories,
+            Distance: distance,
+           
+        }
+
+        document.getElementById("processwaning").style.display = "block";
+
+        //Realtime.
+
+
+        myHub.invoke('SendMessageTo', listTourGuideWarning, "chao ban");
+
+        $.ajax({
+
+            url: "/Home/SendWarning",
+            type: "POST",
+            data: {
+
+                Lat: latSendWarning,
+                Long: longSendWarning,
+                WarningName: warningName,
+                DescriptionWarning: descriptionWarning,
+                CategoryWarnig: categories,
+                Distance: distance,
+                ListTourGuideId : listTourGuideWarning
+            },
+            success: function (result) {
+
+                //var results = $.parseJSON(result);
+                var message = result.Message;
+                var success = result.Success;
+                if (success == false) {
+                    sweetAlert("Oops...", message, "error");
+                }
+                else {
+                    swal("Gửi cảnh báo!", message, "success")
+                    //myHub.server.sendWarning(dataSend);
+                    loadMarkerWarning();
+                    getListWarning();
+                }
+                document.getElementById("processwaning").style.display = "none";
+            },
+            error: function (xhr) {
+                sweetAlert("Oops...", "Gửi cảnh báo thất bại, vui lòng thử lại", "error");
+            }
+        });
+    }
+    function getListWarning()
+    {
+        $.ajax({
+            url: "/Home/GetListWarningRefresh",
+            type: "POST",
+
+        })
+        .done(function (partialViewResult) {
+            $("#list-warning-reciver").html(partialViewResult);
+        });
+    }
+    function loadMarkerWarning()
+    {
+        $.ajax({
+            url: "/Home/CreateMarkerWarning/",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (result) {
+                var results = $.parseJSON(result);
+                $(results).each(function (index, value) {
+                    console.log(index);
+                    var longitude = this['longitude'];
+                    var laitude = this['latitude'];
+                    var title = this['warning_name'];
+                    var warningID = this['warning_id'];
+
+                    console.log(warningID);
+                    var myLatlngWarning = new google.maps.LatLng(laitude, longitude);
+
+                    var imageMarkerWarning = {
+                        url: '/Content/Images/ic_marker_warning.png', // image is 512 x 512
+                        scaledSize: new google.maps.Size(50, 62)
+                    };
+
+                    listMarkerWarning[index] = new SlidingMarker({
+                        position: myLatlngWarning,
+                        map: map,
+                        animation: google.maps.Animation.Gp,
+                        icon: imageMarkerWarning,
+                        warningid: warningID,
+                        //shadow: pinShadow
+                    })
+                    listInfowindowWarning[index] = new google.maps.InfoWindow({
+                        content: title
+                    });
+                    google.maps.event.addListener(listMarkerWarning[index], "click", function () {
+                        closeAllOfInfoWindow();
+                        listInfowindowWarning[index].open(map, listMarkerWarning[index]);                          
+                    });
+                });
+
+                if (latSendWarning != null) {
+                    var distance = $("#distanceWarning").val();
+                    addMarkerWarning(distance, latSendWarning, longSendWarning);
+                }
+               
+            },
+            error: function (xhr) {
+                alert('GET WARNING ERROR');
+            }
+        });
+        
+    }
+    function selectMarkerWarning(id) {
+        $.ajax({
+            url: "/Home/GetMarkerWarningSelected/" + id,
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (result) {
+                var results = $.parseJSON(result);
+                console.log(result);
+                $(results).each(function (index, value) {
+                    var longitude = this['longitude'];
+                    var laitude = this['latitude'];
+                    var distance = this['distance']
+                    var location = new google.maps.LatLng(laitude, longitude);
+                    panTo(laitude, longitude);
+                    
+                    for (k = 0; k < listMarkerWarning.length; k++)
+                    {
+                        if (Circle != null)
+                        {
+                            console.log("clear circle");
+                            Circle.setMap(null);
+                        }
+                        console.log(listMarkerWarning.length);
+
+                        if (listMarkerWarning[k].warningid == id)
+                        {
+                            Circle = new google.maps.Circle({
+                                map: map,
+                                radius: distance * 1000,    // 10 miles in metres
+                                fillColor: '#FF0000',
+                                strokeWeight: 1,
+                                strokeColor: "#f59d21",
+                            });
+                            Circle.bindTo('center', listMarkerWarning[k], 'position');
+                            closeAllOfInfoWindow();
+
+                            console.log("gia tri k: " + k);
+
+                            listInfowindowWarning[k].open(map, listMarkerWarning[k]);
+                            map.setZoom(10);
+                            break;
+                        }                   
+                    }                
+                });
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    }
+    function animateMapZoomTo(map, targetZoom) {
+        var currentZoom = arguments[2] || map.getZoom();
+        if (currentZoom != targetZoom) {
+            google.maps.event.addListenerOnce(map, 'zoom_changed', function (event) {
+                animateMapZoomTo(map, targetZoom, currentZoom + (targetZoom > currentZoom ? 1 : -1));
+            });
+            setTimeout(function () { map.setZoom(currentZoom) }, 80);
+        }
+    }
+
+
+    // FOR WARNING PRIVATE
+    var latSendWarningPrivate;
+    var longSendWarningPrivate;
+    function sendWarningForUser() {
+
+        var warningName = $("#warningName1").val();
+        var descriptionWarning = $("#descriptionWarning1").val();
+        var categories = $("#categoriesWarning1 option:selected").text();
+        var distance = $("#distanceWarning1").val();
+        
+        console.log(warningName);
+        console.log(descriptionWarning);
+        console.log(categories);
+        console.log(distance);
+
+        console.log(latSendWarningPrivate);
+        console.log(longSendWarningPrivate);
+        if (warningName == null) {
+            swal("Vui lòng nhập tiêu đề cảnh báo!");
+            return;
+        }
+        if (distance == null) {
+            distance = 0;
+        }
+        if (descriptionWarning == null) {
+            swal("Vui lòng nhập mô tả cảnh báo!");
+            return;
+        }
+        if (categories == null) {
+            swal("Vui lòng thể loại cảnh báo!");
+            return;
+        }
+
+        var dataSend = {
+            WarningName: warningName,
+            Description: descriptionWarning,
+            Categories: categories,
+            Distance: distance
+        }
+
+        $.ajax({
+            url: "/Home/SendWraningForUser/" + userID,
+            type: "POST",
+            data: {
+
+                Lat: latSendWarningPrivate,
+                Long: longSendWarningPrivate,
+                WarningName: warningName,
+                DescriptionWarning: descriptionWarning,
+                CategoryWarnig: categories,
+                Distance: distance
+            },
+            success: function (result) {
+
+                //var results = $.parseJSON(result);
+                var message = result.Message;
+                var success = result.Success;
+                if (success == false) {
+                    sweetAlert("Oops...", message, "error");
+                }
+                else {
+                    swal("Gửi cảnh báo!", message, "success")
+                }
+            },
+            error: function (xhr) {
+                sweetAlert("Oops...", "Gửi cảnh báo thất bại, vui lòng thử lại", "error");
+            }
+        });
+    }
+
+    // FOR TOURGUIDE MARKER
+    var panPath = [];
+    var panQueue = [];
+    var STEPS = 50;
+    function LoadMarker() {
+
+       
+        $.ajax({
+            url: "/Home/CreateMarker/",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (result) {
+
+                var results = $.parseJSON(result);
+                for (i = 0; i < results.objectArray.length; i++) {
+
+                    var longitude = results.objectArray[i].TourGuide.longitude;
+                    var laitude = results.objectArray[i].TourGuide.latitude;
+                    var tourName = results.objectArray[i].Tour.tour_name;
+                    var tourguideID = results.objectArray[i].Tour.tourguide_id;
+                    var tourGuide = results.objectArray[i].TourGuide.tourguide_name;
+                    var departure_date = results.objectArray[i].Tour.departure_date.split('T')[0];
+                    var return_date = results.objectArray[i].Tour.return_date.split('T')[0];
+                    var tourDetail = '/TourDetail/GetDetailTour/' + results.objectArray[i].Tour.tour_id;
+                    var currentLocation = new google.maps.LatLng(laitude, longitude);
+                    var cover_image = results.objectArray[i].TourGuide.display_photo;
+
+                    var contentString = '<div style="width: 300px;background: white;height: 150px;background: while;">' +
+                        '<div style="height: 68%;">' +
+                        '<div style="float: left; width: 35%; height: 100%;">' +
+                        '<img style="width: 100%; height: 100%;" src="/Content/Images/' + cover_image + '"/>' +
+                        '</div>' +
+                        '<div style="float: right; width: 65%; height: 100%;">' +
+                        '<div class="list-tour" style="height: 25px; margin-top: 0px; margin-left: 5px;" id="nav-accordion">' +
+                        '<span style="color: black; font-size: 14px; margin-left: 10px; font-weight: bold;">' + tourName + '</span>' +
+                        '</div>' +
+                        '<div class="list-tour" style="height: 20px; margin-top: 0px; margin-left: 15px;" id="nav-accordion">' +
+                        '<img src="/Content/Images/ic_tourguide.png" width="20" height="20"/>' +
+                        '<span style="color: gray; font-size: 12px; margin-left: 20px;">' + tourGuide + '</span><span style="font-size: 16px;"></span>' +
+                        '</div>' +
+                        '<div class="list-tour" style="height: 20px; margin-top: 10px; margin-left: 15px;" id="nav-accordion">' +
+                        '<img src="/Content/Images/ic_time.png" width="18" height="18" style="margin-top: -4px;"/>' +
+                        '<span style="color: gray; font-size: 12px; margin-left: 20px;">' + departure_date + ' - ' + return_date + '</span>' +
+                        '</div>' +
+                        '<div class="list-tour" style="height: 20px; margin-top: 8px; margin-left: 15px;" id="nav-accordion">' +
+                        '<span style="color: blue; font-size: 12px; margin-left: 20px; float: right;"><a href="' + tourDetail + '"  style="color: blue;">Xem chi tiết</a></span>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div style="height: 10%; border-bottom: 1px solid #e5e5e6;"> </div>' +
+                        '<div style="height: 22%; margin-top: 10px;">' +
+                        '<div style="float: right; height: 100%; width: 20%;">' +
+                        '<img src="/Content/Images/ic_message.png" width="30" height="30" style=" margin-left: 10px; float: right;"/>' +
+                        '</div>' +
+                        '<div style="float: right; height: 100%; width: 20%; ">' +
+                        '<a href="#" data-toggle="modal" data-target="#myModal1"><img src="/Content/Images/ic_warning.png" width="28" height="28" style=" margin-left: 20px; float: right;"/></a>' +
+                        '</div>' +
+                        '<div style="float: right; height: 100%; width: 20%;"></div>' +
+                        '</div>' +
+                        '</div>';
+
+                    var count = function () {
+                        return 'some value';
+                    };
+
+
+                    createMarker(i, tourguideID, currentLocation, contentString);
+
+                }
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    }
+    function createMarker(index,tourguideID, latlng, title) {
+        window.setTimeout(function () {
+
+            var pinImage = {
+                url: '/Content/Images/icon_marker.png', // image is 512 x 512
+                scaledSize: new google.maps.Size(48, 64)
+            };
+
+            listMarker[index] = new SlidingMarker({
+                position: latlng,
+                map: map,
+                animation: google.maps.Animation.Gp,
+                icon: pinImage,
+                tourguiderid : tourguideID
+                //shadow: pinShadow
+            })
+            listInforwindow[index] = new google.maps.InfoWindow({
+                content: title
+            });
+
+            google.maps.event.addListener(listMarker[index], "click", function () {
+                
+                userID = listMarker[index].tourguiderid;
+                console.log(userID);
+                for (i = 0; i < listInforwindow.length; i++) {
+                    listInforwindow[i].close();
+                }
+                listInforwindow[index].open(map, listMarker[index]);
+            });
+        }, 200);
+    }
+    function getMarkerSelected(id) {
+
+        var pinImage = {
+            url: '/Content/Images/icon_marker.png', // image is 512 x 512
+            scaledSize: new google.maps.Size(48, 64)
+        };
+
+
+        var pinImageSelect = {
+            url: '/Content/Images/icon_marker_select.png', // image is 512 x 512
+            scaledSize: new google.maps.Size(48, 64)
+        };
+
+        $.ajax({
+            url: "/Home/SelectMarkerTourGuide/" + id,
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (result) {
+                var results = $.parseJSON(result);
+                $(results).each(function (index, value) {
+                    var longitude = this['longitude'];
+                    var laitude = this['latitude'];
+                    var location = new google.maps.LatLng(laitude, longitude);
+                    panTo(laitude, longitude);
+                    map.setZoom(15);
+                    for (i = 0 ; i < listMarker.length; i++) {
+
+                        if (listMarker[i].tourguiderid == id)
+                        {
+                            listMarker[i].setIcon(pinImageSelect);
+                        }
+                        else
+                        {
+                            listMarker[i].setIcon(pinImage);
+                        }
+                    }
+                   
+                });
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    }
+    $('#DemoAjaxClick').click(function () {
+        setInterval(function () {
+            $.ajax({
+                url: "/Home/GetLocationTourGuide/20",
+                type: "GET",
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                processData: false,
+                cache: false,
+                success: function (result) {
+                    var results = $.parseJSON(result);
+                    $(results).each(function (index, value) {
+
+                        var longitude = this['longitude'];
+                        var laitude = this['latitude'];
+                        var currentLocation = new google.maps.LatLng(laitude, longitude);
+                        MoverMarker(currentLocation, index)
+                    });
+                },
+                error: function (xhr) {
+                    alert('error');
+                }
+            });
+        }, 2000)
+    });
+    function MoverMarker(Latlng, index) {
+        var duration = parseInt($('#durationOption').val());
+        if (duration < 0) {
+            duration = 1;
+            $('#durationOption').val(duration);
+        }
+        listMarker[index].setDuration(duration);
+        listMarker[index].setEasing($('#easingOption').val());
+        listMarker[index].setPosition(Latlng);
+    }
+    function panTo(newLat, newLng) {
+        if (panPath.length > 0) {
+            panQueue.push([newLat, newLng]);
+        } else {
+
+            panPath.push("LAZY SYNCRONIZED LOCK");
+            var curLat = map.getCenter().lat();
+            var curLng = map.getCenter().lng();
+            var dLat = (newLat - curLat) / STEPS;
+            var dLng = (newLng - curLng) / STEPS;
+
+            for (var i = 0; i < STEPS; i++) {
+                panPath.push([curLat + dLat * i, curLng + dLng * i]);
+            }
+            panPath.push([newLat, newLng]);
+            panPath.shift();
+            setTimeout(doPan, 20);
+        }
+    }
+    function doPan() {
+        var next = panPath.shift();
+        if (next != null) {
+            map.panTo(new google.maps.LatLng(next[0], next[1]));
+            setTimeout(doPan, 20);
+        } else {
+
+            var queued = panQueue.shift();
+            if (queued != null) {
+                panTo(queued[0], queued[1]);
+            }
+        }
+    }
+</script>
+<style type="text/css">
+    button, input, select, textarea {
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+    .mini-stat > a {
+        text-decoration: none;
+    }
+
+    .mini-stat {
+        text-align: center;
+    }
+
+        .mini-stat img {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+    .mini-stat-info span {
+        color: #1FB5AD;
+        font-size: 16px;
+        padding-top: 17px;
+        text-align: center;
+    }
+
+    .mini-stat-info a {
+        text-decoration: none;
+    }
+
+    .mini-stat .hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+        border-radius: 50%;
+    }
+
+    .mini-stat .hvr-glow {
+        border-radius: 50%;
+    }
+
+    ul.list-tour, ul.list-tour li ul.sub {
+        margin: -2px 0 0;
+        padding: 0;
+    }
+
+    ul.list-tour {
+        padding-top: 0px;
+    }
+
+    ul.list-tour li {
+        border-bottom: 1px dotted #d7d7d7;
+    }
+
+    ul.list-tour li a {
+        color: gray;
+        text-decoration: none;
+        display: block;
+        padding: 18px 0 18px 12px;
+        font-size: 14px;
+        outline: none;
+        margin-top: -25px;
+    }
+
+    ul.list-tour li a:hover {
+                 
+    }
+
+    ul.list-tour li a i {
+        font-size: 15px;
+        padding-right: 6px;
+    }
+
+    ul.list-tour li a span {
+        display: inline-block;
+    }
+
+    ul.list-tour, ul.list-tour li ul.sub {
+        margin: -2px 0 0;
+        padding: 0;
+    }
+
+    ul.list-tour li ul.sub li {
+        margin-bottom: 0;
+        margin-left: 0px;
+        margin-right: 0;
+    }
+
+    ul.list-tour li ul.sub li a {
+        font-size: 12px;
+        padding-top: 13px;
+        padding-bottom: 13px;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        color: #aeb2b7;
+    }
+
+    .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        border-radius: 4px;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+    }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+
+    .pac-container {
+        font-family: Roboto;
+    }
+
+    #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+    }
+
+        #type-selector label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+    #target {
+        width: 345px;
+    }
+
+
+    #pac-input1 {
+        background-color: #fff;
+        font-family: Roboto;
+        border-radius: 4px;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+    }
+
+    #pac-input1:focus {
+        border-color: #4d90fe;
+    }
+
+    .pac-container1 {
+        font-family: Roboto;
+    }
+
+    #type-selector1 {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+    }
+
+    #type-selector1 label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+    #target1 {
+        width: 345px;
+    }
+</style>

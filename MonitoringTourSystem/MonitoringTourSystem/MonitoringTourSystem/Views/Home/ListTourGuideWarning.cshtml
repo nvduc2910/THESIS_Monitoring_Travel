@@ -1,0 +1,27 @@
+﻿@model MonitoringTourSystem.ViewModel.HomeViewModel
+
+@{
+    if (Model == null || Model.ListTourIsProcessing == null || Model.ListTourIsProcessing.Count == 0)
+    {
+        <div class="alert alert-info" style="margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+            Không có tour nào nằm trong bán kính này.
+        </div>
+    }
+    else
+    {
+        foreach (var item in Model.ListTourIsProcessing)
+        {
+            <ul class="list-tour" id="nav-accordion">
+                <li class="sub-menu">
+
+                    <a onclick="getMarkerSelected(@item.TourGuide.tourguide_id);" href="javascript:;">
+                        <h4 style="color: black; font-size: 14px;">@item.TourGuide.tourguide_name</h4>
+                        <span style="font-size: 12px;">@item.Tour.tour_code</span>
+                    </a>
+
+                </li>
+            </ul>
+        }
+    }
+}
+

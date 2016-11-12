@@ -1,0 +1,89 @@
+﻿    .mini-stat > a {
+        text-decoration: none;
+    }
+
+    .mini-stat {
+        text-align: center;
+    }
+
+        .mini-stat img {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+    .mini-stat-info span {
+        color: #1FB5AD;
+        font-size: 16px;
+        padding-top: 17px;
+        text-align: center;
+    }
+
+    .mini-stat-info a {
+        text-decoration: none;
+    }
+
+    .mini-stat .hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+        border-radius: 50%;
+    }
+
+    .mini-stat .hvr-glow {
+        border-radius: 50%;
+    }
+    ul.list-tour, ul.list-tour li ul.sub {
+            margin: -2px 0 0;
+            padding: 0;
+    }
+    ul.list-tour {
+        padding-top: 0px;
+    }
+
+    ul.list-tour li {
+        border-bottom: 1px dotted #d7d7d7 ;
+    }
+
+    ul.list-tour li a {
+        color: gray;
+          
+        text-decoration: none;
+        display: block;
+        padding: 18px 0 18px 12px;
+        font-size: 14px;
+        outline: none;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+
+
+    ul.list-tour li a i {
+        font-size: 15px;
+        padding-right: 6px;
+    }
+
+    ul.list-tour li a span {
+        display: inline-block;
+    }
+
+    ul.list-tour, ul.list-tour li ul.sub {
+        margin: -2px 0 0;
+        padding: 0;
+    }
+
+    ul.list-tour li ul.sub li {
+        margin-bottom: 0;
+        margin-left: 0px;
+        margin-right: 0;
+    }
+
+    ul.list-tour li ul.sub li a {
+        font-size: 12px;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        color: #aeb2b7;
+    }

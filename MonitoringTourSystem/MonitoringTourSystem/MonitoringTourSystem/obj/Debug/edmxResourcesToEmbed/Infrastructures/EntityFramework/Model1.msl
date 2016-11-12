@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sql6142617ModelStoreContainer" CdmEntityContainer="sql6142617Entities">
+    <EntitySetMapping Name="countries">
+      <EntityTypeMapping TypeName="sql6142617Model.country">
+        <MappingFragment StoreEntitySet="country">
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+          <ScalarProperty Name="country_name" ColumnName="country_name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="managers">
+      <EntityTypeMapping TypeName="sql6142617Model.manager">
+        <MappingFragment StoreEntitySet="manager">
+          <ScalarProperty Name="manager_id" ColumnName="manager_id" />
+          <ScalarProperty Name="manager_name" ColumnName="manager_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="access_token" ColumnName="access_token" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+          <ScalarProperty Name="display_photo" ColumnName="display_photo" />
+          <ScalarProperty Name="position" ColumnName="position" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="messages">
+      <EntityTypeMapping TypeName="sql6142617Model.message">
+        <MappingFragment StoreEntitySet="message">
+          <ScalarProperty Name="message_id" ColumnName="message_id" />
+          <ScalarProperty Name="sender_id" ColumnName="sender_id" />
+          <ScalarProperty Name="reciever_id" ColumnName="reciever_id" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="content" ColumnName="content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="places">
+      <EntityTypeMapping TypeName="sql6142617Model.place">
+        <MappingFragment StoreEntitySet="place">
+          <ScalarProperty Name="place_id" ColumnName="place_id" />
+          <ScalarProperty Name="province_id" ColumnName="province_id" />
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+          <ScalarProperty Name="place_name" ColumnName="place_name" />
+          <ScalarProperty Name="contact" ColumnName="contact" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="cover_photo" ColumnName="cover_photo" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="provinces">
+      <EntityTypeMapping TypeName="sql6142617Model.province">
+        <MappingFragment StoreEntitySet="province">
+          <ScalarProperty Name="province_id" ColumnName="province_id" />
+          <ScalarProperty Name="province_name" ColumnName="province_name" />
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tours">
+      <EntityTypeMapping TypeName="sql6142617Model.tour">
+        <MappingFragment StoreEntitySet="tour">
+          <ScalarProperty Name="tour_id" ColumnName="tour_id" />
+          <ScalarProperty Name="tour_code" ColumnName="tour_code" />
+          <ScalarProperty Name="manager_id" ColumnName="manager_id" />
+          <ScalarProperty Name="tourguide_id" ColumnName="tourguide_id" />
+          <ScalarProperty Name="tour_name" ColumnName="tour_name" />
+          <ScalarProperty Name="departure_date" ColumnName="departure_date" />
+          <ScalarProperty Name="return_date" ColumnName="return_date" />
+          <ScalarProperty Name="tourist_quantity" ColumnName="tourist_quantity" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="day" ColumnName="day" />
+          <ScalarProperty Name="cover_photo" ColumnName="cover_photo" />
+          <ScalarProperty Name="is_foreign_tour" ColumnName="is_foreign_tour" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tour_participants">
+      <EntityTypeMapping TypeName="sql6142617Model.tour_participants">
+        <MappingFragment StoreEntitySet="tour_participants">
+          <ScalarProperty Name="tour_participants1" ColumnName="tour_participants" />
+          <ScalarProperty Name="tour_id" ColumnName="tour_id" />
+          <ScalarProperty Name="tourist_id" ColumnName="tourist_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tour_schedule">
+      <EntityTypeMapping TypeName="sql6142617Model.tour_schedule">
+        <MappingFragment StoreEntitySet="tour_schedule">
+          <ScalarProperty Name="tour_schedule1" ColumnName="tour_schedule" />
+          <ScalarProperty Name="tour_id" ColumnName="tour_id" />
+          <ScalarProperty Name="place_id" ColumnName="place_id" />
+          <ScalarProperty Name="place_name" ColumnName="place_name" />
+          <ScalarProperty Name="vehicle" ColumnName="vehicle" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="nameProvince" ColumnName="nameProvince" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tourguides">
+      <EntityTypeMapping TypeName="sql6142617Model.tourguide">
+        <MappingFragment StoreEntitySet="tourguide">
+          <ScalarProperty Name="tourguide_id" ColumnName="tourguide_id" />
+          <ScalarProperty Name="tourguide_name" ColumnName="tourguide_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="access_token" ColumnName="access_token" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="display_photo" ColumnName="display_photo" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tourists">
+      <EntityTypeMapping TypeName="sql6142617Model.tourist">
+        <MappingFragment StoreEntitySet="tourist">
+          <ScalarProperty Name="tourist_id" ColumnName="tourist_id" />
+          <ScalarProperty Name="tourist_name" ColumnName="tourist_name" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="access_token" ColumnName="access_token" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="display_photo" ColumnName="display_photo" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trackings">
+      <EntityTypeMapping TypeName="sql6142617Model.tracking">
+        <MappingFragment StoreEntitySet="tracking">
+          <ScalarProperty Name="tracking_id" ColumnName="tracking_id" />
+          <ScalarProperty Name="tour_id" ColumnName="tour_id" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="warnings">
+      <EntityTypeMapping TypeName="sql6142617Model.warning">
+        <MappingFragment StoreEntitySet="warning">
+          <ScalarProperty Name="warning_id" ColumnName="warning_id" />
+          <ScalarProperty Name="warning_name" ColumnName="warning_name" />
+          <ScalarProperty Name="is_group" ColumnName="is_group" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="distance" ColumnName="distance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="warning_receiver">
+      <EntityTypeMapping TypeName="sql6142617Model.warning_receiver">
+        <MappingFragment StoreEntitySet="warning_receiver">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="warning_id" ColumnName="warning_id" />
+          <ScalarProperty Name="warner_id" ColumnName="warner_id" />
+          <ScalarProperty Name="receiver_id" ColumnName="receiver_id" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

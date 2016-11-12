@@ -1,0 +1,258 @@
+﻿@model MonitoringTourSystem.ViewModel.TourDetailViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Danh Sách Tour";
+}
+<link href="~/Content/DropdowSelect/select2.min.css" rel="stylesheet" />
+<script src="~/Content/DropdowSelect/select2.min.js" type="text/javascript"></script>
+<script src="~/Scripts/TourDetail/tourdetail.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+<link href="~/Content/DropdowSelect/select2.min.css" rel="stylesheet" />
+<script src="~/Content/DropdowSelect/select2.min.js" type="text/javascript"></script>
+<link href="~/Scripts/TourDetail/css/timelineSchedule.css" rel="stylesheet" />
+<script src="~/Scripts/TourDetail/tourdetail.js"></script>
+<link rel="stylesheet" type="text/css" href="https://eonasdan.github.io/bootstrap-datetimepicker/css/prettify-1.0.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="~/Scripts/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="~/Scripts/sweetalert.css">
+
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://eonasdan.github.io/bootstrap-datetimepicker/css/prettify-1.0.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>*@
+
+
+<div id="main-content" style="background-color: white; height: 100%;">
+    <div class="wrapper" style="background-color: white; padding-top: 15px;">
+        <div class='row' style="height: 100%; width: 100%; margin: 0px;">
+            <div class="col-sm-4" style="height:100%;">
+                <header class="panel-heading" style="border: 1px solid #EAEBED; height: 14%">
+                    <h3>Danh sách tour</h3>
+                </header>
+                <div class="panel-body" style="background-color: white; border: 1px solid #EAEBED;">
+                    <ul class="nav nav-tabs" style="margin-top: 0px;">
+                        <li class="active"><a data-toggle="tab" href="#home" style="color: #1FB5AD">Trong Nước</a></li>
+                        <li><a data-toggle="tab" href="#menu1" style="color: #1FB5AD">Ngoài Nước</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <div style="padding-left: 0px; padding-right: 0px; margin-top: 10px;">
+                                <div id="searchform">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Tìm kiếm tour theo mã..." id="nametourVietNam" onkeyup="searchTour();" name="query" value="">
+                                        <div class="input-group-btn">
+                                            <button type="submit" id="Search" class="btn">
+                                                <i class="fa fa-search" style="color: gray" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="input-group" style="margin-top: 10px; width: 100%;">
+                                        <div class="input-group date datepicker_end">
+                                            <input class="form-control" id="daysearch" type="text" placeholder="Tìm theo ngày" name="mytext[]">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group" style="margin-top: 10px; width: 100%;">
+                                        <select id="region" style="width: 70%; margin-right: 10px; height: 34px; border-radius: 4px;">
+                                            <option style="font-size: 18px;" value="0" disabled selected>Chọn miền</option>
+
+
+                                        </select>
+                                        <button type="button" class="btn btn-primary" style="width: 25%; float: right" onclick="searchWithDateAndTown();">Tìm</button>
+                                    </div>
+                                    <div class="alert alert-success" style="margin-top: 10px;">
+                                        Danh sách.
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="group-list-tour" style="height: 100%; margin-top: -20px">
+                                @{
+                                    Html.RenderPartial("ListTourVietNam", Model);
+                                }
+                            </div>
+                            <style>
+                                ul.list-tour, ul.list-tour li ul.sub {
+                                    margin: -2px 0 0;
+                                    padding: 0;
+                                }
+
+                                ul.list-tour {
+                                    padding-top: 0px;
+                                }
+
+                                    ul.list-tour li {
+                                        border-bottom: 1px dotted #d7d7d7;
+                                    }
+
+                                        ul.list-tour li a {
+                                            color: gray;
+                                            text-decoration: none;
+                                            display: block;
+                                            padding: 18px 0 18px 12px;
+                                            font-size: 14px;
+                                            outline: none;
+                                            -webkit-transition: all 0.3s ease;
+                                            -moz-transition: all 0.3s ease;
+                                            -o-transition: all 0.3s ease;
+                                            -ms-transition: all 0.3s ease;
+                                            transition: all 0.3s ease;
+                                        }
+
+                                            ul.list-tour li a i {
+                                                font-size: 15px;
+                                                padding-right: 6px;
+                                            }
+
+                                            ul.list-tour li a span {
+                                                display: inline-block;
+                                            }
+
+                                        ul.list-tour, ul.list-tour li ul.sub {
+                                            margin: -2px 0 0;
+                                            padding: 0;
+                                        }
+
+                                            ul.list-tour li ul.sub li {
+                                                margin-bottom: 0;
+                                                margin-left: 0px;
+                                                margin-right: 0;
+                                            }
+
+                                                ul.list-tour li ul.sub li a {
+                                                    font-size: 12px;
+                                                    padding-top: 13px;
+                                                    padding-bottom: 13px;
+                                                    -webkit-transition: all 0.3s ease;
+                                                    -moz-transition: all 0.3s ease;
+                                                    -o-transition: all 0.3s ease;
+                                                    -ms-transition: all 0.3s ease;
+                                                    transition: all 0.3s ease;
+                                                    color: #aeb2b7;
+                                                }
+                            </style>
+                        </div>
+                        <div id="menu1" class="tab-pane fade">
+                            <div style="padding-left: 0px; padding-right: 0px; margin-top: 10px;">
+                                <div id="searchform">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Tìm kiếm tour theo mã..." id="nametourForeign" onkeyup="searchTourForeign();" name="query" value="">
+                                        <div class="input-group-btn">
+                                            <button type="submit" id="Search" class="btn">
+                                                <i class="fa fa-search" style="color: gray" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="group-list-tour" style="height: 77%;">
+                                @{
+                                    Html.RenderPartial("ListTourForeign", Model);
+                                }
+                            </div>
+                            <style>
+                                ul.list-tour, ul.list-tour li ul.sub {
+                                    margin: -2px 0 0;
+                                    padding: 0;
+                                }
+
+                                ul.list-tour {
+                                    padding-top: 0px;
+                                }
+
+                                    ul.list-tour li {
+                                        border-bottom: 1px dotted #d7d7d7;
+                                    }
+
+                                        ul.list-tour li a {
+                                            color: gray;
+                                            text-decoration: none;
+                                            display: block;
+                                            padding: 18px 0 18px 12px;
+                                            font-size: 14px;
+                                            outline: none;
+                                            -webkit-transition: all 0.3s ease;
+                                            -moz-transition: all 0.3s ease;
+                                            -o-transition: all 0.3s ease;
+                                            -ms-transition: all 0.3s ease;
+                                            transition: all 0.3s ease;
+                                        }
+
+                                            ul.list-tour li a i {
+                                                font-size: 15px;
+                                                padding-right: 6px;
+                                            }
+
+                                            ul.list-tour li a span {
+                                                display: inline-block;
+                                            }
+
+                                        ul.list-tour, ul.list-tour li ul.sub {
+                                            margin: -2px 0 0;
+                                            padding: 0;
+                                        }
+
+                                            ul.list-tour li ul.sub li {
+                                                margin-bottom: 0;
+                                                margin-left: 0px;
+                                                margin-right: 0;
+                                            }
+
+                                                ul.list-tour li ul.sub li a {
+                                                    font-size: 12px;
+                                                    padding-top: 13px;
+                                                    padding-bottom: 13px;
+                                                    -webkit-transition: all 0.3s ease;
+                                                    -moz-transition: all 0.3s ease;
+                                                    -o-transition: all 0.3s ease;
+                                                    -ms-transition: all 0.3s ease;
+                                                    transition: all 0.3s ease;
+                                                    color: #aeb2b7;
+
+                                }
+                            </style>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <h3>Menu 2</h3>
+                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                        </div>
+                        <div id="menu3" class="tab-pane fade">
+                            <h3>Menu 3</h3>
+                            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-8" style="height:100%;">
+                <header class="panel-heading" style="border: 1px solid #EAEBED; height: 14%">
+                    <h3>Thông tin chi tiết tour</h3>
+                </header>
+                <div id="tour-details" class="panel-body" style="background-color: white; border: 1px solid #EAEBED; height: 75%;">
+                    @{
+                        Html.RenderPartial("ScheduleTourTimeline", Model);
+                    }
+                </div>
+                <style>
+                    div.list-tour {
+                        padding-top: 15px;
+                        padding-bottom: 15px;
+                    }
+
+                    div.list-tour {
+                        border-bottom: 1px solid #d7d7d7;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+</div>

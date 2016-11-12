@@ -1,0 +1,163 @@
+﻿@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <!--mini statistics start-->
+        <div class="row" style="margin: 0px">
+            <div class="col-md-3 wow zoomIn ">
+                <div class="mini-stat clearfix">
+                    <a href=""> 
+                    <img class="img-responsive hvr-glow" src="http://loudbeacon.demo.beesightsoft.com/img/beacon.png">
+                    </a>
+                    <a href="/admin/dddForeignPlace">
+                        <div class="mini-stat-info">
+                            <span>  Thêm ĐĐ Ngoài Nước</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 wow zoomIn ">
+
+                <div class="mini-stat clearfix">
+
+                    <a href="/ddmin/dddCountry">   
+                         <img class="img-responsive hvr-glow" src="~/Content/Images/ic_flag.png" width="120" height="120">
+                    </a>
+                    <a href="/admin/addCountry">
+                        <div class="mini-stat-info">
+                            <span>Thêm Quốc Gia</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-md-3 wow zoomIn ">
+
+                <div class="mini-stat clearfix">
+
+                    <a href="/admin/addProvince">  
+                          <img class="img-responsive hvr-glow" src="~/Content/Images/ic_province.png" width="120" height="120">
+                    </a>
+                    <a href="/admin/addProvince">
+                        <div class="mini-stat-info">
+                            <span>Thêm Huyện/TP</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-md-3 wow zoomIn ">
+
+                <div class="mini-stat clearfix">
+
+                    <a href="/admin/addPlace"> 
+                           <img class="img-responsive hvr-glow" src="http://loudbeacon.demo.beesightsoft.com/img/beacon.png">
+                    </a>
+                    <a href="/admin/addPlace">
+                        <div class="mini-stat-info">
+                            <span>Thêm ĐĐ Trong Nước</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row" style="margin: 0px; background: white;">
+            <div class="col-md-3 wow zoomIn ">
+
+                <div class="mini-stat clearfix">
+
+                    <a href="">  
+                          <img class="img-responsive hvr-glow" src="http://loudbeacon.demo.beesightsoft.com/img/beacon.png">
+                    </a>
+                    <a href="">
+                        <div class="mini-stat-info">
+                            <span>Địa Điểm Trong Nước</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 wow zoomIn ">
+
+                <div class="mini-stat clearfix">
+
+                    <a href="/Admin/AddCountry">
+                        <img class="img-responsive hvr-glow" src="~/Content/Images/ic_flag.png" width="120" height="120">
+                    </a>
+                    <a href="/Admin/AddCountry">
+                        <div class="mini-stat-info">
+                            <span>DS Quốc Gia</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-md-3 wow zoomIn ">
+
+                <div class="mini-stat clearfix">
+                    <a href="/Admin/AddProvince">
+                        <img class="img-responsive hvr-glow" src="~/Content/Images/ic_province.png" width="120" height="120">
+                    </a>
+                    <a href="/Admin/AddProvince">
+                        <div class="mini-stat-info">
+                            <span>DS Huyện/TP</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-md-3 wow zoomIn ">
+
+                <div class="mini-stat clearfix">
+
+                    <a href="/Admin/AddPlace">
+                        <img class="img-responsive hvr-glow" src="http://loudbeacon.demo.beesightsoft.com/img/beacon.png">
+                    </a>
+                    <a href="/Admin/AddPlace">
+                        <div class="mini-stat-info">
+                            <span>DS ĐĐ Trong Nước</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <style>
+        .mini-stat > a {
+            text-decoration: none;
+        }
+
+        .mini-stat {
+            text-align: center;
+        }
+
+            .mini-stat img {
+                margin: 0 auto;
+                text-align: center;
+            }
+
+        .mini-stat-info span {
+            color: #1FB5AD;
+            font-size: 16px;
+            padding-top: 17px;
+            text-align: center;
+        }
+
+        .mini-stat-info a {
+            text-decoration: none;
+        }
+
+        .mini-stat .hvr-glow:hover, .hvr-glow:focus, .hvr-glow:active {
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+        }
+
+        .mini-stat .hvr-glow {
+            border-radius: 50%;
+        }
+    </style>
+</section>
