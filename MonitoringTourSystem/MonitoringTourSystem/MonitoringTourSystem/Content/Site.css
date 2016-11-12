@@ -385,14 +385,14 @@ ul.sidebar-menu li a {
     display: inline-block;
     padding: 0px;
     width: 100%;
-    margin-top: 60px;
+    margin-top: 80px;
 }
 
 .brand {
-    background: #F1F1F1;
+    background: #1fb5ad;
     float: left;
     width: 240px;
-    height: 61px;
+    height: 80px;
     position: relative;
 }
 
@@ -6883,7 +6883,7 @@ div.tagsinput span.tag {
     /*background-color: #F97753;*/
     background-color: #00BCD4;
     float: right;
-    margin-right: -2px;
+    margin-right: 20px;
     border: 1px solid #EAEBED;
     border-radius: 3px;
 }

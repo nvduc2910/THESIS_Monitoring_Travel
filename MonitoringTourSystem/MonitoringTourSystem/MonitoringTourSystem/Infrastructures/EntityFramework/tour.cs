@@ -29,5 +29,6 @@ namespace MonitoringTourSystem.Infrastructures.EntityFramework
         public int is_foreign_tour { get; set; }
 
         public List<tour_schedule> ListTourSchedule { get; set; }
+
     }
 }

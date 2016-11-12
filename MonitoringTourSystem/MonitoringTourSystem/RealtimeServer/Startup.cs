@@ -19,7 +19,6 @@ namespace PlaneSeats
                     
                     EnableDetailedErrors = true,
                 };
-                hubConfiguration.En
                 map.RunSignalR(hubConfiguration);
             });
         }

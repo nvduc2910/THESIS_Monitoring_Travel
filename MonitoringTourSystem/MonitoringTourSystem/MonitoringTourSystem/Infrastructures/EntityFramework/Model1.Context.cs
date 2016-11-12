@@ -13,9 +13,10 @@ namespace MonitoringTourSystem.Infrastructures.EntityFramework
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class monitoring_tour_v3Entities: DbContext
+    public partial class monitoring_tour_v3Entities : DbContext
     {
-        public monitoring_tour_v3Entities(): base("name=monitoring_tour_v3Entities")
+        public monitoring_tour_v3Entities()
+            : base("name=monitoring_tour_v3Entities")
         {
         }
     

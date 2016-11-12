@@ -365,6 +365,7 @@
     <Content Include="Content\processing_small.jpg" />
     <Content Include="Content\process_small.gif" />
     <Content Include="Content\sending.gif" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
     <Content Include="Infrastructures\EntityFramework\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -410,7 +411,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\Account\css\normalize.css" />
     <Content Include="Scripts\Account\css\style.css" />
     <Content Include="Scripts\Account\index.js" />

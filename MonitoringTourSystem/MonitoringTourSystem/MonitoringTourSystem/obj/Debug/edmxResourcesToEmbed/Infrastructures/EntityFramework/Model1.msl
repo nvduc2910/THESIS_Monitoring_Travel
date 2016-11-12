@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="sql6142617ModelStoreContainer" CdmEntityContainer="sql6142617Entities">
+  <EntityContainerMapping StorageEntityContainer="tour_monitoring_v3ModelStoreContainer" CdmEntityContainer="tour_monitoring_v3Entities1">
     <EntitySetMapping Name="countries">
-      <EntityTypeMapping TypeName="sql6142617Model.country">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.country">
         <MappingFragment StoreEntitySet="country">
           <ScalarProperty Name="country_id" ColumnName="country_id" />
           <ScalarProperty Name="country_name" ColumnName="country_name" />
@@ -11,7 +11,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="managers">
-      <EntityTypeMapping TypeName="sql6142617Model.manager">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.manager">
         <MappingFragment StoreEntitySet="manager">
           <ScalarProperty Name="manager_id" ColumnName="manager_id" />
           <ScalarProperty Name="manager_name" ColumnName="manager_name" />
@@ -25,7 +25,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="messages">
-      <EntityTypeMapping TypeName="sql6142617Model.message">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.message">
         <MappingFragment StoreEntitySet="message">
           <ScalarProperty Name="message_id" ColumnName="message_id" />
           <ScalarProperty Name="sender_id" ColumnName="sender_id" />
@@ -37,7 +37,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="places">
-      <EntityTypeMapping TypeName="sql6142617Model.place">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.place">
         <MappingFragment StoreEntitySet="place">
           <ScalarProperty Name="place_id" ColumnName="place_id" />
           <ScalarProperty Name="province_id" ColumnName="province_id" />
@@ -52,7 +52,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="provinces">
-      <EntityTypeMapping TypeName="sql6142617Model.province">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.province">
         <MappingFragment StoreEntitySet="province">
           <ScalarProperty Name="province_id" ColumnName="province_id" />
           <ScalarProperty Name="province_name" ColumnName="province_name" />
@@ -62,7 +62,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tours">
-      <EntityTypeMapping TypeName="sql6142617Model.tour">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.tour">
         <MappingFragment StoreEntitySet="tour">
           <ScalarProperty Name="tour_id" ColumnName="tour_id" />
           <ScalarProperty Name="tour_code" ColumnName="tour_code" />
@@ -81,7 +81,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tour_participants">
-      <EntityTypeMapping TypeName="sql6142617Model.tour_participants">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.tour_participants">
         <MappingFragment StoreEntitySet="tour_participants">
           <ScalarProperty Name="tour_participants1" ColumnName="tour_participants" />
           <ScalarProperty Name="tour_id" ColumnName="tour_id" />
@@ -90,7 +90,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tour_schedule">
-      <EntityTypeMapping TypeName="sql6142617Model.tour_schedule">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.tour_schedule">
         <MappingFragment StoreEntitySet="tour_schedule">
           <ScalarProperty Name="tour_schedule1" ColumnName="tour_schedule" />
           <ScalarProperty Name="tour_id" ColumnName="tour_id" />
@@ -105,7 +105,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tourguides">
-      <EntityTypeMapping TypeName="sql6142617Model.tourguide">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.tourguide">
         <MappingFragment StoreEntitySet="tourguide">
           <ScalarProperty Name="tourguide_id" ColumnName="tourguide_id" />
           <ScalarProperty Name="tourguide_name" ColumnName="tourguide_name" />
@@ -120,7 +120,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tourists">
-      <EntityTypeMapping TypeName="sql6142617Model.tourist">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.tourist">
         <MappingFragment StoreEntitySet="tourist">
           <ScalarProperty Name="tourist_id" ColumnName="tourist_id" />
           <ScalarProperty Name="tourist_name" ColumnName="tourist_name" />
@@ -135,7 +135,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="trackings">
-      <EntityTypeMapping TypeName="sql6142617Model.tracking">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.tracking">
         <MappingFragment StoreEntitySet="tracking">
           <ScalarProperty Name="tracking_id" ColumnName="tracking_id" />
           <ScalarProperty Name="tour_id" ColumnName="tour_id" />
@@ -146,7 +146,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="warnings">
-      <EntityTypeMapping TypeName="sql6142617Model.warning">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.warning">
         <MappingFragment StoreEntitySet="warning">
           <ScalarProperty Name="warning_id" ColumnName="warning_id" />
           <ScalarProperty Name="warning_name" ColumnName="warning_name" />
@@ -161,7 +161,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="warning_receiver">
-      <EntityTypeMapping TypeName="sql6142617Model.warning_receiver">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.warning_receiver">
         <MappingFragment StoreEntitySet="warning_receiver">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="warning_id" ColumnName="warning_id" />

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="sql6142617Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="tour_monitoring_v3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="country">
     <Key>
       <PropertyRef Name="country_id" />
@@ -157,7 +157,7 @@
     <Property Name="receiver_id" Type="Int32" Nullable="false" />
     <Property Name="status" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
-  <EntityContainer Name="sql6142617Entities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="tour_monitoring_v3Entities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="countries" EntityType="Self.country" />
     <EntitySet Name="managers" EntityType="Self.manager" />
     <EntitySet Name="messages" EntityType="Self.message" />
