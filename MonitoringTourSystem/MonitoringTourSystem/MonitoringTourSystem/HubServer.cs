@@ -23,6 +23,7 @@ namespace MonitoringTourSystem
             string position = Context.QueryString["USER_POSITION"];
             string managerId = Context.QueryString["MANAGER_ID"];
             string userId = Context.QueryString["USER_ID"];
+
             if (userId.Contains("TG"))
             {
                 PushAlert("MG_1", userId + "da ket noi vao he thong");
@@ -57,8 +58,6 @@ namespace MonitoringTourSystem
             //        UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + name);
             //    }
             //}
-
-
             return base.OnReconnected();
         }
 
@@ -92,33 +91,31 @@ namespace MonitoringTourSystem
             }
         }
 
-        // send warning
-        public void MakeMarkerNewConection( string latitude, string longitude)
+        // Handle For Manager From Touguide
+        public void InitMarkerNewConection(string latitude, string longitude, string receiver)
         {
-
-            foreach (var connection in _connections.GetConnections("MG_1"))
+            foreach (var connection in _connections.GetConnections(receiver))
             {
                 Clients.Client(connection).locationForAddMarker(latitude, longitude);
             }
-
         }
-        public void UpdatePositionTourGuide(string user, string latitude, string longitude)
+        public void UpdatePositionTourGuide(string sender, string latitude, string longitude, string receiver)
         {
-            foreach (var connection in _connections.GetConnections("MG_1"))
+            foreach (var connection in _connections.GetConnections(receiver))
             {
-                Clients.Client(connection).receiveLoaction(user, latitude, longitude);
+                Clients.Client(connection).receiveLoaction(sender, latitude, longitude);
             }
         }
 
-        public void AddMarker(object marker)
-        {
-            // add marker user when a new user connect
-        }
+        //public void AddMarker(object marker)
+        //{
+        //    // add marker user when a new user connect
+        //}
 
-        public void Remove(object marker)
-        {
-            // remove marker user when a new user disconnect
-        }
+        //public void Remove(object marker)
+        //{
+        //    // remove marker user when a new user disconnect
+        //}
 
         public void PushAlert(string userIdManager, string message)
         {

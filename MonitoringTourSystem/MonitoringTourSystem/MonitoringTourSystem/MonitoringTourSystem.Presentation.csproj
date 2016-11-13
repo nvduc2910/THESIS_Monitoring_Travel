@@ -340,6 +340,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\home\Site1.css" />
     <Content Include="Content\Images\1-thich-ca-Phat-dai.jpg" />
+    <Content Include="Content\Images\ic_markerProfile.png" />
     <Content Include="Content\Images\ban-dao-son-tra-ivivu.jpg" />
     <Content Include="Content\Images\deo-hai-van-ivivu-1.jpg" />
     <Content Include="Content\Images\icon_marker.png" />

@@ -581,15 +581,12 @@
     }
 
     //var userId;
-
     var connection = $.hubConnection('http://192.168.0.104:3407');
     connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1' };
     var myHub = connection.createHubProxy('hubServer');
 
     // for listening
     myHub.on('updateNumberOfOnline', function (numberOfOnline) {
-
-        alert(numberOfOnline);
 
         $("#numberofuseronline").text(numberOfOnline);
     });
@@ -599,8 +596,8 @@
         var lastIndex = listMarker.length;
         var latlng = new google.maps.LatLng(latitude, longitude);
         var pinImage = {
-            url: '/Content/Images/icon_marker.png', // image is 512 x 512
-            scaledSize: new google.maps.Size(48, 64)
+            url: '/Content/Images/ic_markerProfile.png', // image is 512 x 512
+            scaledSize: new google.maps.Size(64, 76)
         };
 
         listMarker[lastIndex] = new SlidingMarker({
@@ -609,7 +606,6 @@
             animation: google.maps.Animation.Gp,
             icon: pinImage,
             //tourguiderid: tourguideID
-
         });       
     });
 
