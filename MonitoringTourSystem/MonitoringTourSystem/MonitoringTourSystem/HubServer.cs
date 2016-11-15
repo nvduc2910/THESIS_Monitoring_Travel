@@ -24,12 +24,13 @@ namespace MonitoringTourSystem
             string position = Context.QueryString["USER_POSITION"];
             string managerId = Context.QueryString["MANAGER_ID"];
             string userId = Context.QueryString["USER_ID"];
-
-            if (userId.Contains("TG"))
-            {
-                PushAlert("MG_1", userId + "da ket noi vao he thong");
-            }
             HandleGroup(position, managerId, userId);
+            if (position == "MG")
+            {
+                InformManageOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
+                UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
+            }
+           
             return base.OnConnected();
         }
 
@@ -38,8 +39,10 @@ namespace MonitoringTourSystem
             string position = Context.QueryString["USER_POSITION"];
             string managerId = Context.QueryString["MANAGER_ID"];
             string userId = Context.QueryString["USER_ID"];
+            string userName = "ABCXYZ";
+            HandleRemoveGroup(position, managerId, userId);
 
-            HandleRemoveGroup(position, managerId, userId);       
+            RemoveUserDisconnection(managerId, userId, userName);
             return base.OnDisconnected(stopCalled);
         }
 
@@ -78,6 +81,11 @@ namespace MonitoringTourSystem
                     Clients.Client(connection).sendMessager(message);
                 }
             }
+        }
+
+        public void InformManageOnline(string groupName)
+        {
+            Clients.Group(groupName).managerOnline("Online");
         }
 
         // Update Number of user online

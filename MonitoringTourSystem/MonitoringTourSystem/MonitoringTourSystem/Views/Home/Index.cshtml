@@ -672,10 +672,8 @@
             var a = $(this).attr('class').split(" ")[1];
             //alert(a);
             if (a == tourguideID)
-            {
-               
-                var b = $(this).find('h4').css('color', '#00BCD4');
-                alert(b);
+            {    
+                var b = $(this).find('h4').css('color', '#204cfc');
             }
         });
         
@@ -706,6 +704,14 @@
                 break;
             }
         }
+
+        $('#list-tour').children('ul').each(function () {
+            var a = $(this).attr('class').split(" ")[1];
+            //alert(a);
+            if (a == userIdReplace) {
+                var b = $(this).find('h4').css('color', 'gray');
+            }
+        });
     });
 
     myHub.on('receiveLoaction', function (user, lat, lng) {
@@ -1942,6 +1948,7 @@
             });
         }, 200);
     }
+
     function getMarkerSelected(id) {
 
         var pinImageOffline = {
@@ -1960,46 +1967,71 @@
             scaledSize: new google.maps.Size(64, 76)
         };
 
-        $.ajax({
-            url: "/Home/SelectMarkerTourGuide/" + id,
-            type: "GET",
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            async: true,
-            processData: false,
-            cache: false,
-            success: function (result) {
-                var results = $.parseJSON(result);
-                $(results).each(function (index, value) {
-                    var longitude = this['longitude'];
-                    var laitude = this['latitude'];
-                    var location = new google.maps.LatLng(laitude, longitude);
-                    panTo(laitude, longitude);
-                    map.setZoom(15);
-                    for (i = 0 ; i < listMarker.length; i++) {
 
-                        if (listMarker[i].tourguiderid == id)
-                        {
-                            listMarker[i].setIcon(pinImageSelect);
-                        }
-                        else
-                        {
-                            if (listMarker[i].isActive == "False") {
-                                listMarker[i].setIcon(pinImageOffline);
-                            }
-                            else if (listMarker[i].isActive == "True")
-                            {
-                                listMarker[i].setIcon(pinImageActive);
-                            }
-                        }
-                    }
-                   
-                });
-            },
-            error: function (xhr) {
-                alert('error');
+        for (i = 0 ; i < listMarker.length; i++) {
+
+            if (listMarker[i].tourguiderid == id) {
+                listMarker[i].setIcon(pinImageSelect);
+
+                var position = listMarker[i].getPosition();
+
+                var latitude = position.lat();
+                var longitude = position.lng();
+
+                panTo(latitude, longitude);
+                //map.setZoom(12);
             }
-        });
+            else {
+                if (listMarker[i].isActive == "False") {
+                    listMarker[i].setIcon(pinImageOffline);
+                }
+                else if (listMarker[i].isActive == "True") {
+                    listMarker[i].setIcon(pinImageActive);
+                }
+            }
+        }
+       
+
+        //$.ajax({
+        //    url: "/Home/SelectMarkerTourGuide/" + id,
+        //    type: "GET",
+        //    dataType: 'json',
+        //    contentType: 'application/json; charset=utf-8',
+        //    async: true,
+        //    processData: false,
+        //    cache: false,
+        //    success: function (result) {
+        //        var results = $.parseJSON(result);
+        //        $(results).each(function (index, value) {
+        //            var longitude = this['longitude'];
+        //            var laitude = this['latitude'];
+        //            var location = new google.maps.LatLng(laitude, longitude);
+        //            panTo(laitude, longitude);
+        //            map.setZoom(15);
+        //            for (i = 0 ; i < listMarker.length; i++) {
+
+        //                if (listMarker[i].tourguiderid == id)
+        //                {
+        //                    listMarker[i].setIcon(pinImageSelect);
+        //                }
+        //                else
+        //                {
+        //                    if (listMarker[i].isActive == "False") {
+        //                        listMarker[i].setIcon(pinImageOffline);
+        //                    }
+        //                    else if (listMarker[i].isActive == "True")
+        //                    {
+        //                        listMarker[i].setIcon(pinImageActive);
+        //                    }
+        //                }
+        //            }
+                   
+        //        });
+        //    },
+        //    error: function (xhr) {
+        //        alert('error');
+        //    }
+        //});
     }
     $('#DemoAjaxClick').click(function () {
         setInterval(function () {

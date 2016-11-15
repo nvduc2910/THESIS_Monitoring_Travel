@@ -156,7 +156,7 @@ namespace MonitoringTourSystem.Controllers
                     var tourID = MonitoringTourSystem.tours.Max(x => x.tour_id);
                     for (int i = 0; i < obj.ListTourSchedule.Count; i++)
                     {
-                        obj.ListTourSchedule[i].tour_id = tourID + 1;
+                        obj.ListTourSchedule[i].tour_id = tourID;
                     }
                     if (AddNewTour(obj.ListTourSchedule))
                     {
