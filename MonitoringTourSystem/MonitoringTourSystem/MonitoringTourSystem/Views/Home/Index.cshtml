@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/Scripts/Home/css/homestyle.css">
     <link rel="stylesheet" type="text/css" href="/Content/style.css">
     <script src="/Scripts/jquery.signalR-2.2.0.js"></script>
-
+    <script src="~/Content/bootstrap-notify.min.js"></script>
 </head>
 
 <title>@ViewBag.Title</title>
@@ -586,31 +586,130 @@
     var myHub = connection.createHubProxy('hubServer');
 
     // for listening
-    myHub.on('updateNumberOfOnline', function (numberOfOnline) {
+    myHub.on('updateNumberOfOnline', function (groupName, numberOfOnline) {
 
+       
         $("#numberofuseronline").text(numberOfOnline);
     });
 
 
-    myHub.on('locationForAddMarker', function (latitude, longitude) {
+    myHub.on('locationForAddMarker', function (latitude, longitude, tourguide, tour) {
+
         var lastIndex = listMarker.length;
+        var lastIndexInfoWindow = listInforwindow.length
+
+
         var latlng = new google.maps.LatLng(latitude, longitude);
         var pinImage = {
             url: '/Content/Images/ic_markerProfile.png', // image is 512 x 512
             scaledSize: new google.maps.Size(64, 76)
         };
 
-        listMarker[lastIndex] = new SlidingMarker({
-            position: latlng,
-            map: map,
-            animation: google.maps.Animation.Gp,
-            icon: pinImage,
-            //tourguiderid: tourguideID
-        });       
+        var tourguideInfo = $.parseJSON(tourguide);
+        var tourInfo = $.parseJSON(tour);
+
+        var tourName = tourInfo.tour_name;
+        var tourguideID = tourguideInfo.tourguide_id;
+        var tourGuide = tourguideInfo.tourguide_name;
+        var departure_date = tourInfo.departure_date.split('T')[0];
+        var return_date = tourInfo.return_date.split('T')[0];
+        var tourDetail = '/TourDetail/GetDetailTour/' + tourInfo.tour_id;
+        var cover_image = tourguideInfo.display_photo;
+
+        notify(tourGuide, "Has just connected to system", tourDetail);
+
+        var contentString = '<div style="width: 300px;background: white;height: 150px;background: while;">' +
+            '<div style="height: 68%;">' +
+            '<div style="float: left; width: 35%; height: 100%;">' +
+            '<img style="width: 100%; height: 100%;" src="/Content/Images/' + cover_image + '"/>' +
+            '</div>' +
+            '<div style="float: right; width: 65%; height: 100%;">' +
+            '<div class="list-tour" style="height: 25px; margin-top: 0px; margin-left: 5px;" id="nav-accordion">' +
+            '<span style="color: black; font-size: 14px; margin-left: 10px; font-weight: bold;">' + tourName + '</span>' +
+            '</div>' +
+            '<div class="list-tour" style="height: 20px; margin-top: 0px; margin-left: 15px;" id="nav-accordion">' +
+            '<img src="/Content/Images/ic_tourguide.png" width="20" height="20"/>' +
+            '<span style="color: gray; font-size: 12px; margin-left: 20px;">' + tourGuide + '</span><span style="font-size: 16px;"></span>' +
+            '</div>' +
+            '<div class="list-tour" style="height: 20px; margin-top: 10px; margin-left: 15px;" id="nav-accordion">' +
+            '<img src="/Content/Images/ic_time.png" width="18" height="18" style="margin-top: -4px;"/>' +
+            '<span style="color: gray; font-size: 12px; margin-left: 20px;">' + departure_date + ' - ' + return_date + '</span>' +
+            '</div>' +
+            '<div class="list-tour" style="height: 20px; margin-top: 8px; margin-left: 15px;" id="nav-accordion">' +
+            '<span style="color: blue; font-size: 12px; margin-left: 20px; float: right;"><a href="' + tourDetail + '"  style="color: blue;">Xem chi tiết</a></span>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div style="height: 10%; border-bottom: 1px solid #e5e5e6;"> </div>' +
+            '<div style="height: 22%; margin-top: 10px;">' +
+            '<div style="float: right; height: 100%; width: 20%;">' +
+            '<img src="/Content/Images/ic_message.png" width="30" height="30" style=" margin-left: 10px; float: right;"/>' +
+            '</div>' +
+            '<div style="float: right; height: 100%; width: 20%; ">' +
+            '<a href="#" data-toggle="modal" data-target="#myModal1"><img src="/Content/Images/ic_warning.png" width="28" height="28" style=" margin-left: 20px; float: right;"/></a>' +
+            '</div>' +
+            '<div style="float: right; height: 100%; width: 20%;"></div>' +
+            '</div>' +
+            '</div>';
+
+        var pinImage = {
+            url: '/Content/Images/ic_markerProfile.png', // image is 512 x 512
+            scaledSize: new google.maps.Size(64, 76)
+        };
+
+        for (i = 0; i < listMarker.length; i++) {
+
+            if (listMarker[i].tourguiderid == tourguideID) {
+                listMarker[i].setIcon(pinImage);
+                listMarker[i].isActive = "True";
+                break;
+            }
+        }
+
+        // Update List tour is active
+
+        $('#list-tour').children('ul').each(function () {
+            var a = $(this).attr('class').split(" ")[1];
+            //alert(a);
+            if (a == tourguideID)
+            {
+               
+                var b = $(this).find('h4').css('color', '#00BCD4');
+                alert(b);
+            }
+        });
+        
+    });
+
+
+    myHub.on('removeUserDisconnection', function (userId, userName) {
+       
+        $.notify({
+            title: '<strong>' +userName + '</strong>',
+            message: 'Have just disconnected'
+        }, {
+            type: 'danger'
+        })
+
+        var userIdReplace = userId.replace("TG_", "");
+
+        var pinImage = {
+            url: '/Content/Images/ic_markerOffline.png', // image is 512 x 512
+            scaledSize: new google.maps.Size(64, 76)
+        };
+
+        for (i = 0; i < listMarker.length; i++) {
+
+            if (listMarker[i].tourguiderid == userIdReplace) {
+                listMarker[i].setIcon(pinImage);
+                listMarker[i].isActive = "False";
+                break;
+            }
+        }
     });
 
     myHub.on('receiveLoaction', function (user, lat, lng) {
-        console.log("dfdfdsf");
+
         for (i = 0; i < listMarker.length; i++) {
 
             if (listMarker[i].tourguiderid == user) {
@@ -637,6 +736,7 @@
         $("#div-alert").prepend(contentHtml);
     });
 
+
     // start connection
     connection.start().done(function () {
        // doing after connected
@@ -645,6 +745,13 @@
 
     // For add marker tourguide first connect
 
+    function notify(user, message, url)
+    {
+        $.notify({
+            message: user + " " + message,
+            url: url
+        });
+    }
     
 
 </script>
@@ -1807,8 +1914,8 @@
         window.setTimeout(function () {
 
             var pinImage = {
-                url: '/Content/Images/icon_marker.png', // image is 512 x 512
-                scaledSize: new google.maps.Size(48, 64)
+                url: '/Content/Images/ic_markerOffline.png', // image is 512 x 512
+                scaledSize: new google.maps.Size(64, 76)
             };
 
             listMarker[index] = new SlidingMarker({
@@ -1816,7 +1923,8 @@
                 map: map,
                 animation: google.maps.Animation.Gp,
                 icon: pinImage,
-                tourguiderid : tourguideID
+                tourguiderid: tourguideID,
+                isActive : "False"
                 //shadow: pinShadow
             })
             listInforwindow[index] = new google.maps.InfoWindow({
@@ -1836,15 +1944,20 @@
     }
     function getMarkerSelected(id) {
 
-        var pinImage = {
-            url: '/Content/Images/icon_marker.png', // image is 512 x 512
-            scaledSize: new google.maps.Size(48, 64)
+        var pinImageOffline = {
+            url: '/Content/Images/ic_markerOffline.png', // image is 512 x 512
+            scaledSize: new google.maps.Size(64, 76)
+        };
+
+        var pinImageActive = {
+            url: '/Content/Images/ic_markerProfile.png', // image is 512 x 512
+            scaledSize: new google.maps.Size(64, 76)
         };
 
 
         var pinImageSelect = {
-            url: '/Content/Images/icon_marker_select.png', // image is 512 x 512
-            scaledSize: new google.maps.Size(48, 64)
+            url: '/Content/Images/ic_markerSelected.png', // image is 512 x 512
+            scaledSize: new google.maps.Size(64, 76)
         };
 
         $.ajax({
@@ -1871,7 +1984,13 @@
                         }
                         else
                         {
-                            listMarker[i].setIcon(pinImage);
+                            if (listMarker[i].isActive == "False") {
+                                listMarker[i].setIcon(pinImageOffline);
+                            }
+                            else if (listMarker[i].isActive == "True")
+                            {
+                                listMarker[i].setIcon(pinImageActive);
+                            }
                         }
                     }
                    

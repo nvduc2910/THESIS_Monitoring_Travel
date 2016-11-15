@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using MonitoringTourSystem.Infrastructures.EntityFramework;
 using System.Web.Security;
 using MonitoringTourSystem.RealTimeServer.Model;
+using Newtonsoft.Json;
 
 namespace MonitoringTourSystem
 {
@@ -82,23 +83,61 @@ namespace MonitoringTourSystem
         // Update Number of user online
         public void UpdateCountUserOnline(string groupName)
         {
+            
             for (int i = 0; i < _groups._groups.Count; i++)
             {
                 if (_groups._groups[i].GroupName == groupName)
                 {
-                    Clients.Group(groupName).updateNumberOfOnline(_groups._groups[i].ConnectionId.Count);
+
+                    if (groupName.Contains(RoomNameDefine.GROUP_NAME_TOURGUIDE))
+                    {
+                        var numberOfOnline = (_groups._groups[i].ConnectionId.Count - 1).ToString();
+                        Clients.Group(groupName).updateNumberOfOnline(groupName, numberOfOnline);
+                    }
+                    else
+                    {
+                        var numberOfOnline = _groups._groups[i].ConnectionId.Count.ToString();
+                        Clients.Group(groupName).updateNumberOfOnline(groupName, numberOfOnline);
+                    }
                 }
             }
         }
 
+        #region Manager
         // Handle For Manager From Touguide
-        public void InitMarkerNewConection(string latitude, string longitude, string receiver)
+        //public void InitMarkerNewConection(string latitude, string longitude, string receiver, tourguide tourguide, tour tour)
+        //{
+
+        //    var jsonTourguideInfo = JsonConvert.SerializeObject(tourguide);
+        //    var jsonTourInfo = JsonConvert.SerializeObject(tour);
+
+        //    foreach (var connection in _connections.GetConnections(receiver))
+        //    {
+        //        Clients.Client(connection).locationForAddMarker(latitude, longitude, jsonTourguideInfo, jsonTourInfo);
+        //    }
+        //}
+
+
+        public void InitMarkerNewConection(string latitude, string longitude, string receiver, tourguide tourguide, tour tour)
+        {
+
+            var jsonTourguideInfo = JsonConvert.SerializeObject(tourguide);
+            var jsonTourInfo = JsonConvert.SerializeObject(tour);
+
+            foreach (var connection in _connections.GetConnections(receiver))
+            {
+                Clients.Client(connection).locationForAddMarker(latitude, longitude, jsonTourguideInfo, jsonTourInfo);
+            }
+        }
+
+        public void RemoveUserDisconnection(string receiver, string senderId, string sernderUserName)
         {
             foreach (var connection in _connections.GetConnections(receiver))
             {
-                Clients.Client(connection).locationForAddMarker(latitude, longitude);
+                Clients.Client(connection).removeUserDisconnection(senderId, sernderUserName);
             }
         }
+
         public void UpdatePositionTourGuide(string sender, string latitude, string longitude, string receiver)
         {
             foreach (var connection in _connections.GetConnections(receiver))
@@ -107,15 +146,29 @@ namespace MonitoringTourSystem
             }
         }
 
-        //public void AddMarker(object marker)
-        //{
-        //    // add marker user when a new user connect
-        //}
 
-        //public void Remove(object marker)
-        //{
-        //    // remove marker user when a new user disconnect
-        //}
+        #endregion
+
+
+        #region TourGuide
+
+        // Handle For Tourguid from Tourist
+
+        public void InitTouristConnection(string latitude, string longitude, string receiver, string touristName)
+        {
+            foreach (var connection in _connections.GetConnections(receiver))
+            {
+                Clients.Client(connection).initTouristConnected(latitude, longitude, touristName);
+            }
+        }
+
+
+        #endregion
+
+
+
+
+
 
         public void PushAlert(string userIdManager, string message)
         {
