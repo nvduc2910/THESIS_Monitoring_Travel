@@ -582,7 +582,7 @@
 
     //var userId;
     var connection = $.hubConnection('http://192.168.0.104:3407');
-    connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1' };
+    connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1', 'USER_NAME' : 'DUC NGUYEN' };
     var myHub = connection.createHubProxy('hubServer');
 
     // for listening
@@ -1547,7 +1547,7 @@
 
                     var tourguideID = results.objectArray[i].Tour.tourguide_id;
                     alert(tourguideID);
-                    listTourGuideWarning.push(tourguideID);
+                    listTourGuideWarning.push("TG_" + tourguideID);
                 }
                 
             },
@@ -1597,8 +1597,18 @@
 
         //Realtime.
 
+        var dataWarning = {
 
-        myHub.invoke('SendMessageTo', listTourGuideWarning, "chao ban");
+            Lat: latSendWarning,
+            Long: longSendWarning,
+            WarningName: warningName,
+            DescriptionWarning: descriptionWarning,
+            CategoryWarnig: categories,
+            Distance: distance,
+            ListTourGuideId: listTourGuideWarning
+        };
+
+        myHub.invoke('SendWarning', dataWarning);
 
         $.ajax({
 

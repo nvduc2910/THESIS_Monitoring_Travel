@@ -9,6 +9,7 @@ using MonitoringTourSystem.Infrastructures.EntityFramework;
 using System.Web.Security;
 using MonitoringTourSystem.RealTimeServer.Model;
 using Newtonsoft.Json;
+using MonitoringTourSystem.Models;
 
 namespace MonitoringTourSystem
 {
@@ -24,6 +25,8 @@ namespace MonitoringTourSystem
             string position = Context.QueryString["USER_POSITION"];
             string managerId = Context.QueryString["MANAGER_ID"];
             string userId = Context.QueryString["USER_ID"];
+            string userName = Context.QueryString["USER_NAME"];
+
             HandleGroup(position, managerId, userId);
             if (position == "MG")
             {
@@ -39,10 +42,11 @@ namespace MonitoringTourSystem
             string position = Context.QueryString["USER_POSITION"];
             string managerId = Context.QueryString["MANAGER_ID"];
             string userId = Context.QueryString["USER_ID"];
-            string userName = "ABCXYZ";
-            HandleRemoveGroup(position, managerId, userId);
+            string userName = Context.QueryString["USER_NAME"];
 
+            HandleRemoveGroup(position, managerId, userId);
             RemoveUserDisconnection(managerId, userId, userName);
+
             return base.OnDisconnected(stopCalled);
         }
 
@@ -72,7 +76,7 @@ namespace MonitoringTourSystem
             //Clients.Group(groupName).sendMessager(message);
         }
 
-        public void SendMessageTo(List<string> who, string message)
+        public void SendMessageTo(List<string> who, object message)
         {
             for (int i = 0; i < who.Count; i++)
             {
@@ -154,6 +158,17 @@ namespace MonitoringTourSystem
             }
         }
 
+
+        public void SendWarning(Warning obj)
+        {
+            for (int i = 0; i < obj.ListTourGuideId.Count; i++)
+            {
+                foreach (var connection in _connections.GetConnections(obj.ListTourGuideId[i]))
+                {
+                    Clients.Client(connection).receiverWarning(obj);
+                }
+            }
+        }
 
         #endregion
 
