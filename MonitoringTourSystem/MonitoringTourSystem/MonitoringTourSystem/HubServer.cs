@@ -130,15 +130,15 @@ namespace MonitoringTourSystem
         //}
 
 
-        public void InitMarkerNewConection(string latitude, string longitude, string receiver, tourguide tourguide, tour tour)
+        public void InitMarkerNewConection(string latitude, string longitude, string receiver, string tourguideId, string tourguideName, string tourId)
         {
 
-            var jsonTourguideInfo = JsonConvert.SerializeObject(tourguide);
-            var jsonTourInfo = JsonConvert.SerializeObject(tour);
+            //var jsonTourguideInfo = JsonConvert.SerializeObject(tourguide);
+            //var jsonTourInfo = JsonConvert.SerializeObject(tour);
 
             foreach (var connection in _connections.GetConnections(receiver))
             {
-                Clients.Client(connection).locationForAddMarker(latitude, longitude, jsonTourguideInfo, jsonTourInfo);
+                Clients.Client(connection).locationForAddMarker(latitude, longitude, tourguideId, tourguideName,tourId);
             }
         }
 
@@ -161,6 +161,7 @@ namespace MonitoringTourSystem
 
         public void SendWarning(Warning obj)
         {
+
             for (int i = 0; i < obj.ListTourGuideId.Count; i++)
             {
                 foreach (var connection in _connections.GetConnections(obj.ListTourGuideId[i]))
