@@ -341,6 +341,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\home\Site1.css" />
     <Content Include="Content\Images\1-thich-ca-Phat-dai.jpg" />
+    <Content Include="Content\Images\duc_avatar.jpg" />
     <Content Include="Content\Images\duc_avatar.png" />
     <Content Include="Content\Images\huy_avatar.png" />
     <Content Include="Content\Images\ic_markerOffline.png" />

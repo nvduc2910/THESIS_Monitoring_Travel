@@ -25,7 +25,7 @@
 <section id="container" style="background: #F1F2F7">
     <header class="header fixed-top clearfix">
         
-        <div id="divMarker" style="width: 64px; height: 76px; visibility: collapse"></div>
+       
         <div class="top-nav clearfix" style="margin-top: 0px;">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar" style="margin-left: 240px;">
                 <!-- navbar-top-links -->
@@ -223,7 +223,7 @@
      
           <img style="margin-left: 20px; margin-top: 10px;" src="~/Content/Images/M_logo.png" width="200" height="37" />
            
-           
+            <div id="divMarker" style="width: 64px; height: 76px; visibility: collapse"></div>
         </div>
     </header>
     <div id="sidebar" class="nav-collapse">
@@ -280,68 +280,13 @@
                     </ul>
                 </li>
             </ul>
+           
         </div>
     </div>
     <div id="main-content" style="background-color: #1FB5AD; height: 100%;">
         <div class="wrapper" style="background-color: white; height: 91%; padding-top: 15px;">
-            <div class='row' style="height: 100%; width: 100%; margin: 0px;">
-                <div class="col-sm-3" style="height:100%; ">
-                    <div style="width:100%; background-color: white; height: 100%; ">
-                        <div class="container-tabbar" style="width:100%; height:100%;">
-                            <p style="padding-top: 14px; font-size: 20px;">QUẢN LÝ TOUR</p>
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#home">Tour</a></li>
-                                <li><a data-toggle="tab" href="#menu1">Cảnh báo</a></li>
-                                <li><a data-toggle="tab" href="#menu2">Trợ giúp</a></li>
-                            </ul>
-                            <div class="tab-content" style="border-radius: 3px; border-left: 1px solid #EAEBED; border-right: 1px solid #EAEBED; border-bottom: 1px solid #EAEBED; margin-top: -11px; height: 83%;">
-                                <div id="home" class="tab-pane fade in active" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px; height: 100%;">
-                                    <div id="searchform" style="height: 100%;">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Tìm kiếm tour theo mã..." id="nametour" onkeyup="searchTour();" name="query" value="">
-                                            <div class="input-group-btn">
-                                                <button type="submit" id="Search" class="btn" style="height: 34px;">
-                                                    <i class="fa fa-search" style="color: gray" aria-hidden="true"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="input-group" style="margin-top: 10px; width: 100%;">
-                                            <select id="region" style="width: 100%; margin-right: 10px; height: 34px; border-radius: 4px;">
-                                                <option style="font-size: 18px;" value="0" disabled selected>Chọn miền</option>
-                                            </select>
-                                        </div>
-                                        <div id="DemoAjaxClick" class="alert alert-success" style="margin-top: 10px;">
-                                            Tour đang hoạt động
-                                        </div>
-                                        <div id="list-tour" style="height: 65% ; overflow-y: auto">
-                                            @{
-                                                Html.RenderPartial("ListTourGuide", Model);
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="menu1" class="tab-pane fade" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px; height: 100%">
-                                    <div class="alert alert-success" style="margin-top: 10px; height: 10%">
-                                        Danh sách cảnh báo
-                                    </div>
-                                    <div id="list-warning-reciver" style="height: 84% ; overflow-y: scroll">
-                                        @{
-                                            Html.RenderPartial("ListWarning", Model);
-                                        }
-                                    </div>
-
-                                </div>
-                                <div id="menu2" class="tab-pane fade" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px;">
-                                    <h3>Menu 2</h3>
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-9" style="height: 100%;  ">
-                    <div class="row" style="height: 12%; margin-bottom: 23px">
+            <div class='row' style="height: 100%; width: 100%;">
+                <div class="row" style="height: 12%; margin-left: 15px">
 
                         <div class="col-sm-4" style="padding-top:20px;">
                             <div class="col-sm-6" style="margin-left: -15px;">
@@ -378,8 +323,67 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="primary-div" style="height: 83.5%; background-color: white; border: 1px solid #EAEBED; border-radius: 3px;">
-                        @{
+  
+                <div class="row" style="margin-left: 15px;margin-right: -2px;height: 84.5%;margin-right: -2px;">
+                    <div class="col-sm-3" style="height:100%; ">
+                        <div style="width:100%; background-color: white; height: 100%; ">
+                            <div class="container-tabbar" style="width:100%; height:100%;">
+
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" href="#home">Tour</a></li>
+                                    <li><a data-toggle="tab" href="#menu1">Cảnh báo</a></li>
+                                    <li><a data-toggle="tab" href="#menu2">Trợ giúp</a></li>
+                                </ul>
+                                <div class="tab-content" style="border-radius: 3px; border-left: 1px solid #EAEBED; border-right: 1px solid #EAEBED; border-bottom: 1px solid #EAEBED; margin-top: -11px; height: 83%;">
+                                    <div id="home" class="tab-pane fade in active" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px; height: 100%;">
+                                        <div id="searchform" style="height: 100%;">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="Tìm kiếm tour theo mã..." id="nametour" onkeyup="searchTour();" name="query" value="">
+                                                <div class="input-group-btn">
+                                                    <button type="submit" id="Search" class="btn" style="height: 34px;">
+                                                        <i class="fa fa-search" style="color: gray" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="input-group" style="margin-top: 10px; width: 100%;">
+                                                <select id="region" style="width: 100%; margin-right: 10px; height: 34px; border-radius: 4px;">
+                                                    <option style="font-size: 18px;" value="0" disabled selected>Chọn miền</option>
+                                                </select>
+                                            </div>
+                                            <div id="DemoAjaxClick" class="alert alert-success" style="margin-top: 10px;">
+                                                Tour đang hoạt động
+                                            </div>
+                                            <div id="list-tour" style="height: 65% ; overflow-y: auto">
+                                                @{
+                                                Html.RenderPartial("ListTourGuide", Model);
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="menu1" class="tab-pane fade" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px; height: 100%">
+                                        <div class="alert alert-success" style="margin-top: 10px; height: 10%">
+                                            Danh sách cảnh báo
+                                        </div>
+                                        <div id="list-warning-reciver" style="height: 84% ; overflow-y: scroll">
+                                            @{
+                                            Html.RenderPartial("ListWarning", Model);
+                                            }
+                                        </div>
+
+                                    </div>
+                                    <div id="menu2" class="tab-pane fade" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px;">
+                                        <h3>Menu 2</h3>
+                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9" style="height: 100%;  ">
+
+                        <div class="row" id="primary-div" style="height: 100%; background-color: white; border: 1px solid #EAEBED; border-radius: 3px;">
+                            @{
                             var item = Model;
                             if (item.OptionRenderView == 1)
                             {
@@ -389,7 +393,8 @@
                             {
                                 Html.RenderPartial("Message", Model);
                             }
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -702,9 +707,11 @@
 
         for (i = 0; i < listMarker.length; i++) {
 
-            if (listMarker[i].tourguiderid == userIdReplace) {
-                listMarker[i].setIcon(pinImage);
-                listMarker[i].isActive = "False";
+            if (listMarker[i].tourguiderid == tourguideId) {
+
+
+                listMarker[i].isActive = "True";
+                updateMarker(i, listMarker[i].avatarProfile, "/Content/Images/ic_markerOffline.png")
                 break;
             }
         }
@@ -2070,8 +2077,7 @@
         for (i = 0 ; i < listMarker.length; i++) {
 
             if (listMarker[i].tourguiderid == id) {
-                listMarker[i].setIcon(pinImageSelect);
-
+                updateMarker(i, listMarker[i].avatarProfile, "/Content/Images/ic_markerSelected.png")
                 var position = listMarker[i].getPosition();
 
                 var latitude = position.lat();
@@ -2082,10 +2088,10 @@
             }
             else {
                 if (listMarker[i].isActive == "False") {
-                    listMarker[i].setIcon(pinImageOffline);
+                    updateMarker(i, listMarker[i].avatarProfile, "/Content/Images/ic_markerOffline.png")
                 }
                 else if (listMarker[i].isActive == "True") {
-                    listMarker[i].setIcon(pinImageActive);
+                    updateMarker(i, listMarker[i].avatarProfile, "/Content/Images/ic_markerProfile.png")
                 }
             }
         }
