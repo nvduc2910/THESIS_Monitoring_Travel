@@ -351,7 +351,7 @@
                                                 </select>
                                             </div>
                                             <div id="DemoAjaxClick" class="alert alert-success" style="margin-top: 10px;">
-                                                Tour đang hoạt động
+                                                Tour Ngày 21.11.2016
                                             </div>
                                             <div id="list-tour" style="height: 65% ; overflow-y: auto">
                                                 @{
@@ -1310,8 +1310,11 @@
 
             animateStep(this, (new Date()).getTime());
         }
-        setTimeout(LoadMarker(), 3000);
-        
+   
+        setTimeout(function () {
+            LoadMarker();
+        }, 3000);
+
         loadMarkerWarning();
     }
     function addMarkerWarning(distance, lat, long)
