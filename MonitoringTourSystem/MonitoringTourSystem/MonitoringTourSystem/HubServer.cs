@@ -28,6 +28,8 @@ namespace MonitoringTourSystem
             string userName = Context.QueryString["USER_NAME"];
 
             HandleGroup(position, managerId, userId);
+
+
             if (position == "MG")
             {
                 InformManageOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
@@ -52,19 +54,17 @@ namespace MonitoringTourSystem
 
         public override Task OnReconnected()
         {
-            string position = Context.QueryString["USER_POSITION"];
-            string managerId = Context.QueryString["MANAGER_ID"];
-            string userId = Context.QueryString["USER_ID"];
-            ////string name = Context.QueryString["MANAGER_ID"];
-            //if (name != null)
-            //{
-            //    if (!_connections.GetConnections(name).Contains(Context.ConnectionId))
-            //    {
-            //        _connections.Add(name, Context.ConnectionId);
-            //        _groups.Add(RoomNameDefine.GROUP_NAME_MANAGER + name, Context.ConnectionId);
+            //string position = Context.QueryString["USER_POSITION"];
+            //string managerId = Context.QueryString["MANAGER_ID"];
+            //string userId = Context.QueryString["USER_ID"];
+            //string userName = Context.QueryString["USER_NAME"];
 
-            //        UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + name);
-            //    }
+
+            //HandleGroup(position, managerId, userId);
+            //if (position == "MG")
+            //{
+            //    InformManageOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
+            //    UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
             //}
             return base.OnReconnected();
         }
@@ -108,7 +108,7 @@ namespace MonitoringTourSystem
                     }
                     else
                     {
-                        var numberOfOnline = _groups._groups[i].ConnectionId.Count.ToString();
+                        var numberOfOnline =( _groups._groups[i].ConnectionId.Count - 1).ToString();
                         Clients.Group(groupName).updateNumberOfOnline(groupName, numberOfOnline);
                     }
                 }
@@ -213,12 +213,7 @@ namespace MonitoringTourSystem
             {
                 Groups.Add(Context.ConnectionId, RoomNameDefine.GROUP_NAME_MANAGER + userId);
                 _connections.Add(userId, Context.ConnectionId);
-                if (managerId == userId)
-                { }
-                else
-                {
-                    _groups.Add(RoomNameDefine.GROUP_NAME_MANAGER + userId, Context.ConnectionId);
-                }
+                _groups.Add(RoomNameDefine.GROUP_NAME_MANAGER + userId, Context.ConnectionId);
 
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
             }
@@ -253,13 +248,7 @@ namespace MonitoringTourSystem
             {
                // Groups.Add(Context.ConnectionId, RoomNameDefine.GROUP_NAME_MANAGER + userId);
                 _connections.Remove(userId, Context.ConnectionId);
-                if (managerId == userId)
-                { }
-                else
-                {
-                    _groups.Remove(RoomNameDefine.GROUP_NAME_MANAGER + userId, Context.ConnectionId);
-                }
-
+                _groups.Remove(RoomNameDefine.GROUP_NAME_MANAGER + userId, Context.ConnectionId);
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
             }
             else if (userPosition == "TG")
