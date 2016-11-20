@@ -1310,7 +1310,8 @@
 
             animateStep(this, (new Date()).getTime());
         }
-        LoadMarker();
+        setTimeout(LoadMarker(), 3000);
+        
         loadMarkerWarning();
     }
     function addMarkerWarning(distance, lat, long)
