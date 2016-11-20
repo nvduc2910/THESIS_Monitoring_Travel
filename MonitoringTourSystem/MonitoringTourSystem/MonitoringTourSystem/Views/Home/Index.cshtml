@@ -18,12 +18,14 @@
     <link rel="stylesheet" type="text/css" href="/Content/style.css">
     <script src="/Scripts/jquery.signalR-2.2.0.js"></script>
     <script src="~/Content/bootstrap-notify.min.js"></script>
+    <script src="~/Scripts/html2canvas.js"></script>
 </head>
 
 <title>@ViewBag.Title</title>
 <section id="container" style="background: #F1F2F7">
     <header class="header fixed-top clearfix">
-       
+        
+        <div id="divMarker" style="width: 64px; height: 76px; visibility: collapse"></div>
         <div class="top-nav clearfix" style="margin-top: 0px;">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar" style="margin-left: 240px;">
                 <!-- navbar-top-links -->
@@ -660,8 +662,10 @@
         for (i = 0; i < listMarker.length; i++) {
 
             if (listMarker[i].tourguiderid == tourguideId) {
-                listMarker[i].setIcon(pinImage);
+
+               
                 listMarker[i].isActive = "True";
+                updateMarker(i, listMarker[i].avatarProfile, "/Content/Images/ic_markerProfile.png")
                 break;
             }
         }
@@ -1916,8 +1920,15 @@
                         return 'some value';
                     };
 
+                    var avartaProfile = "/Content/Images/" + cover_image;
+                    drawMarker(i, tourguideID, currentLocation, contentString, avartaProfile, "/Content/Images/ic_markerOffline.png");
+                    
+                    //{
+                    //    //SetMarker(orderTracking.latitudeStore, orderTracking.longitudeStore, url, orderTracking.latitudeReceiver, orderTracking.longitudeReceiver)
+                    //   // createMarker(i, tourguideID, currentLocation, contentString, url);
+                    //});
 
-                    createMarker(i, tourguideID, currentLocation, contentString);
+                   // createMarker(i, tourguideID, currentLocation, contentString);
 
                 }
             },
@@ -1926,8 +1937,9 @@
             }
         });
     }
-    function createMarker(index,tourguideID, latlng, title) {
-        window.setTimeout(function () {
+     function createMarker(index,tourguideID, latlng, title, url) {
+            alert("Index " + index);
+            alert("tourguidID " + tourguideID);
 
             var pinImage = {
                 url: '/Content/Images/ic_markerOffline.png', // image is 512 x 512
@@ -1938,11 +1950,13 @@
                 position: latlng,
                 map: map,
                 animation: google.maps.Animation.Gp,
-                icon: pinImage,
+                icon: url,
                 tourguiderid: tourguideID,
                 isActive : "False"
                 //shadow: pinShadow
             })
+
+           
             listInforwindow[index] = new google.maps.InfoWindow({
                 content: title
             });
@@ -1956,8 +1970,83 @@
                 }
                 listInforwindow[index].open(map, listMarker[index]);
             });
-        }, 200);
     }
+
+     function drawMarker(index, tourguideID, latlng, title, avatar, imgmarker) {
+
+        var divMarker = '<div id="marker">' +
+                            '<div style="height: 150px"; z-index="1">' +
+                              '<img style="width: 64px; height: 76px;" src="' + imgmarker + '" />' +
+                            '</div>' +
+                            '<div style="position:relative; bottom: 150px;">' +
+                              '<img style="width: 59px; height: 59px; margin-top: 3px; margin-left: 2.5px; border-radius: 30%;" src="' + avatar + '"/>' +
+                            '</div>' +
+                            '</div>';
+
+        var url = '';
+
+        $('#divMarker').children().remove();
+
+        $('#divMarker').append(divMarker);
+
+        html2canvas($('#divMarker'), {
+            onrendered: function (canvas) {
+                url = canvas.toDataURL("image/png");
+                // fn(url);
+
+                listMarker[index] = new SlidingMarker({
+                    position: latlng,
+                    map: map,
+                    animation: google.maps.Animation.Gp,
+                    icon: url,
+                    tourguiderid: tourguideID,
+                    avatarProfile: avatar, 
+                    isActive: "False"
+                    //shadow: pinShadow
+                })
+
+
+                listInforwindow[index] = new google.maps.InfoWindow({
+                    content: title
+                });
+
+                google.maps.event.addListener(listMarker[index], "click", function () {
+
+                    userID = listMarker[index].tourguiderid;
+                    console.log(userID);
+                    for (i = 0; i < listInforwindow.length; i++) {
+                        listInforwindow[i].close();
+                    }
+                    listInforwindow[index].open(map, listMarker[index]);
+                });
+            }
+        });
+     };
+
+
+     function updateMarker(index, avatar, imgmarker) {
+
+         var divMarker = '<div id="marker">' +
+                            '<div style="height: 150px"; z-index="1">' +
+                              '<img style="width: 64px; height: 76px;" src="' + imgmarker + '" />' +
+                            '</div>' +
+                            '<div style="position:relative; bottom: 150px;">' +
+                              '<img style="width: 59px; height: 59px; margin-top: 3px; margin-left: 2.5px; border-radius: 30%;" src="' + avatar + '"/>' +
+                            '</div>' +
+                            '</div>';
+
+         var url = '';
+         $('#divMarker').children().remove();
+         $('#divMarker').append(divMarker);
+
+         html2canvas($('#divMarker'), {
+             onrendered: function (canvas) {
+                 url = canvas.toDataURL("image/png");
+                 // fn(url);
+                 listMarker[index].setIcon(url);
+             }
+         });
+     };
 
     function getMarkerSelected(id) {
 

@@ -342,6 +342,7 @@
     <Content Include="Content\home\Site1.css" />
     <Content Include="Content\Images\1-thich-ca-Phat-dai.jpg" />
     <Content Include="Content\Images\duc_avatar.png" />
+    <Content Include="Content\Images\huy_avatar.png" />
     <Content Include="Content\Images\ic_markerOffline.png" />
     <Content Include="Content\Images\ic_markerProfile.png" />
     <Content Include="Content\Images\ban-dao-son-tra-ivivu.jpg" />
@@ -369,6 +370,8 @@
     <Content Include="Content\Images\morakot2-13545.jpg" />
     <Content Include="Content\Images\M_logo.png" />
     <Content Include="Content\Images\nam_avatar.jpg" />
+    <Content Include="Content\Images\ndq_avatar.jpg" />
+    <Content Include="Content\Images\nhat_avatar.png" />
     <Content Include="Content\loading.gif" />
     <Content Include="Content\processing_small.jpg" />
     <Content Include="Content\process_small.gif" />
@@ -413,6 +416,7 @@
     <Content Include="Content\Images\support.png" />
     <Content Include="Content\Images\user.png" />
     <Content Include="Content\Images\warning.png" />
+    <Content Include="Scripts\html2canvas.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\TourDetail\css\timelineSchedule.css" />
