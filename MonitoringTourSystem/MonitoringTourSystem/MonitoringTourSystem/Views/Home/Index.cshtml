@@ -588,7 +588,7 @@
     }
 
     //var userId;
-    var connection = $.hubConnection('http://192.168.0.104:3407');
+    var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
     connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1', 'USER_NAME' : 'DUC NGUYEN' };
     var myHub = connection.createHubProxy('hubServer');
 
