@@ -1314,8 +1314,10 @@
         setTimeout(function () {
             LoadMarker();
         }, 3000);
-
-        loadMarkerWarning();
+        setTimeout(function () {
+            loadMarkerWarning();
+        }, 2000);
+        
     }
     function addMarkerWarning(distance, lat, long)
     {
