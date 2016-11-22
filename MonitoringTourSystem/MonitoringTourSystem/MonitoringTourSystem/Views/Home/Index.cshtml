@@ -364,7 +364,7 @@
                                         <div class="alert alert-success" style="margin-top: 10px; height: 10%">
                                             Danh sách cảnh báo
                                         </div>
-                                        <div id="list-warning-reciver" style="height: 84% ; overflow-y: scroll">
+                                        <div id="list-warning-reciver" style="height: 84% ; overflow-y: auto">
                                             @{
                                             Html.RenderPartial("ListWarning", Model);
                                             }
@@ -462,7 +462,7 @@
                                     </div>
                                 </div>
                                 <div class="row" style="background: #FFFFFF; margin-right: -5px;  height: 90%;">
-                                    <div id="list-tour-warning" style="height: 100% ; overflow-y: scroll">
+                                    <div id="list-tour-warning" style="height: 100% ; overflow-y: auto">
                                         @{
                                             Html.RenderPartial("ListTourGuideWarning", Model);
                                         }
@@ -1561,7 +1561,6 @@
                 for (i = 0; i < results.objectArray.length; i++) {
 
                     var tourguideID = results.objectArray[i].Tour.tourguide_id;
-                    alert(tourguideID);
                     listTourGuideWarning.push("TG_" + tourguideID);
                 }
                 
@@ -1826,11 +1825,15 @@
         }
 
         var dataSend = {
+            Lat: latSendWarningPrivate,
+            Long: longSendWarningPrivate,
             WarningName: warningName,
-            Description: descriptionWarning,
-            Categories: categories,
+            DescriptionWarning: descriptionWarning,
+            CategoryWarnig: categories,
             Distance: distance
         }
+
+        myHub.invoke('SendWarningForUser', dataSend, userID);
 
         $.ajax({
             url: "/Home/SendWraningForUser/" + userID,

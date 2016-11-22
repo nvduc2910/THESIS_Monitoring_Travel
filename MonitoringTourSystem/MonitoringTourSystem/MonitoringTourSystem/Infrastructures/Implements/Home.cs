@@ -176,7 +176,7 @@ namespace MonitoringTourSystem.Infrastructures.Implements
                         var warningReceiver = new warning_receiver()
                         {
                             warning_id = warningId,
-                            receiver_id = Convert.ToInt32(obj.ListTourGuideId[i]),
+                            receiver_id = Convert.ToInt32(obj.ListTourGuideId[i].Replace("TG_","")),
                             status = StatusWarning.Opening.ToString(),
                             warner_id = userId
                         };

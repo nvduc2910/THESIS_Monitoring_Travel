@@ -171,6 +171,15 @@ namespace MonitoringTourSystem
             }
         }
 
+        public void SendWarningForUser(Warning obj, int receiverId)
+        {
+            var receveriIdStr = "TG_" + receiverId.ToString();
+            foreach (var connection in _connections.GetConnections(receveriIdStr))
+            {
+                Clients.Client(connection).receiverWarning(obj);
+            }
+        }
+
         #endregion
 
 
