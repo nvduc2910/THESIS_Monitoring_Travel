@@ -19,5 +19,6 @@ namespace MonitoringTourSystem.Infrastructures.EntityFramework
         public int warner_id { get; set; }
         public int receiver_id { get; set; }
         public string status { get; set; }
+        public Nullable<int> tour_id { get; set; }
     }
 }

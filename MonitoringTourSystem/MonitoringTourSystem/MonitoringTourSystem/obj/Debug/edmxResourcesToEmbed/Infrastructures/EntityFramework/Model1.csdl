@@ -156,6 +156,7 @@
     <Property Name="warner_id" Type="Int32" Nullable="false" />
     <Property Name="receiver_id" Type="Int32" Nullable="false" />
     <Property Name="status" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tour_id" Type="Int32" />
   </EntityType>
   <EntityContainer Name="tour_monitoring_v3Entities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="countries" EntityType="Self.country" />

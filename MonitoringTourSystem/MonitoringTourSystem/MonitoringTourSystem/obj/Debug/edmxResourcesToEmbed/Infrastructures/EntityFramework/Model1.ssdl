@@ -39,7 +39,7 @@
     <Property Name="place_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="province_id" Type="varchar" MaxLength="14" Nullable="false" />
     <Property Name="country_id" Type="int" Nullable="false" />
-    <Property Name="place_name" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="place_name" Type="text" Nullable="false" />
     <Property Name="contact" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="address" Type="varchar" MaxLength="60" Nullable="false" />
     <Property Name="cover_photo" Type="varchar" MaxLength="256" Nullable="false" />
@@ -88,7 +88,7 @@
     <Property Name="tour_schedule" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tour_id" Type="int" Nullable="false" />
     <Property Name="place_id" Type="varchar" MaxLength="12" Nullable="false" />
-    <Property Name="place_name" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="place_name" Type="varchar" MaxLength="50" />
     <Property Name="vehicle" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="time" Type="datetime" Precision="0" Nullable="false" />
     <Property Name="description" Type="text" Nullable="false" />
@@ -155,6 +155,7 @@
     <Property Name="warning_id" Type="int" Nullable="false" />
     <Property Name="warner_id" Type="int" Nullable="false" />
     <Property Name="receiver_id" Type="int" Nullable="false" />
+    <Property Name="tour_id" Type="int" />
     <Property Name="status" Type="text" Nullable="false" />
   </EntityType>
   <EntityContainer Name="tour_monitoring_v3ModelStoreContainer">

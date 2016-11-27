@@ -10,6 +10,7 @@ using System.Web.Security;
 using MonitoringTourSystem.RealTimeServer.Model;
 using Newtonsoft.Json;
 using MonitoringTourSystem.Models;
+using MonitoringTourSystem.Infrastructures;
 
 namespace MonitoringTourSystem
 {
@@ -18,7 +19,7 @@ namespace MonitoringTourSystem
     {
         private readonly static ConnectionMapping<string> _connections = new ConnectionMapping<string>();
         private readonly static ConnectionMappingGroup _groups = new ConnectionMappingGroup();
-
+        protected DbContext _dbContextPool = new DbContext();
         public override Task OnConnected()
         {
 
@@ -54,18 +55,22 @@ namespace MonitoringTourSystem
 
         public override Task OnReconnected()
         {
-            //string position = Context.QueryString["USER_POSITION"];
-            //string managerId = Context.QueryString["MANAGER_ID"];
-            //string userId = Context.QueryString["USER_ID"];
-            //string userName = Context.QueryString["USER_NAME"];
+            string position = Context.QueryString["USER_POSITION"];
+            string managerId = Context.QueryString["MANAGER_ID"];
+            string userId = Context.QueryString["USER_ID"];
+            string userName = Context.QueryString["USER_NAME"];
 
+            if (!_connections.GetConnections(userId).Contains(Context.ConnectionId))
+            {
+                _connections.Add(userId, Context.ConnectionId);
+                HandleGroup(position, managerId, userId);
+            }
 
-            //HandleGroup(position, managerId, userId);
-            //if (position == "MG")
-            //{
-            //    InformManageOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
-            //    UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
-            //}
+            if (position == "MG")
+            {
+                InformManageOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
+                UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
+            }
             return base.OnReconnected();
         }
 
@@ -108,7 +113,7 @@ namespace MonitoringTourSystem
                     }
                     else
                     {
-                        var numberOfOnline =( _groups._groups[i].ConnectionId.Count - 1).ToString();
+                        var numberOfOnline =( _groups._groups[i].ConnectionId.Count).ToString();
                         Clients.Group(groupName).updateNumberOfOnline(groupName, numberOfOnline);
                     }
                 }
@@ -150,17 +155,29 @@ namespace MonitoringTourSystem
             }
         }
 
-        public void UpdatePositionTourGuide(string sender, string latitude, string longitude, string receiver)
+        public void UpdatePositionTourGuide(string sender, int tourId, string latitude, string longitude, string receiver)
         {
             foreach (var connection in _connections.GetConnections(receiver))
             {
                 Clients.Client(connection).receiveLoaction(sender, latitude, longitude);
             }
+
+
+            var location = new Location()
+            {
+                lat = Convert.ToDouble(latitude),
+                lng = Convert.ToDouble(longitude),
+            };
+            WriteLocationTracking(location, tourId);
+           
         }
 
 
         public void SendWarning(Warning obj)
         {
+            var id = _dbContextPool.GetContext().warnings.Max(x => x.warning_id);
+
+            obj.WarningId = id.ToString();
 
             for (int i = 0; i < obj.ListTourGuideId.Count; i++)
             {
@@ -173,11 +190,140 @@ namespace MonitoringTourSystem
 
         public void SendWarningForUser(Warning obj, int receiverId)
         {
+
+            var id = _dbContextPool.GetContext().warnings.Max(x => x.warning_id);
+
+            obj.WarningId = id.ToString();
+
             var receveriIdStr = "TG_" + receiverId.ToString();
             foreach (var connection in _connections.GetConnections(receveriIdStr))
             {
                 Clients.Client(connection).receiverWarning(obj);
             }
+        }
+
+        public void ConfirmWarning(string warningId, string warningName, string tourguideId, string sender, string receiver)
+        {
+            int warningInt = Convert.ToInt32(warningId);
+            int tourguideIdInt = Convert.ToInt32(tourguideId);
+
+            using (var context = new monitoring_tour_v3Entities())
+            {
+                var warningResult = (from x in context.warning_receiver
+                                     where x.warning_id == warningInt && x.receiver_id == tourguideIdInt
+                                     select x).First();
+
+                warningResult.status = "Confirmed";
+                context.SaveChanges();
+            }
+            foreach (var connection in _connections.GetConnections(receiver))
+            {
+                Clients.Client(connection).confirmWarning(sender, warningName);
+            }
+
+        }
+
+
+        // Write Location Tracking to database 
+
+        private static Dictionary<string, Location> lastLocationUpdate = new Dictionary<string, Location>();
+        private static Dictionary<string, Location> tempLocationNow = new Dictionary<string, Location>();
+        private static Dictionary<string, DateTime?> lastManagerTime = new Dictionary<string, DateTime?>();
+        private static Dictionary<string, bool> isWriting = new Dictionary<string, bool>();
+
+        public  void WriteLocationTracking(Location location, int tourId)
+        {
+
+            if (!lastManagerTime.ContainsKey(tourId.ToString()))
+            {
+                lastManagerTime.Add(tourId.ToString(), null);
+            }
+            if (!tempLocationNow.ContainsKey(tourId.ToString()))
+            {
+                tempLocationNow.Add(tourId.ToString(), null);
+            }
+            if (!lastManagerTime.ContainsKey(tourId.ToString()))
+            {
+                lastManagerTime.Add(tourId.ToString(), null);
+            }
+            if (!isWriting.ContainsKey(tourId.ToString()))
+            {
+                isWriting.Add(tourId.ToString(), false);
+            }
+            try
+            {
+                Console.Write("Checking to write");
+                bool isNeedWriteLocation = false;
+
+                if (lastManagerTime[tourId.ToString()] == null)
+                {
+                    isNeedWriteLocation = true;
+                }
+        
+                else
+                {
+                    TimeSpan ts = DateTime.Now.Subtract((DateTime)lastManagerTime[tourId.ToString()]);
+                    var distance = GetDistanceFromLatLonInKm(location.lat, location.lng, lastLocationUpdate[tourId.ToString()].lat, lastLocationUpdate[tourId.ToString()].lng);
+                    if (ts.TotalSeconds > 60)
+                    {
+                        isNeedWriteLocation = true;
+                    }
+                }
+                if (isNeedWriteLocation)
+                {
+                    Console.Write("Need write location");
+                    if (!isWriting[tourId.ToString()])
+                    {
+                        Console.WriteLine("Insert to database");
+                        tempLocationNow[tourId.ToString()] = location;
+                        isWriting[tourId.ToString()] = true;
+
+                        // Write to  database
+
+                        using (var context = new monitoring_tour_v3Entities())
+                        {
+                            var trackingLocation = new tracking()
+                            {
+                                tour_id = tourId,
+                                latitude = location.lat,
+                                longitude = location.lng,
+                                time = DateTime.Now,
+                            };
+
+                            context.trackings.Add(trackingLocation);
+                            context.SaveChanges();
+                        }
+
+                        lastManagerTime[tourId.ToString()] = DateTime.Now;
+                        lastLocationUpdate = tempLocationNow;
+                        isWriting[tourId.ToString()] = false;
+
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+
+        double GetDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2)
+        {
+            var R = 6371d; // Radius of the earth in km
+            var dLat = Deg2Rad(lat2 - lat1);  // deg2rad below
+            var dLon = Deg2Rad(lon2 - lon1);
+            var a =
+              Math.Sin(dLat / 2d) * Math.Sin(dLat / 2d) +
+              Math.Cos(Deg2Rad(lat1)) * Math.Cos(Deg2Rad(lat2)) *
+              Math.Sin(dLon / 2d) * Math.Sin(dLon / 2d);
+            var c = 2d * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1d - a));
+            var d = R * c; // Distance in km
+            return d;
+        }
+        double Deg2Rad(double deg)
+        {
+            return deg * (Math.PI / 180d);
         }
 
         #endregion
@@ -196,12 +342,12 @@ namespace MonitoringTourSystem
         }
 
 
+        public void WarningForTourist(WarningTourguide warning)
+        {
+
+        }
+
         #endregion
-
-
-
-
-
 
         public void PushAlert(string userIdManager, string message)
         {
@@ -222,7 +368,7 @@ namespace MonitoringTourSystem
             {
                 Groups.Add(Context.ConnectionId, RoomNameDefine.GROUP_NAME_MANAGER + userId);
                 _connections.Add(userId, Context.ConnectionId);
-                _groups.Add(RoomNameDefine.GROUP_NAME_MANAGER + userId, Context.ConnectionId);
+               //_groups.Add(RoomNameDefine.GROUP_NAME_MANAGER + userId, Context.ConnectionId);
 
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
             }
@@ -246,7 +392,6 @@ namespace MonitoringTourSystem
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_TOURGUIDE + managerId);
             }
         }
-
         #endregion
 
         #region Check position and remove group
@@ -280,7 +425,6 @@ namespace MonitoringTourSystem
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_TOURGUIDE + managerId);
             }
         }
-
         #endregion
     }
 

@@ -44,7 +44,7 @@ namespace MonitoringTourSystem.Infrastructures.Implements
 
                 if (listReceiverOfWarning.Count != 0)
                 {
-                    lstWarningWithReceiver.Add(new WarningWithReceiver() { Warning = listWarning[i], ListWarningReceiver = listReceiverOfWarning, QuanityRecevied = listReceiverOfWarning.Where(x => x.status == StatusWarning.Received.ToString()).ToList().Count });
+                    lstWarningWithReceiver.Add(new WarningWithReceiver() { Warning = listWarning[i], ListWarningReceiver = listReceiverOfWarning, QuanityRecevied = listReceiverOfWarning.Where(x => x.status == StatusWarning.Confirmed.ToString()).ToList().Count });
                 }
             }
 
@@ -178,7 +178,9 @@ namespace MonitoringTourSystem.Infrastructures.Implements
                             warning_id = warningId,
                             receiver_id = Convert.ToInt32(obj.ListTourGuideId[i].Replace("TG_","")),
                             status = StatusWarning.Opening.ToString(),
-                            warner_id = userId
+                            warner_id = userId,
+                            tour_id = Convert.ToInt32(obj.ListTourId[i])
+                            
                         };
 
                         using (var context = new monitoring_tour_v3Entities())

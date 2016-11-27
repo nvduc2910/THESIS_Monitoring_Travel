@@ -9,6 +9,6 @@ namespace MonitoringTourSystem.Models
     {
         Opening,
         Close,
-        Received,
+        Confirmed,
     }
 }

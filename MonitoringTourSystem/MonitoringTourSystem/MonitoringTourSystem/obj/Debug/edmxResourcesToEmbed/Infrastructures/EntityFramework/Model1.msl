@@ -163,6 +163,7 @@
     <EntitySetMapping Name="warning_receiver">
       <EntityTypeMapping TypeName="tour_monitoring_v3Model.warning_receiver">
         <MappingFragment StoreEntitySet="warning_receiver">
+          <ScalarProperty Name="tour_id" ColumnName="tour_id" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="warning_id" ColumnName="warning_id" />
           <ScalarProperty Name="warner_id" ColumnName="warner_id" />

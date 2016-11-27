@@ -321,8 +321,10 @@
     <Compile Include="RealTimeServer\BaseMappingConnection\ConnectionMappingGroup.cs" />
     <Compile Include="HubServer.cs" />
     <Compile Include="RealTimeServer\Interface\IUserIdProvider.cs" />
+    <Compile Include="RealTimeServer\Model\Location.cs" />
     <Compile Include="RealTimeServer\Model\RoomChat.cs" />
     <Compile Include="RealTimeServer\Model\RoomNameDefine.cs" />
+    <Compile Include="RealTimeServer\Model\WarningTourguide.cs" />
     <Compile Include="Services\ManagerServices.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\CreateTourViewModel.cs" />

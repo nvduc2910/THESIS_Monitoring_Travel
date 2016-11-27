@@ -588,7 +588,7 @@
     }
 
     //var userId;
-    var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
+    var connection = $.hubConnection('http://192.168.0.106:3407/');
     connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1', 'USER_NAME' : 'DUC NGUYEN' };
     var myHub = connection.createHubProxy('hubServer');
 
@@ -754,6 +754,14 @@
     });
 
 
+    myHub.on("confirmWarning", function (tourguideName, warningName) {
+        $.notify({
+            message: tourguideName + " - Da xac nhan canh bao: " + warningName,
+            url: "#"
+        });
+        getListWarning();
+    });
+
     // start connection
     connection.start().done(function () {
        // doing after connected
@@ -769,7 +777,6 @@
             url: url
         });
     }
-    
 
 </script>
 
@@ -1369,6 +1376,7 @@
     var long;
 
     var listTourGuideWarning = [];
+    var listTourWarning = [];
 
     $(document).on('change', '#distanceWarning', function () {
 
@@ -1548,6 +1556,7 @@
         latSendWarning = latTemp;
         longSendWarning = longTemp;
         listTourGuideWarning = [];
+        listTourWarning = [];
         $.ajax({
             url: "/Home/GetListForWarningJson",
             type: "POST",
@@ -1564,6 +1573,7 @@
 
                     var tourguideID = results.objectArray[i].Tour.tourguide_id;
                     listTourGuideWarning.push("TG_" + tourguideID);
+                    listTourWarning.push(results.objectArray[i].Tour.tour_id);
                 }
                 
             },
@@ -1614,17 +1624,16 @@
         //Realtime.
 
         var dataWarning = {
-
+            WarningId: 0,
             Lat: latSendWarning,
             Long: longSendWarning,
             WarningName: warningName,
             DescriptionWarning: descriptionWarning,
             CategoryWarnig: categories,
             Distance: distance,
-            ListTourGuideId: listTourGuideWarning
+            ListTourGuideId: listTourGuideWarning,
         };
 
-        myHub.invoke('SendWarning', dataWarning);
 
         $.ajax({
 
@@ -1638,9 +1647,13 @@
                 DescriptionWarning: descriptionWarning,
                 CategoryWarnig: categories,
                 Distance: distance,
-                ListTourGuideId : listTourGuideWarning
+                ListTourGuideId: listTourGuideWarning,
+                ListTourId: listTourWarning
             },
             success: function (result) {
+
+
+                myHub.invoke('SendWarning', dataWarning);
 
                 //var results = $.parseJSON(result);
                 var message = result.Message;
@@ -1660,6 +1673,9 @@
                 sweetAlert("Oops...", "Gửi cảnh báo thất bại, vui lòng thử lại", "error");
             }
         });
+
+        listTourWarning = [];
+        listTourGuideWarning = [];
     }
     function getListWarning()
     {
@@ -1827,15 +1843,17 @@
         }
 
         var dataSend = {
+            WarningId: 0,
             Lat: latSendWarningPrivate,
             Long: longSendWarningPrivate,
             WarningName: warningName,
             DescriptionWarning: descriptionWarning,
             CategoryWarnig: categories,
             Distance: distance
+           
         }
 
-        myHub.invoke('SendWarningForUser', dataSend, userID);
+       
 
         $.ajax({
             url: "/Home/SendWraningForUser/" + userID,
@@ -1847,11 +1865,13 @@
                 WarningName: warningName,
                 DescriptionWarning: descriptionWarning,
                 CategoryWarnig: categories,
-                Distance: distance
+                Distance: distance,
+                
             },
             success: function (result) {
 
-                //var results = $.parseJSON(result);
+                
+
                 var message = result.Message;
                 var success = result.Success;
                 if (success == false) {
@@ -1865,6 +1885,8 @@
                 sweetAlert("Oops...", "Gửi cảnh báo thất bại, vui lòng thử lại", "error");
             }
         });
+
+        myHub.invoke('SendWarningForUser', dataSend, userID);
     }
 
     // FOR TOURGUIDE MARKER
