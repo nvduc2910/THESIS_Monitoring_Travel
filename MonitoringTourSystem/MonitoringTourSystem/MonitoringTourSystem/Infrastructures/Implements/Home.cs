@@ -209,10 +209,8 @@ namespace MonitoringTourSystem.Infrastructures.Implements
         public JsonResult CreateWarningMarker(string userName)
         {
 
-            var userId = _managerServices.GetUserID(userName);
-
+            var userId = _managerServices.GetUserID(userName);      
             var listWarningReceiver = _dbContextPool.GetContext().warning_receiver.Where(s => s.warner_id == userId).GroupBy(x => x.warning_id).Select(y => y.FirstOrDefault()).ToList();
-
             var listWarningAll = _dbContextPool.GetContext().warnings.ToList();
 
             var listWarningOfUser = new List<warning>();
@@ -223,10 +221,8 @@ namespace MonitoringTourSystem.Infrastructures.Implements
                 {
                     listWarningOfUser.Add(warningItem);
                 }
-
             }
 
-            //
             var jsonString = JsonConvert.SerializeObject(listWarningOfUser);
             return Json(jsonString, JsonRequestBehavior.AllowGet);
         }
@@ -235,6 +231,14 @@ namespace MonitoringTourSystem.Infrastructures.Implements
         {
             var itemResult = _dbContextPool.GetContext().warnings.Where(item => item.warning_id == id);
             var jsonString = JsonConvert.SerializeObject(itemResult);
+            return Json(jsonString, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CreateMarkerPlace(string userName)
+        {
+            var userId = _managerServices.GetUserID(userName);
+            var listWarningReceiver = _dbContextPool.GetContext().places.ToList();
+            var jsonString = JsonConvert.SerializeObject(listWarningReceiver);
             return Json(jsonString, JsonRequestBehavior.AllowGet);
         }
     }

@@ -345,6 +345,7 @@
     <Content Include="Content\Images\1-thich-ca-Phat-dai.jpg" />
     <Content Include="Content\Images\duc_avatar.jpg" />
     <Content Include="Content\Images\duc_avatar.png" />
+    <Content Include="Content\Images\ic_place.png" />
     <Content Include="Content\Images\huy_avatar.png" />
     <Content Include="Content\Images\ic_markerOffline.png" />
     <Content Include="Content\Images\ic_markerProfile.png" />
@@ -422,6 +423,7 @@
     <Content Include="Scripts\html2canvas.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
+    <Content Include="Scripts\markerclusterer.js" />
     <Content Include="Scripts\TourDetail\css\timelineSchedule.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

@@ -168,7 +168,7 @@ namespace MonitoringTourSystem
                 lat = Convert.ToDouble(latitude),
                 lng = Convert.ToDouble(longitude),
             };
-            WriteLocationTracking(location, tourId);
+            WriteLocationTracking(sender, location, tourId);
            
         }
 
@@ -231,8 +231,9 @@ namespace MonitoringTourSystem
         private static Dictionary<string, DateTime?> lastManagerTime = new Dictionary<string, DateTime?>();
         private static Dictionary<string, bool> isWriting = new Dictionary<string, bool>();
 
-        public  void WriteLocationTracking(Location location, int tourId)
+        public  void WriteLocationTracking(string sender, Location location, int tourId)
         {
+            var senderInt = Convert.ToInt32(sender);
 
             if (!lastManagerTime.ContainsKey(tourId.ToString()))
             {
@@ -264,7 +265,7 @@ namespace MonitoringTourSystem
                 {
                     TimeSpan ts = DateTime.Now.Subtract((DateTime)lastManagerTime[tourId.ToString()]);
                     var distance = GetDistanceFromLatLonInKm(location.lat, location.lng, lastLocationUpdate[tourId.ToString()].lat, lastLocationUpdate[tourId.ToString()].lng);
-                    if (ts.TotalSeconds > 60)
+                    if (distance > 0.02)
                     {
                         isNeedWriteLocation = true;
                     }
@@ -289,6 +290,12 @@ namespace MonitoringTourSystem
                                 longitude = location.lng,
                                 time = DateTime.Now,
                             };
+
+                            var locationTourguide = (from x in context.tourguides
+                                                     where x.tourguide_id == senderInt
+                                                     select x).First();
+                            locationTourguide.latitude = location.lat;
+                            locationTourguide.longitude = location.lng;
 
                             context.trackings.Add(trackingLocation);
                             context.SaveChanges();

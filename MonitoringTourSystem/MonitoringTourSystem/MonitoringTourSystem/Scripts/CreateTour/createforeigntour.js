@@ -37,7 +37,7 @@
                 var success = result.Success;
                 if (success == true) {
                     console.log(pathImage);
-                    $("#myUploadedImg").attr("src", "http://localhost:20261/Content/Images/" + pathImage);
+                    $("#myUploadedImg").attr("src", "/Content/Images/" + pathImage);
                 }
             },
             processData: false,
@@ -150,10 +150,10 @@
 
     function yourfunction() {
         $('.datepicker_init').datetimepicker({
-
+            format: 'MM/YYYY'
         });
         $('.datepicker_end').datetimepicker({
-
+            format: 'MM/YYYY'
         });
 
     }
@@ -250,7 +250,7 @@ function getTourGuideAvailable() {
         return;
     }
     if (startday > endday) {
-        $('#warning').text("Vui lòng chọn ngày bắt đầu nhỏ kết thúc");
+        $('#warning').text("Vui lòng chọn ngày bắt đầu nhỏ  kết thúc");
         return;
     }
 
@@ -379,7 +379,6 @@ function addNewTour() {
             isValidSchedule = false;
             return;
         }
-        alert(placename);
         listSchedule[index] =
             {
                 tour_schedule1: null,

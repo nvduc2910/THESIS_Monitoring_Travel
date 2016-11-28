@@ -212,6 +212,13 @@ namespace MonitoringTourSystem.Controllers
             return null;
         }
 
+        [HttpGet]
+
+        public JsonResult CreateMarkerPlace()
+        {
+            string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
+            return homeControllerService.CreateMarkerPlace(username);
+        }
         #endregion
     }
 }

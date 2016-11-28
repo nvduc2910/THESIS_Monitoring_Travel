@@ -14,18 +14,12 @@ namespace MonitoringTourSystem.Infrastructures.Interfaces.Home
         List<TourIsProcessing> GetTourIsProcessing(string username);
         List<WarningWithReceiver> GetInfoWarning(string username);
         JsonResult CreateMarkerTourGuide(string userName);
-
         JsonResult SelectMarkerTourGuide(int id);
-
         List<TourIsProcessing> SearchTourGuide(string username, string id);
-
         List<TourIsProcessing> GetTourForWarningOption(Warning obj, string userName);
-
         JsonResult SendWarningGroup(Warning obj, string userName);
-
         JsonResult CreateWarningMarker(string userName);
-
-
         JsonResult SelectMarkerWarning(int id);
+        JsonResult CreateMarkerPlace(string userName);
     }
 }

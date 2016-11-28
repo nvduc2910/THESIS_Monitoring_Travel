@@ -51,10 +51,17 @@ namespace MonitoringTourSystem.Controllers
             int indexDay = 0;
             int indexStart = 0;
             List<ScheduleDay> ListScheduleDay = new List<ScheduleDay>();
+
             var listSchedule = (from schedule in MonitoringTourSystem.tour_schedule
                                 where schedule.tour_id == id
                                 select schedule).ToList();
-           
+
+            //var listSchedule = listScheduleNotArrange.Where(p => p.time.HasValue)
+            //                                         .OrderBy(p => p.time.Value)
+            //                                         .ToList();
+
+
+
             for (int i = 0; i < listSchedule.Count; i++)
             {
                 var a = (listSchedule[i].time - listSchedule[indexStart].time).TotalHours;
