@@ -25,8 +25,6 @@
 <title>@ViewBag.Title</title>
 <section id="container" style="background: #F1F2F7">
     <header class="header fixed-top clearfix">
-        
-       
         <div class="top-nav clearfix" style="margin-top: 0px;">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar" style="margin-left: 240px;">
                 <!-- navbar-top-links -->
@@ -256,6 +254,9 @@
                         </li>
                         <li>
                             <a href="/createtour/createtourchoose">Thêm Tour</a>
+                        </li>
+                        <li>
+                            <a href="/historytour">Lịch Sử Tour</a>
                         </li>
                     </ul>
                 </li>
@@ -780,7 +781,6 @@
     }
 
 </script>
-
 <script>
     // For Warning POPUP GROUP
     var marker1;
@@ -817,12 +817,17 @@
 
     //FOR PLACE PROPERTY
 
-    var listMarkerPlace = new Array();
+    var listMarkerPlace = [];
     var listInfoWindowPlace = [];
 
+    //FOR ROUTE
+    var _mapPoints = new Array();
+    var listMarkerRoute = [];
+    var flightPath;
     function initAutocomplete() {
 
-        // FOR WARNING GROUP
+           directionsService = new google.maps.DirectionsService();
+          // FOR WARNING GROUP
 
            map1 = new google.maps.Map(document.getElementById('map_canvas1'), {
             center: { lat: 10.823099, lng: 106.629664 },
@@ -965,6 +970,7 @@
           });
 
         // FOR HOME ONLY
+
         var myLatlng = new google.maps.LatLng(10.824638, 106.627733);
         var mapOptions = {
             zoom: 4,
@@ -972,6 +978,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
         map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
 
         // SLIDING MARKER   
         /* global define,module,require,google */
@@ -1326,7 +1333,6 @@
         setTimeout(function () {
             loadMarkerWarning();
         }, 2000);
-
         loadMarkerPlace();
         
     }
@@ -2081,13 +2087,10 @@
             url: '/Content/Images/ic_markerOffline.png', // image is 512 x 512
             scaledSize: new google.maps.Size(64, 76)
         };
-
         var pinImageActive = {
             url: '/Content/Images/ic_markerProfile.png', // image is 512 x 512
             scaledSize: new google.maps.Size(64, 76)
         };
-
-
         var pinImageSelect = {
             url: '/Content/Images/ic_markerSelected.png', // image is 512 x 512
             scaledSize: new google.maps.Size(64, 76)
@@ -2115,7 +2118,8 @@
                 }
             }
         }
-       
+
+        drawRoutre(id);
 
         //$.ajax({
         //    url: "/Home/SelectMarkerTourGuide/" + id,
@@ -2226,9 +2230,74 @@
             }
         }
     }
+    function drawRoutre(id)
+    {
+        $.ajax({
 
+            url: "/Home/GetPointLocation/" + id,
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (result) {
+                var results = $.parseJSON(result);
+                $(results).each(function (index, value) {
+
+                    var longitude = this['longitude'];
+                    var latitude = this['latitude'];
+                    var point = new google.maps.LatLng(latitude, longitude);
+                    _mapPoints.push(point);
+                });
+
+                alert(_mapPoints.length);
+
+                flightPath = new google.maps.Polyline({
+                    path: _mapPoints,
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+
+                flightPath.setMap(map);
+
+                var pinImageStart = {
+                    url: '/Content/Images/ic_flag_start.png', // image is 512 x 512
+                    scaledSize: new google.maps.Size(40, 40)
+                };
+
+                var pinImageStop = {
+                    url: '/Content/Images/ic_flag_destination.png', // image is 512 x 512
+                    scaledSize: new google.maps.Size(40, 40)
+                };
+
+                listMarkerRoute[0] = new SlidingMarker({
+                    position: _mapPoints[0],
+                    map: map,
+                    animation: google.maps.Animation.Gp,
+                    icon: pinImageStart,
+                })
+
+                listMarkerRoute[0] = new SlidingMarker({
+                    position: _mapPoints[_mapPoints.length - 1],
+                    map: map,
+                    animation: google.maps.Animation.Gp,
+                    icon: pinImageStop,
+                })
+
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+
+      
+
+        
+    }
     //FOR PLACE 
-
     function loadMarkerPlace()
     {
 

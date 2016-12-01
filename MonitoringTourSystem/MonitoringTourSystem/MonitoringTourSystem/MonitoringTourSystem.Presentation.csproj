@@ -239,6 +239,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CreateTourController.cs" />
     <Compile Include="Controllers\EditTourController.cs" />
+    <Compile Include="Controllers\HistoryTourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TourDetailController.cs" />
     <Compile Include="Controllers\TrackingController.cs" />
@@ -345,6 +346,8 @@
     <Content Include="Content\Images\1-thich-ca-Phat-dai.jpg" />
     <Content Include="Content\Images\duc_avatar.jpg" />
     <Content Include="Content\Images\duc_avatar.png" />
+    <Content Include="Content\Images\ic_flag_destination.png" />
+    <Content Include="Content\Images\ic_flag_start.png" />
     <Content Include="Content\Images\ic_place.png" />
     <Content Include="Content\Images\huy_avatar.png" />
     <Content Include="Content\Images\ic_markerOffline.png" />
@@ -595,6 +598,10 @@
     <Content Include="Scripts\StockTicker.js" />
     <Content Include="Views\Tracking\basic_form.html" />
     <Content Include="Views\Tracking\general.html" />
+    <Content Include="Views\HistoryTour\Index.cshtml" />
+    <Content Include="Views\HistoryTour\ListTourForeign.cshtml" />
+    <Content Include="Views\HistoryTour\ListTourVietNam.cshtml" />
+    <Content Include="Views\HistoryTour\ScheduleTourTimeline.cshtml" />
     <None Include="Views\Tracking\index.cshtml" />
     <Content Include="Views\Tracking\simple.html" />
     <Content Include="Web.config">

@@ -122,10 +122,10 @@
 
     function yourfunction() {
         $('.datepicker_init').datetimepicker({
-            format: 'MM/YYYY'
+            format: 'DD/MM/YYYY'
         });
         $('.datepicker_end').datetimepicker({
-            format: 'MM/YYYY'
+            format: 'DD/MM/YYYY'
         });
     }
     $(add_button).click(function (e) { //on add input button click

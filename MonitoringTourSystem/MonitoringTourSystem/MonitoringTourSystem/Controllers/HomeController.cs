@@ -4,6 +4,7 @@ using MonitoringTourSystem.Infrastructures.Interfaces.Home;
 using MonitoringTourSystem.Models;
 using MonitoringTourSystem.ViewModel;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -218,6 +219,15 @@ namespace MonitoringTourSystem.Controllers
         {
             string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
             return homeControllerService.CreateMarkerPlace(username);
+        }
+
+
+        [HttpGet]
+        public JsonResult GetPointLocation(string id)
+        {
+            var tourguideIdInt = Convert.ToInt32(id);
+            return homeControllerService.GetPointLocation(tourguideIdInt);
+
         }
         #endregion
     }

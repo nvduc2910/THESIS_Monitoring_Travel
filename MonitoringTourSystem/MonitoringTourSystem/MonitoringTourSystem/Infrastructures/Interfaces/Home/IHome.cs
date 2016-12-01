@@ -21,5 +21,7 @@ namespace MonitoringTourSystem.Infrastructures.Interfaces.Home
         JsonResult CreateWarningMarker(string userName);
         JsonResult SelectMarkerWarning(int id);
         JsonResult CreateMarkerPlace(string userName);
+
+        JsonResult GetPointLocation(int tourguideId);
     }
 }

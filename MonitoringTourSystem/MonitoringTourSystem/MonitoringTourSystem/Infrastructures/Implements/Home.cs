@@ -241,5 +241,27 @@ namespace MonitoringTourSystem.Infrastructures.Implements
             var jsonString = JsonConvert.SerializeObject(listWarningReceiver);
             return Json(jsonString, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetPointLocation(int tourguideId)
+        {
+            try
+            {
+                var tourId = (from x in _dbContextPool.GetContext().tours
+                              where x.tourguide_id == tourguideId && x.status == StatusTour.Running.ToString()
+                              select x).First();
+
+                var pointLocation = (from x in _dbContextPool.GetContext().trackings
+                                     where x.tour_id == tourId.tour_id
+                                     select x).ToList();
+                var jsonString = JsonConvert.SerializeObject(pointLocation);
+                return Json(jsonString, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var result = new { Success = false, Message = "Get Fail" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+
+        }
     }
 }

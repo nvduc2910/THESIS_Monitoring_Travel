@@ -1,0 +1,157 @@
+﻿@model MonitoringTourSystem.ViewModel.TourDetailViewModel
+
+
+@{
+    if (Model.ListScheduleDay == null)
+    {
+        <div class="alert alert-info">
+            Chọn tour bất kỳ để xem chi tiết.
+        </div>
+    }
+    else
+    {
+        var urlImage = "/Content/Images/" + Model.TourItem.cover_photo;
+        <div class="details-tour">
+
+            <div class="row">
+                @{
+                    if (Model.TourItem.status == "Running")
+                    {
+                        <div class="col-sm-3">
+                            <a  style="text-decoration:none; color: #FF0000">
+                                <img src="~/Content/Images/ic_pausetour.png" width="25" height="25" />
+                                Đang Hoạt Động
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-3">
+                            <a href="#" onclick="activatedTour(@Model.TourItem.tour_id);" style="text-decoration:none">
+                                <img src="~/Content/Images/ic_start.png" width="25" height="25" />
+                                Bắt Đầu
+                            </a>
+                        </div>
+                    }
+                }
+                
+                <div class="col-sm-3">
+                    <a href="/tourdetail/edittour/@Model.TourItem.tour_id" style="text-decoration:none">
+                        <img src="~/Content/Images/ic_edit.png" width="25" height="25" />
+                        Sửa Tour
+                    </a>
+                </div>
+                <div class="col-sm-3" style="text-decoration:none">
+                    <a href="#" onclick="deleteTour(@Model.TourItem.tour_id);"  style="text-decoration:none" >
+                        <img src="~/Content/Images/ic_delete.png" width="25" height="25"  />
+                        Xóa Tour
+                    </a>
+                </div>
+            </div>
+
+            <div class="row" style="margin-left: 0; margin-right: 0px; margin-top: 20px;">
+                <img src="@urlImage" style="width: 100% !important; height: auto !important; display: block; border: 3px solid ; border-color: #FAFAFA; border-radius: 5px;" />
+            </div>
+            <div class="row" style="margin-left: 0">
+                <h4>@Model.TourItem.tour_name</h4>
+            </div>
+            <br />
+            <div class="row" style="margin-left: 0">
+                <div class="list-tour" id="nav-accordion">
+                    <img src="~/Content/Images/ic_statuss.png" width="30" height="30" style="margin-top: -5px;" />
+                    <span style="color: gray; font-size: 16px; margin-left: 20px;">Trạng thái: </span><span style="font-size: 16px;">@Model.TourGuideName</span>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0">
+                <div class="list-tour" id="nav-accordion">
+                    <img src="~/Content/Images/ic_tourguide.png" width="30" height="30" style="margin-top: -5px;"/>
+                    <span style="color: gray; font-size: 16px; margin-left: 20px;">Hướng dẫn viên: </span><span style="font-size: 16px;">@Model.TourGuideName</span>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0">
+                <div class="list-tour" id="nav-accordion">
+                    <img src="~/Content/Images/ic_time.png" width="30" height="30" style="margin-top: -5px;" />
+                    <span style="color: gray; font-size: 16px; margin-left: 20px;">Thời gian: </span><span style="font-size: 16px;">@Model.TourItem.departure_date - @Model.TourItem.return_date</span>
+
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0">
+                <div class="list-tour" id="nav-accordion">
+                    <img src="~/Content/Images/ic_numbertourist.png" width="30" height="30" style="margin-top: -5px;" />
+                    <span style="color: gray; font-size: 16px; margin-left: 20px;">Số lượng du khách: </span><span style="font-size: 16px;">@Model.TourItem.tourist_quantity du khách</span>
+
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0;">
+                <div class="list-tour" id="nav-accordion">
+                    <img src="~/Content/Images/ic_quantity.png" width="30" height="30" style="margin-top: -5px;" />
+                    <span style="color: gray; font-size: 16px; margin-left: 20px;">Số ngày: </span><span style="font-size: 16px;">@Model.TourItem.day</span>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0">
+                <div class="list-tour" id="nav-accordion">
+                    <img src="~/Content/Images/ic_description.png" width="30" height="30" style="margin-top: -5px;" />
+                    <span style="color: gray; font-size: 16px; margin-left: 20px;">Mô tả tour: </span>
+                    <br />
+                    <span style="font-size: 16px; font-size: 16px;margin-left: 55px;">@Model.TourItem.description</span>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0">
+                <div class="list-tour" id="nav-accordion">
+                    <img src="~/Content/Images/ic_schedule.png" width="30" height="30"  style="margin-top: -5px;"/>
+                    <span style="color: gray; font-size: 16px; margin-left: 20px;">Lịch trình tour</span>
+                </div>
+            </div>
+            <div class="row" style="margin-left: 0">
+                <div id="container-timeline">
+                    @{
+                        int index = 0;
+                        foreach (var item in Model.ListScheduleDay)
+                        {
+                            index++;
+                            <div class="row" style="background-color: #1FB5AD; width: 21%; margin-left: 0">
+                                <h4 style="color: white; margin-left: 20px;">NGÀY @index</h4>
+                            </div>
+                            <div class="row" style="margin-left: -400px; margin-right: 20px; margin-top: 20px;">
+                                <div class="row">
+                                    <div class="timeline-centered">
+                                        @{
+                                            foreach (var item1 in item.TourSchedule)
+                                            {
+                                                string imageLink = "/Content/Images/" + @item1.image;
+                                                <article class="timeline-entry">
+                                                    <div class="timeline-entry-inner">
+                                                        <time class="timeline-time" datetime="2014-01-10T03:45"><span>@item1.time.ToString("dd/MM/yyyy")</span> <span>@item1.time.ToString("HH:mm")</span></time>
+
+                                                        <div class="timeline-icon bg-success">
+                                                            <i class="entypo-feather"></i>
+                                                        </div>
+                                                        <div class="timeline-label">
+                                                            <h2><a href="#">@item1.nameProvince -  @item1.place_name</a></h2>
+                                                            <p style="font-size: 14px;">@item1.description</p>
+                                                            
+                                                            <img src="@imageLink" class="img-responsive img-rounded full-width">
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            }
+                                        }
+                                        <article class="timeline-entry begin">
+                                            <div class="timeline-entry-inner">
+                                                <div class="timeline-icon" style="-webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);">
+                                                    <i class="entypo-flight"></i>
+                                                </div>
+                                            </div>
+                                        </article>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        
+    }
+}
