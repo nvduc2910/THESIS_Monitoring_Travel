@@ -71,7 +71,8 @@
     <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="day" Type="Int32" Nullable="false" />
     <Property Name="cover_photo" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="is_foreign_tour" Type="Int32" Nullable="false" />
+    <Property Name="country_id" Type="Int32" Nullable="false" />
+    <Property Name="area_id" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="tour_participants">
     <Key>
@@ -172,5 +173,13 @@
     <EntitySet Name="trackings" EntityType="Self.tracking" />
     <EntitySet Name="warnings" EntityType="Self.warning" />
     <EntitySet Name="warning_receiver" EntityType="Self.warning_receiver" />
+    <EntitySet Name="areas" EntityType="tour_monitoring_v3Model.area" />
   </EntityContainer>
+  <EntityType Name="area">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

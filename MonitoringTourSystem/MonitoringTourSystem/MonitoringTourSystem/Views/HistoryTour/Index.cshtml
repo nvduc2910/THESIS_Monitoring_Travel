@@ -403,6 +403,9 @@
         function getHistoryTour(id) {
 
             _mapPoints = [];
+            for (i = 0; i < listMarkerRoute.length; i++) {
+                listMarkerRoute[i].setMap(null);
+            }
             listMarkerRoute = [];
             if (flightPath != null) {
                 flightPath.setMap(null);
@@ -454,7 +457,7 @@
                         icon: pinImageStart,
                     })
 
-                    listMarkerRoute[0] = new google.maps.Marker({
+                    listMarkerRoute[1] = new google.maps.Marker({
                         position: _mapPoints[_mapPoints.length - 1],
                         map: map1,
                         animation: google.maps.Animation.Gp,

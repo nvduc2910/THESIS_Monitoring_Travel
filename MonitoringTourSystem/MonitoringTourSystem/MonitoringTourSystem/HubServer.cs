@@ -140,7 +140,6 @@ namespace MonitoringTourSystem
 
             //var jsonTourguideInfo = JsonConvert.SerializeObject(tourguide);
             //var jsonTourInfo = JsonConvert.SerializeObject(tour);
-
             foreach (var connection in _connections.GetConnections(receiver))
             {
                 Clients.Client(connection).locationForAddMarker(latitude, longitude, tourguideId, tourguideName,tourId);
@@ -177,7 +176,7 @@ namespace MonitoringTourSystem
         {
             var id = _dbContextPool.GetContext().warnings.Max(x => x.warning_id);
 
-            obj.WarningId = id.ToString();
+            obj.WarningId = id;
 
             for (int i = 0; i < obj.ListTourGuideId.Count; i++)
             {
@@ -193,7 +192,7 @@ namespace MonitoringTourSystem
 
             var id = _dbContextPool.GetContext().warnings.Max(x => x.warning_id);
 
-            obj.WarningId = id.ToString();
+            obj.WarningId = id;
 
             var receveriIdStr = "TG_" + receiverId.ToString();
             foreach (var connection in _connections.GetConnections(receveriIdStr))
@@ -202,9 +201,9 @@ namespace MonitoringTourSystem
             }
         }
 
-        public void ConfirmWarning(string warningId, string warningName, string tourguideId, string sender, string receiver)
+        public void ConfirmWarning(int warningId, string warningName, string tourguideId, string sender, string receiver)
         {
-            int warningInt = Convert.ToInt32(warningId);
+            int warningInt = warningId;
             int tourguideIdInt = Convert.ToInt32(tourguideId);
 
             using (var context = new monitoring_tour_v3Entities())

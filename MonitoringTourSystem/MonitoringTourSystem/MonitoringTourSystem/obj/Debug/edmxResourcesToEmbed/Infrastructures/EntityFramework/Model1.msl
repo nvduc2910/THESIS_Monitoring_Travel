@@ -64,6 +64,8 @@
     <EntitySetMapping Name="tours">
       <EntityTypeMapping TypeName="tour_monitoring_v3Model.tour">
         <MappingFragment StoreEntitySet="tour">
+          <ScalarProperty Name="area_id" ColumnName="area_id" />
+          <ScalarProperty Name="country_id" ColumnName="country_id" />
           <ScalarProperty Name="tour_id" ColumnName="tour_id" />
           <ScalarProperty Name="tour_code" ColumnName="tour_code" />
           <ScalarProperty Name="manager_id" ColumnName="manager_id" />
@@ -76,7 +78,6 @@
           <ScalarProperty Name="description" ColumnName="description" />
           <ScalarProperty Name="day" ColumnName="day" />
           <ScalarProperty Name="cover_photo" ColumnName="cover_photo" />
-          <ScalarProperty Name="is_foreign_tour" ColumnName="is_foreign_tour" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -169,6 +170,14 @@
           <ScalarProperty Name="warner_id" ColumnName="warner_id" />
           <ScalarProperty Name="receiver_id" ColumnName="receiver_id" />
           <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="areas">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.area">
+        <MappingFragment StoreEntitySet="area">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -73,7 +73,7 @@ namespace MonitoringTourSystem.Controllers
                                  select tourGuide).ToList();
             var touItem = listTour.Where(x => x.tour_id == idInt).First();
 
-            if (touItem.is_foreign_tour == 0)
+            if (touItem.country_id == 84)
             {
 
                 var model = new TourDetailViewModel() { TourItem = touItem, ListScheduleDay = ListScheduleDay, TourGuideName = tourGuideName[0].tourguide_name };
@@ -179,9 +179,9 @@ namespace MonitoringTourSystem.Controllers
                 if (pathImage == null)
                 {
                     pathCoverPhoto = tourSelect.cover_photo;
-                    isForeignTour = tourSelect.is_foreign_tour;
+                    //isForeignTour = tourSelect.is_foreign_tour;
                 }
-
+            
                 tourSelect.tourguide_id = obj.tourguide_id;
                 tourSelect.tour_code = obj.tour_code;
                 tourSelect.manager_id = userId;
@@ -193,7 +193,7 @@ namespace MonitoringTourSystem.Controllers
                 tourSelect.day = obj.day;
                 tourSelect.status = tourSelect.status;
                 tourSelect.cover_photo = pathCoverPhoto;
-                tourSelect.is_foreign_tour = isForeignTour;
+                //tourSelect.is_foreign_tour = isForeignTour;
 
                 using (var context = new monitoring_tour_v3Entities())
                 {

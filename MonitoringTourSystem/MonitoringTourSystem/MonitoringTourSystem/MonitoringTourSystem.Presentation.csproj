@@ -247,6 +247,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructures\EntityFramework\area.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructures\EntityFramework\country.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

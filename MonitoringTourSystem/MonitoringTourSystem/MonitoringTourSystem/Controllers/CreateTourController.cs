@@ -17,7 +17,6 @@ namespace MonitoringTourSystem.Controllers
     [Authorize]
     public class CreateTourController : Controller
     {
-        
         static string pathImage;
         public readonly monitoring_tour_v3Entities MonitoringTourSystem = new monitoring_tour_v3Entities();
         private static bool isForeignTour = false;
@@ -106,19 +105,18 @@ namespace MonitoringTourSystem.Controllers
         {
             ManagerServices _managerServices = new ManagerServices();
             string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
-
             var managerId = _managerServices.GetUserID(username);
 
-            int foreignTour = 0;
+            //int countryId = 0;
 
-            if(isForeignTour == false)
-            {
-                foreignTour = 0;
-            }
-            else
-            {
-                foreignTour = 1;
-            }
+            //if(isForeignTour == false)
+            //{
+            //    countryId = 84;
+            //}
+            //else
+            //{
+            //    foreignTour = 1;
+            //}
 
             if (pathImage == null)
             {
@@ -140,10 +138,11 @@ namespace MonitoringTourSystem.Controllers
                         return_date = obj.return_date,
                         tourist_quantity = obj.tourist_quantity,
                         status = statusTour.ToString(),
-                        description = "N'" + obj.description + "'",
+                        description = obj.description,
                         day = obj.day,
                         cover_photo = pathImage,
-                        is_foreign_tour = foreignTour,
+                        //is_foreign_tour = foreignTour,
+                        country_id = obj.country_id
                     };
 
                     using (var context = new monitoring_tour_v3Entities())

@@ -8,7 +8,7 @@ namespace MonitoringTourSystem.Models
     public class Warning
     {
 
-        public string WarningId { get; set; }
+        public int WarningId { get; set; }
         public string CategoryWarnig { get; set; }
         public double Distance { get; set; }
         public double Lat { get; set; }

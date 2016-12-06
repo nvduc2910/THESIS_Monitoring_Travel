@@ -296,6 +296,7 @@ function addNewTour() {
     var endday = $("#endday").val();
     var description = $("#descriptionTour").val();
     var cover_photo = "photo";
+
     if (tourcode == null || tourcode == "") {
         swal("Vui lòng nhập mã tour!")
         return;

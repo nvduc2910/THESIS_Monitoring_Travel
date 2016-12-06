@@ -36,7 +36,7 @@
                 var success = result.Success;
                 if (success == true) {
                     console.log(pathImage);
-                    $("#myUploadedImg").attr("src", "http://localhost:20261/Content/Images/" + pathImage);
+                    $("#myUploadedImg").attr("src", "/Content/Images/" + pathImage);
                 }
             },
             processData: false,
@@ -264,6 +264,7 @@ function getTourGuideAvailable()
 }
 
 function addNewTour() {
+
     var isValidSchedule;
     var listSchedule = [];
     var index = 0;
@@ -276,7 +277,6 @@ function addNewTour() {
     var endday = $("#endday").val();
     var description = $("#descriptionTour").val();
     var cover_photo = "photo";
-
 
     if (tourcode == null || tourcode == "") {
         swal("Vui lòng nhập mã tour!")
@@ -405,6 +405,7 @@ function addNewTour() {
             description: description,
             day: day,
             cover_photo: cover_photo,
+            country_id: 84,
             ListTourSchedule: listSchedule
         },
         success: function (result) {

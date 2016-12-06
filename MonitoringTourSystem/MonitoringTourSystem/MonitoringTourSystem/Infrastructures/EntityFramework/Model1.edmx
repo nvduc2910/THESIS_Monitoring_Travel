@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="tour_monitoring_v3Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="country">
           <Key>
             <PropertyRef Name="country_id" />
@@ -76,7 +83,8 @@
           <Property Name="description" Type="text" Nullable="false" />
           <Property Name="day" Type="int" Nullable="false" />
           <Property Name="cover_photo" Type="varchar" MaxLength="256" Nullable="false" />
-          <Property Name="is_foreign_tour" Type="int" Nullable="false" />
+          <Property Name="country_id" Type="int" Nullable="false" />
+          <Property Name="area_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tour_participants">
           <Key>
@@ -164,6 +172,7 @@
           <Property Name="status" Type="text" Nullable="false" />
         </EntityType>
         <EntityContainer Name="tour_monitoring_v3ModelStoreContainer">
+          <EntitySet Name="area" EntityType="Self.area" Schema="tour_monitoring_v3" store:Type="Tables" />
           <EntitySet Name="country" EntityType="Self.country" Schema="tour_monitoring_v3" store:Type="Tables" />
           <EntitySet Name="manager" EntityType="Self.manager" Schema="tour_monitoring_v3" store:Type="Tables" />
           <EntitySet Name="message" EntityType="Self.message" Schema="tour_monitoring_v3" store:Type="Tables" />
@@ -253,7 +262,8 @@
           <Property Name="description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="day" Type="Int32" Nullable="false" />
           <Property Name="cover_photo" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="is_foreign_tour" Type="Int32" Nullable="false" />
+          <Property Name="country_id" Type="Int32" Nullable="false" />
+          <Property Name="area_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="tour_participants">
           <Key>
@@ -354,7 +364,15 @@
           <EntitySet Name="trackings" EntityType="Self.tracking" />
           <EntitySet Name="warnings" EntityType="Self.warning" />
           <EntitySet Name="warning_receiver" EntityType="Self.warning_receiver" />
+          <EntitySet Name="areas" EntityType="tour_monitoring_v3Model.area" />
         </EntityContainer>
+        <EntityType Name="area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -424,6 +442,8 @@
           <EntitySetMapping Name="tours">
             <EntityTypeMapping TypeName="tour_monitoring_v3Model.tour">
               <MappingFragment StoreEntitySet="tour">
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+                <ScalarProperty Name="country_id" ColumnName="country_id" />
                 <ScalarProperty Name="tour_id" ColumnName="tour_id" />
                 <ScalarProperty Name="tour_code" ColumnName="tour_code" />
                 <ScalarProperty Name="manager_id" ColumnName="manager_id" />
@@ -436,7 +456,6 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="day" ColumnName="day" />
                 <ScalarProperty Name="cover_photo" ColumnName="cover_photo" />
-                <ScalarProperty Name="is_foreign_tour" ColumnName="is_foreign_tour" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -529,6 +548,14 @@
                 <ScalarProperty Name="warner_id" ColumnName="warner_id" />
                 <ScalarProperty Name="receiver_id" ColumnName="receiver_id" />
                 <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="areas">
+            <EntityTypeMapping TypeName="tour_monitoring_v3Model.area">
+              <MappingFragment StoreEntitySet="area">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

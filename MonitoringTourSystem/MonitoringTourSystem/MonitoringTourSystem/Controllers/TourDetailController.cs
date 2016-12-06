@@ -26,8 +26,8 @@ namespace MonitoringTourSystem.Controllers
             var userId = _managerServices.GetUserID(username);
             var listTour = MonitoringTourSystem.tours.Where(s => s.manager_id == userId).ToList();
             var listPlace = MonitoringTourSystem.places.ToList();
-            var listTourVietNam = listTour.Where(x => x.is_foreign_tour == 0).ToList();
-            var listTourForeign = listTour.Where(x => x.is_foreign_tour == 1).ToList();
+            var listTourVietNam = listTour.Where(x => x.country_id == 84).ToList();
+            var listTourForeign = listTour.Where(x => x.country_id != 84).ToList();
             var model = new TourDetailViewModel() { ListTour = listTour, ListTourVietNam = listTourVietNam, ListTourForeign = listTourForeign, ListScheduleDay = null, TourGuideName = null, TourItem = null };
             return View("Index", model);
         }
@@ -37,8 +37,8 @@ namespace MonitoringTourSystem.Controllers
         {
             var listTour = MonitoringTourSystem.tours.ToList();
             var listPlace = MonitoringTourSystem.places.ToList();
-            var listTourVietNam = listTour.Where(x => x.is_foreign_tour == 0).ToList();
-            var listTourForeign = listTour.Where(x => x.is_foreign_tour == 1).ToList();
+            var listTourVietNam = listTour.Where(x => x.country_id == 84).ToList();
+            var listTourForeign = listTour.Where(x => x.country_id != 84).ToList();
 
             if (!IsStartTourActive)
             {
@@ -123,7 +123,7 @@ namespace MonitoringTourSystem.Controllers
                 id = id.ToUpper();
                 listTour = MonitoringTourSystem.tours.Where(s => s.manager_id == userId).ToList();
                 var listTourSearch = (from item in listTour
-                                      where item.tour_code.ToString().Contains(id) && item.is_foreign_tour == 0
+                                      where item.tour_code.ToString().Contains(id) && item.country_id == 84
                                       select item).ToList();
                 var model = new TourDetailViewModel() { ListTourVietNam = listTourSearch };
                 return PartialView("ListTourVietNam", model);
@@ -131,7 +131,7 @@ namespace MonitoringTourSystem.Controllers
             else
             {
                 listTour = MonitoringTourSystem.tours.Where(s => s.manager_id == userId).ToList();
-                var listTourSearch = listTour.Where(x => x.is_foreign_tour == 0).ToList();
+                var listTourSearch = listTour.Where(x => x.country_id == 84).ToList();
                 var model = new TourDetailViewModel() { ListTourVietNam = listTourSearch };
                 return PartialView("ListTourVietNam", model);
             }
@@ -150,7 +150,7 @@ namespace MonitoringTourSystem.Controllers
                 listTour = MonitoringTourSystem.tours.Where(s => s.manager_id == userId).ToList();
                 id = id.ToUpper();
                 var listTourSearch = (from item in listTour
-                                      where item.tour_code.ToString().Contains(id) && item.is_foreign_tour == 1
+                                      where item.tour_code.ToString().Contains(id) && item.country_id == 84
                                       select item).ToList();
                 var model = new TourDetailViewModel() { ListTourForeign = listTourSearch };
                 return PartialView("ListTourForeign", model);
@@ -158,7 +158,7 @@ namespace MonitoringTourSystem.Controllers
             else
             {
                 listTour = MonitoringTourSystem.tours.Where(s => s.manager_id == userId).ToList();
-                var listTourSearch = listTour.Where(x => x.is_foreign_tour == 1).ToList();
+                var listTourSearch = listTour.Where(x => x.country_id != 84).ToList();
                 var model = new TourDetailViewModel() { ListTourForeign = listTourSearch };
                 return PartialView("ListTourForeign", model);
             }
@@ -176,7 +176,7 @@ namespace MonitoringTourSystem.Controllers
             if (regionSearch != null && dateSearch != null && regionSearch != "Chọn miền")
             {
                 var listTourSearch = (from item in listTour
-                                      where (item.departure_date < dateSearch && item.return_date > dateSearch) && item.is_foreign_tour == 0
+                                      where (item.departure_date < dateSearch && item.return_date > dateSearch) && item.country_id == 84
                                       select item).ToList();
                 var model = new TourDetailViewModel() { ListTourVietNam = listTourSearch };
                 return PartialView("ListTourVietNam", model);

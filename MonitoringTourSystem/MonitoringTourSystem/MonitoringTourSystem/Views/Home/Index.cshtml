@@ -2232,6 +2232,19 @@
     }
     function drawRoutre(id)
     {
+        _mapPoints = [];
+       
+
+        alert(listMarkerRoute.length);
+
+        for (i = 0; i < listMarkerRoute.length; i++)
+        {
+            listMarkerRoute[i].setMap(null);
+        }
+        listMarkerRoute = [];
+        if (flightPath != null) {
+            flightPath.setMap(null);
+        }
         $.ajax({
 
             url: "/Home/GetPointLocation/" + id,
@@ -2280,7 +2293,7 @@
                     icon: pinImageStart,
                 })
 
-                listMarkerRoute[0] = new SlidingMarker({
+                listMarkerRoute[1] = new SlidingMarker({
                     position: _mapPoints[_mapPoints.length - 1],
                     map: map,
                     animation: google.maps.Animation.Gp,
