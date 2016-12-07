@@ -77,10 +77,15 @@
                 var countryName = this['country_name'];
                 var countryID = this['country_id'];
                 $(".country").append(new Option(countryName, countryID))
+                $("#country_area").append(new Option(countryName, countryID))
             });
             $(".country").select2({
 
             });
+            $("#country_area").select2({
+
+            });
+
         },
         error: function (xhr) {
             alert('error');
@@ -150,10 +155,10 @@
 
     function yourfunction() {
         $('.datepicker_init').datetimepicker({
-            format: 'MM/YYYY'
+            format: 'DD/MM/YYYY'
         });
         $('.datepicker_end').datetimepicker({
-            format: 'MM/YYYY'
+            format: 'DD/MM/YYYY'
         });
 
     }
@@ -296,12 +301,17 @@ function addNewTour() {
     var endday = $("#endday").val();
     var description = $("#descriptionTour").val();
     var cover_photo = "photo";
+    var country_area_id = $("#country_area").val();
 
     if (tourcode == null || tourcode == "") {
         swal("Vui lòng nhập mã tour!")
         return;
     }
-
+    if (country_area_id == null)
+    {
+        swal("Chọn địa điểm tour!")
+        return;
+    }
     if (nameTour == null || nameTour == "") {
 
         swal("Vui lòng nhập tên tour!")
@@ -414,6 +424,8 @@ function addNewTour() {
             description: description,
             day: day,
             cover_photo: cover_photo,
+            country_id: country_area_id,
+            area_id: 0,
             ListTourSchedule: listSchedule
         },
         success: function (result) {

@@ -141,6 +141,7 @@ namespace MonitoringTourSystem.Controllers
                         description = obj.description,
                         day = obj.day,
                         cover_photo = pathImage,
+                        area_id = obj.area_id,
                         //is_foreign_tour = foreignTour,
                         country_id = obj.country_id
                     };

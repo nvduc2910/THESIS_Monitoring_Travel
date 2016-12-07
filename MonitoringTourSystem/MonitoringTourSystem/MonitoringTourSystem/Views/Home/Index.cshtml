@@ -349,7 +349,7 @@
                                             </div>
                                             <div class="input-group" style="margin-top: 10px; width: 100%;">
                                                 <select id="region" style="width: 100%; margin-right: 10px; height: 34px; border-radius: 4px;">
-                                                    <option style="font-size: 18px;" value="0" disabled selected>Chọn miền</option>
+                                                    <option style="font-size: 18px;" value="0" disabled selected>Khu vực - Đất Nước</option>
                                                 </select>
                                             </div>
                                             <div id="DemoAjaxClick" class="alert alert-success" style="margin-top: 10px;">
@@ -363,7 +363,7 @@
                                         </div>
                                     </div>
                                     <div id="menu1" class="tab-pane fade" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px; height: 100%">
-                                        <div class="alert alert-success" style="margin-top: 10px; height: 10%">
+                                        <div class="alert alert-success" style="margin-top: 10px;">
                                             Danh sách cảnh báo
                                         </div>
                                         <div id="list-warning-reciver" style="height: 84% ; overflow-y: auto">
@@ -442,6 +442,12 @@
                                             <label for="exampleInputEmail1">Bán kính</label>
                                             <select id="distanceWarning" style="width: 100%; height: 33px;">
                                                 <option selected disabled value="0">-Bán Kính-</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 5px; border-radius: 5px;">
+                                            <label for="exampleInputEmail1">Mức độ</label>
+                                            <select id="levelWarning" style="width: 100%; height: 33px;">
+                                                <option selected disabled value="0">-Mức độ-</option>
                                             </select>
                                         </div>
                                     </div>
@@ -588,7 +594,6 @@
             $("#list-tour").html(partialViewResult);
         });
     }
-
     //var userId;
     var connection = $.hubConnection('http://192.168.0.106:3407/');
     connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1', 'USER_NAME' : 'DUC NGUYEN' };
@@ -1386,6 +1391,7 @@
     var categoriesWarning = ["Khủng Bố", "Thời Tiết", "Giao Thông", "Khác"];
     var optionDistance1 = ["3 KM", "5 KM", "10 KM ", "20 KM ", "30 KM"];
     var categoriesWarning1 = ["Khủng Bố", "Thời Tiết", "Giao Thông", "Khác"];
+    var levelWarning = ["Thấp", "Cao", "Khẩn Cấp"];
     var lat;
     var long;
     var listTourGuideWarning = [];
@@ -1404,8 +1410,50 @@
         }
         getListTourWarning(distance, lat, long);
     });
+    $(document).on('change', '#region', function () {
+
+        var id = $('#region').val();
+
+        $("#list-tour").html("<img src='/Content/loading.gif' style='display: block; margin: auto;'> ");
+        $.ajax({
+            url: "/Home/SearchTourByRegion/" + id,
+            type: "GET",
+        })
+        .done(function (partialViewResult) {
+            $("#list-tour").html(partialViewResult);
+        });
+    });
     $(document).ready(function()
     {
+        $('#region').append(new Option("Tất Cả Tour", "0"));
+        $('#region').append(new Option("Việt Nam - Miền Bắc", "1"));
+        $('#region').append(new Option("Việt Nam - Miền Trung", "2"));
+        $('#region').append(new Option("Việt Nam - Miền Nam", "3"));
+
+        $.ajax({
+            url: "/CreateTour/GetCountry",
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (result) {
+                var results = $.parseJSON(result);
+                $(results).each(function (index, value) {
+                    var countryName = this['country_name'];
+                    var countryID = this['country_id'];
+                    $('#region').append(new Option(countryName, countryID))
+                });
+                $('#region').select2({
+
+                });
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+
         $("#myModal").on("shown.bs.modal", function () {
 
             google.maps.event.trigger(map1, "resize");
@@ -1425,12 +1473,24 @@
             $("#categoriesWarning:last").select2({
 
             });
+
+            for (j = 0; j < levelWarning.length; j++)
+            {
+                $("#levelWarning:last").append(new Option(levelWarning[j], j.toString()));
+            }
+            $("#levelWarning:last").select2({
+
+            });
             if (optionDistance.length != 0) {
                 optionDistance.length = 0;
             }
 
             if (categoriesWarning.length != 0) {
                 categoriesWarning.length = 0;
+            }
+            if(levelWarning.length !=0)
+            {
+                levelWarning.length == 0
             }
 
         });
@@ -1479,6 +1539,10 @@
         var distance = $("#distanceWarning").val();
         if (distance == null) {
             distance = 0;
+            getListTourWarning(distance, latMarker, longMarker);
+        }
+        else
+        {
             getListTourWarning(distance, latMarker, longMarker);
         }
     }
@@ -1600,22 +1664,22 @@
         var categories = $("#categoriesWarning option:selected").text();
         var distance = $("#distanceWarning").val();
 
-        if(warningName == null)
+        if (warningName == null || warningName == "")
         {
             swal("Vui lòng nhập tiêu đề cảnh báo!");
             return;
         }
-        if (distance == null)
+        if (distance == null || distance == "")
         {
             distance = 0;
             warningName = "CẢNH BÁO TOÀN BỘ: " + warningName;
         }
-        if(descriptionWarning == null)
+        if (descriptionWarning == null || descriptionWarning == "")
         {
             swal("Vui lòng nhập mô tả cảnh báo!");
             return;
         }
-        if(categories == null)
+        if (categories == null || categories == "")
         {
             swal("Vui lòng thể loại cảnh báo!");
             return;

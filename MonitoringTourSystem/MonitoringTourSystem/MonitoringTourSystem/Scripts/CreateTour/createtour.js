@@ -6,6 +6,15 @@
     var province_button = $(".provience");
     var x = 1; //initlal text box count
 
+
+    $("#area").append(new Option("-miền bắc-", "1"))
+    $("#area").append(new Option("-miền trung-", "2"))
+    $("#area").append(new Option("-miền nam-", "3"))
+
+    $("#area").select2({
+
+    });
+
     $('#datetimepicker2').datetimepicker();
     $('#datetimepicker1').datetimepicker();
     $('#datetimepicker3').datetimepicker();
@@ -90,6 +99,7 @@
         var parent = $(this).parent();
         parent.closest('.tour-travel').find('.placeschedule:last').children().remove();
         var vehecial = ["Xe máy", "Xe ô-tô", "Máy bay"];
+
         var id = $(this).val();
         $.ajax({
             url: "/CreateTour/GetListPlace/" + id,
@@ -271,6 +281,7 @@ function addNewTour() {
     var tourcode = $("#tourcode").val();
     var nameTour = $("#nametour").val();
     var tourguideID = $("#tourguide").val();
+    var areaId = $("#area").val();
     var numberoftourist = $("#numberoftourist").val();
     var day = $("#day").val();
     var startday = $("#startday").val();
@@ -322,6 +333,11 @@ function addNewTour() {
         return;
     }
 
+    if (areaId == null)
+    {
+        swal("Vui lòng chọn khu vực tour");
+        return;
+    }
 
     $('div.tour-travel').each(function () {
 
@@ -406,6 +422,7 @@ function addNewTour() {
             day: day,
             cover_photo: cover_photo,
             country_id: 84,
+            area_id: areaId,
             ListTourSchedule: listSchedule
         },
         success: function (result) {

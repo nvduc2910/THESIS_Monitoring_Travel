@@ -44,7 +44,17 @@ namespace MonitoringTourSystem.Infrastructures.Implements
 
                 if (listReceiverOfWarning.Count != 0)
                 {
-                    lstWarningWithReceiver.Add(new WarningWithReceiver() { Warning = listWarning[i], ListWarningReceiver = listReceiverOfWarning, QuanityRecevied = listReceiverOfWarning.Where(x => x.status == StatusWarning.Confirmed.ToString()).ToList().Count });
+                    var numberOfRecevierConfirm = listReceiverOfWarning.Where(x => x.status == StatusWarning.Confirmed.ToString()).ToList().Count;
+                    if (numberOfRecevierConfirm != listReceiverOfWarning.Count)
+                    {
+                        lstWarningWithReceiver.Add(new WarningWithReceiver() { Warning = listWarning[i], ListWarningReceiver = listReceiverOfWarning, QuanityRecevied = listReceiverOfWarning.Where(x => x.status == StatusWarning.Confirmed.ToString()).ToList().Count });
+                    }
+                    else if(numberOfRecevierConfirm == listReceiverOfWarning.Count)
+                    {
+                        listWarning[i].status = StatusWarning.Close.ToString();
+                        _dbContextPool.GetContext().SaveChanges();
+
+                    }
                 }
             }
 
@@ -262,6 +272,36 @@ namespace MonitoringTourSystem.Infrastructures.Implements
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
 
+        }
+
+        public List<TourIsProcessing> SearchTourByRegion(string username, int id)
+        {
+            try
+            {
+                List<TourIsProcessing> listSearch;
+                if(id == 0)
+                {
+                    listSearch = GetTourIsProcessing(username);
+                    return listSearch;
+                }
+                if (id == 1 || id == 2 || id == 3)
+                {
+                    listSearch = GetTourIsProcessing(username);
+                    var listSearchResult = (listSearch.Where(x => x.Tour.area_id == id).ToList());
+                    return listSearchResult;
+                }
+                else
+                {
+                    listSearch = GetTourIsProcessing(username);
+                    var listSearchResult = (listSearch.Where(x => x.Tour.country_id == id).ToList());
+                    return listSearchResult;
+                }
+            }
+            catch
+            {
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return null;
+            }
         }
     }
 }

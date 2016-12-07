@@ -114,6 +114,16 @@ namespace MonitoringTourSystem.Controllers
 
         }
 
+        public ActionResult SearchTourByRegion(int id)
+        {
+            string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
+            var result = homeControllerService.SearchTourByRegion(username, id);
+            var model = new HomeViewModel() { ListTourIsProcessing = result };
+            return PartialView("ListTourGuide", model);
+
+        }
+
+
         #endregion
 
         public ActionResult RenderHomeOption(int id)

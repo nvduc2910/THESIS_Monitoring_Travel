@@ -35,6 +35,13 @@
                             <div class="input text required"><input class="form-control" id="nametour" required="required" placeholder="Nhập tên tour" maxlength="255" type="text"></div>
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Khu vực tour</label>
+                            <br />                         
+                            <select id="area" style="width: 100%; height: 33px;">
+                             
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Ngày bắt đầu</label>
                             <div class='input-group date' id='datetimepicker1'>
                                 <input type='text' id="startday" class="form-control" placeholder="Nhập ngày bắt đầu" />
@@ -68,7 +75,7 @@
                             <label for="exampleInputEmail1">Số ngày</label>
                             <div class="input text"><input class="form-control" id="day" placeholder="Nhập số ngày của tour" maxlength="255" type="number" min="0.5"></div>
                         </div>
-                        
+                       
                         <div class="form-group">
                             <label for="exampleInputEmail1">Mô tả tour</label>
                             <textarea class="form-control" style="resize: none;"  rows="4" id="descriptionTour" placeholder="Nhập mô tả về tour"></textarea>
@@ -76,7 +83,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình đại diện</label>
                             <input type="file" class="upload" id="f_UploadImage"><br />
-                            <img id="myUploadedImg" alt="Photo" src="http://localhost:20261/Content/Images/cover_photo.PNG" style="width:98%;" />
+                            <img id="myUploadedImg" alt="Photo" src="/Content/Images/cover_photo.PNG" style="width:98%;" />
                         </div>
                     </div>
                 </div>
