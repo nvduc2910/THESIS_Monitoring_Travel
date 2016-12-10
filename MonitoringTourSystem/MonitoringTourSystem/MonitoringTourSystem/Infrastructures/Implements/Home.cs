@@ -221,7 +221,7 @@ namespace MonitoringTourSystem.Infrastructures.Implements
 
             var userId = _managerServices.GetUserID(userName);      
             var listWarningReceiver = _dbContextPool.GetContext().warning_receiver.Where(s => s.warner_id == userId).GroupBy(x => x.warning_id).Select(y => y.FirstOrDefault()).ToList();
-            var listWarningAll = _dbContextPool.GetContext().warnings.ToList();
+            var listWarningAll = _dbContextPool.GetContext().warnings.Where(x => x.status == StatusWarning.Opening.ToString()).ToList();
 
             var listWarningOfUser = new List<warning>();
             for (int i = 0; i < listWarningReceiver.Count; i++)
@@ -299,8 +299,24 @@ namespace MonitoringTourSystem.Infrastructures.Implements
             }
             catch
             {
-                Response.StatusCode = (int)HttpStatusCode.OK;
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return null;
+            }
+        }
+
+        public JsonResult GetTourGuideInfo(int tourguideId)
+        {
+            try
+            {
+                var tourguideInfo = _dbContextPool.GetContext().tourguides.Where(x => x.tourguide_id == tourguideId).FirstOrDefault();
+                var jsonString = JsonConvert.SerializeObject(tourguideInfo);
+                return Json(jsonString, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                var result = new { Success = false, Message = "Get Tourguide Info Fail" };
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
     }

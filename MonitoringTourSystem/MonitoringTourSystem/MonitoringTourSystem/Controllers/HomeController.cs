@@ -239,6 +239,13 @@ namespace MonitoringTourSystem.Controllers
             return homeControllerService.GetPointLocation(tourguideIdInt);
 
         }
+
+        [HttpGet]
+
+        public JsonResult GetTourguideInfo(int id)
+        {
+            return homeControllerService.GetTourGuideInfo(id);
+        }
         #endregion
     }
 }

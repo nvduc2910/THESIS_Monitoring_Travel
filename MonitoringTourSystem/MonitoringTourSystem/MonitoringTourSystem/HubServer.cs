@@ -219,6 +219,11 @@ namespace MonitoringTourSystem
             {
                 Clients.Client(connection).confirmWarning(sender, warningName);
             }
+        
+        }
+
+        public void NeedHelp(int tourguideId, string latitude, string longitude, string helpContent)
+        {
 
         }
 

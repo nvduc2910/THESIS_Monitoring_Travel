@@ -594,19 +594,16 @@
             $("#list-tour").html(partialViewResult);
         });
     }
-    //var userId;
+
+    // var userId;
     var connection = $.hubConnection('http://192.168.0.106:3407/');
     connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1', 'USER_NAME' : 'DUC NGUYEN' };
     var myHub = connection.createHubProxy('hubServer');
 
     // for listening
     myHub.on('updateNumberOfOnline', function (groupName, numberOfOnline) {
-
-       
         $("#numberofuseronline").text(numberOfOnline);
     });
-
-
     myHub.on('locationForAddMarker', function (latitude, longitude, tourguideId, tourguideName, tourId) {
 
         //var lastIndex = listMarker.length;
@@ -632,39 +629,39 @@
 
         notify(tourguideName, "Has just connected to system", tourDetail);
 
-        //var contentString = '<div style="width: 300px;background: white;height: 150px;background: while;">' +
-        //    '<div style="height: 68%;">' +
-        //    '<div style="float: left; width: 35%; height: 100%;">' +
-        //    '<img style="width: 100%; height: 100%;" src="/Content/Images/' + cover_image + '"/>' +
-        //    '</div>' +
-        //    '<div style="float: right; width: 65%; height: 100%;">' +
-        //    '<div class="list-tour" style="height: 25px; margin-top: 0px; margin-left: 5px;" id="nav-accordion">' +
-        //    '<span style="color: black; font-size: 14px; margin-left: 10px; font-weight: bold;">' + tourName + '</span>' +
-        //    '</div>' +
-        //    '<div class="list-tour" style="height: 20px; margin-top: 0px; margin-left: 15px;" id="nav-accordion">' +
-        //    '<img src="/Content/Images/ic_tourguide.png" width="20" height="20"/>' +
-        //    '<span style="color: gray; font-size: 12px; margin-left: 20px;">' + tourGuide + '</span><span style="font-size: 16px;"></span>' +
-        //    '</div>' +
-        //    '<div class="list-tour" style="height: 20px; margin-top: 10px; margin-left: 15px;" id="nav-accordion">' +
-        //    '<img src="/Content/Images/ic_time.png" width="18" height="18" style="margin-top: -4px;"/>' +
-        //    '<span style="color: gray; font-size: 12px; margin-left: 20px;">' + departure_date + ' - ' + return_date + '</span>' +
-        //    '</div>' +
-        //    '<div class="list-tour" style="height: 20px; margin-top: 8px; margin-left: 15px;" id="nav-accordion">' +
-        //    '<span style="color: blue; font-size: 12px; margin-left: 20px; float: right;"><a href="' + tourDetail + '"  style="color: blue;">Xem chi tiết</a></span>' +
-        //    '</div>' +
-        //    '</div>' +
-        //    '</div>' +
-        //    '<div style="height: 10%; border-bottom: 1px solid #e5e5e6;"> </div>' +
-        //    '<div style="height: 22%; margin-top: 10px;">' +
-        //    '<div style="float: right; height: 100%; width: 20%;">' +
-        //    '<img src="/Content/Images/ic_message.png" width="30" height="30" style=" margin-left: 10px; float: right;"/>' +
-        //    '</div>' +
-        //    '<div style="float: right; height: 100%; width: 20%; ">' +
-        //    '<a href="#" data-toggle="modal" data-target="#myModal1"><img src="/Content/Images/ic_warning.png" width="28" height="28" style=" margin-left: 20px; float: right;"/></a>' +
-        //    '</div>' +
-        //    '<div style="float: right; height: 100%; width: 20%;"></div>' +
-        //    '</div>' +
-        //    '</div>';
+        var contentString = '<div style="width: 300px;background: white;height: 150px;background: while;">' +
+            '<div style="height: 68%;">' +
+            '<div style="float: left; width: 35%; height: 100%;">' +
+            '<img style="width: 100%; height: 100%;" src="/Content/Images/' + cover_image + '"/>' +
+            '</div>' +
+            '<div style="float: right; width: 65%; height: 100%;">' +
+            '<div class="list-tour" style="height: 25px; margin-top: 0px; margin-left: 5px;" id="nav-accordion">' +
+            '<span style="color: black; font-size: 14px; margin-left: 10px; font-weight: bold;">' + tourName + '</span>' +
+            '</div>' +
+            '<div class="list-tour" style="height: 20px; margin-top: 0px; margin-left: 15px;" id="nav-accordion">' +
+            '<img src="/Content/Images/ic_tourguide.png" width="20" height="20"/>' +
+            '<span style="color: gray; font-size: 12px; margin-left: 20px;">' + tourGuide + '</span><span style="font-size: 16px;"></span>' +
+            '</div>' +
+            '<div class="list-tour" style="height: 20px; margin-top: 10px; margin-left: 15px;" id="nav-accordion">' +
+            '<img src="/Content/Images/ic_time.png" width="18" height="18" style="margin-top: -4px;"/>' +
+            '<span style="color: gray; font-size: 12px; margin-left: 20px;">' + departure_date + ' - ' + return_date + '</span>' +
+            '</div>' +
+            '<div class="list-tour" style="height: 20px; margin-top: 8px; margin-left: 15px;" id="nav-accordion">' +
+            '<span style="color: blue; font-size: 12px; margin-left: 20px; float: right;"><a href="' + tourDetail + '"  style="color: blue;">Xem chi tiết</a></span>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div style="height: 10%; border-bottom: 1px solid #e5e5e6;"> </div>' +
+            '<div style="height: 22%; margin-top: 10px;">' +
+            '<div style="float: right; height: 100%; width: 20%;">' +
+            '<img src="/Content/Images/ic_message.png" width="30" height="30" style=" margin-left: 10px; float: right;"/>' +
+            '</div>' +
+            '<div style="float: right; height: 100%; width: 20%; ">' +
+            '<a href="#" data-toggle="modal" data-target="#myModal1"><img src="/Content/Images/ic_warning.png" width="28" height="28" style=" margin-left: 20px; float: right;"/></a>' +
+            '</div>' +
+            '<div style="float: right; height: 100%; width: 20%;"></div>' +
+            '</div>' +
+            '</div>';
 
         var pinImage = {
             url: '/Content/Images/ic_markerProfile.png', // image is 512 x 512
@@ -694,8 +691,6 @@
         });
         
     });
-
-
     myHub.on('removeUserDisconnection', function (userId, userName) {
        
         $.notify({
@@ -731,7 +726,6 @@
             }
         });
     });
-
     myHub.on('receiveLoaction', function (user, lat, lng) {
 
         for (i = 0; i < listMarker.length; i++) {
@@ -759,8 +753,6 @@
                          '<li class="divider"></li>';
         $("#div-alert").prepend(contentHtml);
     });
-
-
     myHub.on("confirmWarning", function (tourguideName, warningName) {
         $.notify({
             message: tourguideName + " - Da xac nhan canh bao: " + warningName,
@@ -769,14 +761,35 @@
         getListWarning();
     });
 
+    myHub.on("needHelpTourguide", function(tourguideId, helpName, helpDescription)
+    {
+        $.ajax({
+            url: "/Home/GetTourguideInfo/" + tourguideId,
+            type: "GET",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: true,
+            processData: false,
+            cache: false,
+            success: function (result) {
+                var results = $.parseJSON(result);
+                $(results).each(function (index, value) {
+                    //var longitude = this['longitude'];
+                    //var laitude = this['latitude'];
+                });
+            },
+            error: function (xhr) {
+                alert('GET TOURGUIDE INFO ERROR');
+            }
+        });
+    });
+
+
     // start connection
     connection.start().done(function () {
        // doing after connected
     });
-
-
     // For add marker tourguide first connect
-
     function notify(user, message, url)
     {
         $.notify({
@@ -1376,6 +1389,12 @@
             listInfoWindowPlace[k].close();
         }
     }
+
+    //FOR HELP
+    var listMarkerHelper = new Array();
+    var listInforWindowHelper = [];
+
+
 
 </script>
 
@@ -2039,6 +2058,7 @@
         });
     }
     function createMarker(index,tourguideID, latlng, title, url) {
+
             alert("Index " + index);
             alert("tourguidID " + tourguideID);
 
@@ -2374,6 +2394,7 @@
 
         
     }
+
     //FOR PLACE 
     function loadMarkerPlace()
     {
@@ -2459,6 +2480,74 @@
        
     }
 
+
+    //FOR HELPER
+    var indexMarkerHelper = -1;
+
+    function drawMarkerHelper(tourguideID, latlng, avatar, imgmarker, 
+        tourguideName, tourguidePhone, helpName, helpDescription)
+    {
+        indexMarkerHelper++;
+        var divMarker = '<div id="marker">' +
+                            '<div style="height: 150px"; z-index="1">' +
+                              '<img style="width: 64px; height: 76px;" src="' + imgmarker + '" />' +
+                            '</div>' +
+                            '<div style="position:relative; bottom: 150px;">' +
+                              '<img style="width: 59px; height: 59px; margin-top: 3px; margin-left: 2.5px; border-radius: 30%;" src="' + avatar + '"/>' +
+                            '</div>' +
+                            '</div>';
+        var url = '';
+        var title = '<div style="width: 300px;background: white;height: 150px;background: while;">'+
+                    '<div style="height: 68%;">'+
+                    '<div style="float: right; width: 100%; height: 100%;">'+
+                    '<div class="list-tour" style="height: 25px; margin-top: 0px; margin-left: 5px;" id="nav-accordion">'+
+                    '<span style="color: black; font-size: 14px; margin-left: 10px; font-weight: bold;">' + helpName + '</span>' +
+                    '</div>'+
+                    '<div class="list-tour" style="height: 20px; margin-top: 0px; margin-left: 15px;" id="nav-accordion">'+
+                    '<img src="/Content/Images/ic_tourguide.png" width="20" height="20"/>'+
+                    '<span style="color: gray; font-size: 12px; margin-left: 20px;">' + tourguideName + ' - ' + tourguidePhone + '</span><span style="font-size: 16px;"></span>' +
+                    '</div>'+
+                    '<div class="list-tour" style="height: 20px; margin-top: 10px; margin-left: 15px;" id="nav-accordion">' +
+                    '<img src="/Content/Images/ic_time.png" width="18" height="18" style="margin-top: -4px;"/>' +
+                    '<span style="color: gray; font-size: 12px; margin-left: 20px;"> '+ helpDescription + ' </span>' +
+                    '</div>' +
+                    '<div class="list-tour" style="height: 20px; margin-top: 8px; margin-left: 15px;" id="nav-accordion">' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div style="height: 10%; border-bottom: 1px solid #e5e5e6;"> </div>' +
+                    '<div style="height: 22%; margin-top: 10px;">' +
+                    '</div>' +
+                    '</div>';
+
+        $('#divMarker').children().remove();
+
+        $('#divMarker').append(divMarker);
+
+        html2canvas($('#divMarker'), {
+            onrendered: function (canvas) {
+                url = canvas.toDataURL("image/png");
+                // fn(url);
+                listMarkerHelper[indexMarkerHelper] = new SlidingMarker({
+                    position: latlng,
+                    map: map,
+                    animation: google.maps.Animation.Gp,
+                    icon: url,
+                    tourguiderid: tourguideID,
+                })
+                listInforWindowHelper[indexMarkerHelper] = new google.maps.InfoWindow({
+                    content: title
+                });
+                google.maps.event.addListener(listMarkerHelper[indexMarkerHelper], "click", function () {
+
+                    for (i = 0; i < listInforWindowHelper.length; i++) {
+                        listInforWindowHelper[i].close();
+                    }
+                    listInforWindowHelper[indexMarkerHelper].open(map, listMarkerHelper[indexMarkerHelper]);
+                });
+            }
+        });
+    };
 </script>
 <style type="text/css">
     button, input, select, textarea {

@@ -23,5 +23,7 @@ namespace MonitoringTourSystem.Infrastructures.Interfaces.Home
         JsonResult CreateMarkerPlace(string userName);
         JsonResult GetPointLocation(int tourguideId);
         List<TourIsProcessing> SearchTourByRegion(string username, int id);
+
+        JsonResult GetTourGuideInfo(int tourguideId);
     }
 }
