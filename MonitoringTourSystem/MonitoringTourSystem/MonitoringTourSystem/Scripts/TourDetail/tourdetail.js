@@ -94,7 +94,7 @@ function deleteTour(id) {
 
 $(document).ready(function () {
     $('.datepicker_init').datetimepicker({
-        locale: 'es',
+        locale: 'vi',
         format: 'YYYY-MM-DD',
         useCurrent: false
     });

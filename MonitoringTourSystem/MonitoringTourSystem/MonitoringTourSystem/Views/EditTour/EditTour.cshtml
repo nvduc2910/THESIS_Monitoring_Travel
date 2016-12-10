@@ -16,6 +16,78 @@
 <script src="~/Scripts/CreateTour/createtour.js"></script>
 
 <script>
+    $(document).ready(function () {
+
+        $("#datetimepicker1").on("dp.change", function (e) {
+           // getTourGuideAvailable();
+        });
+
+
+        $("#datetimepicker3").on("dp.change", function (e) {
+
+           // getTourGuideAvailable();
+
+        });
+
+    });
+
+    function getTourGuideAvailable1(id) {
+
+        var startday = $("#startday").val();
+        var endday = $("#endday").val();
+
+       // alert(startday);
+
+        if (startday == null || startday == "" || endday == null || endday == "") {
+            $('#warning').text("Vui lòng chọn ngày bắt đầu và kết thúc");
+            return;
+        }
+
+        if (startday > endday) {
+            $('#warning').text("Vui lòng chọn ngày bắt đầu nhỏ kết thúc");
+            return;
+        }
+        $("#processgettourguide").html("<img src='/Content/process_small.gif' width='20' height='20' style='margin-left: 20px;' /> ");
+
+
+        $.ajax({
+            url: "/CreateTour/GetTourGuideAvailable",
+            type: "POST",
+            data: {
+
+                departuredate: startday,
+                returndate: endday
+            },
+            success: function (result) {
+                var results = $.parseJSON(result);
+                $('#tourguide1').empty();
+                $(results).each(function (index, value) {
+
+                    var tourGuideID = this['tourguide_id'];
+                    var tourGuideName = this['tourguide_name'];
+
+                    if (tourGuideID != id) {
+
+                        $("#tourguide1").append(new Option(tourGuideName, tourGuideID));
+                    }
+
+
+                });
+                $("#tourguide1").append(new Option("@Model.TourDetail.TourGuideName", "@Model.TourDetail.TourItem.tourguide_id"));
+                $("#tourguide1").select2({
+
+                });
+
+                $("#tourguide1 select").val("@Model.TourDetail.TourItem.tourguide_id");
+
+                $("#processgettourguide").html("");
+            },
+            error: function (xhr) {
+                getTourGuideAvailable1(id);
+            }
+        });
+
+    }
 
     function updateTour() {
         var isValidSchedule;
@@ -181,10 +253,35 @@
                             <div class="input text required"><input class="form-control" id="nametour" required="required" placeholder="Nhập tên tour" value="@Model.TourDetail.TourItem.tour_name" maxlength="255" type="text"></div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Hướng dẫn viên</label>
-                            <select id="tourguide" style="width: 100%; height: 33px;">
-                                <option disabled value="@Model.TourDetail.TourItem.tourguide_id">@Model.TourDetail.TourGuideName</option>
+                            <label for="exampleInputEmail1">Khu vực tour</label>
+                            <br />
+                            <select id="area1" style="width: 100%; height: 33px;">
+                                <option selected >
+                                    @{
+                                        if (Model.TourDetail.TourItem.area_id == 0)
+                                        {
+                                            <text>Miền Bắc</text>
+                                        }
+                                        if (Model.TourDetail.TourItem.area_id == 1)
+                                        {
+                                            <text>Miền Trung</text>
+                                        }
+                                        if (Model.TourDetail.TourItem.area_id == 2)
+                                        {
+                                            <text>Miền Nam</text>
+                                        }
+                                    }
+                                </option>
                             </select>
+                            <script>
+
+                                $("#area1").append(new Option("-miền bắc-", "1"))
+                                $("#area1").append(new Option("-miền trung-", "2"))
+                                $("#area1").append(new Option("-miền nam-", "3"))
+                                $("#area1:last").select2({
+
+                                });
+                            </script>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số lượng du khách</label>
@@ -197,7 +294,7 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Ngày bắt đầu</label>
                             <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' id="startday" value="@Model.TourDetail.TourItem.departure_date"  class="form-control" placeholder="Nhập ngày bắt đầu" />
+                                <input type='text' id="startday" value="@Model.TourDetail.TourItem.departure_date.ToString("yyyyMMddHHmm")" class="form-control" placeholder="Nhập ngày bắt đầu" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -206,15 +303,28 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Ngày kết thúc</label>
                             <div class='input-group date' id='datetimepicker3'>
-                                <input type='text' id="endday" class="form-control" value="@Model.TourDetail.TourItem.return_date" placeholder="Nhập ngày kết thúc" />
+                                <input type='text' id="endday" class="form-control" value="@Model.TourDetail.TourItem.return_date.ToString("yyyyMMddHHmm")" placeholder="Nhập ngày kết thúc" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Hướng dẫn viên</label> <div id="processgettourguide" style="float: right; margin-right: 5px;"></div>
+                            <br />
+                            <p id="warning" style="color: red; font-size: 12px;"></p>
+                            <select id="tourguide1" style="width: 100%; height: 33px;">
+                               
+                            </select>
+                        </div>
+
+                        <script>
+                      
+                            getTourGuideAvailable1(@Model.TourDetail.TourItem.tourguide_id);
+                        </script>
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Mô tả tour</label>
-                            <textarea class="form-control" style="resize: none;" rows="4" id="descriptionTour"  placeholder="Nhập mô tả về tour">@Model.TourDetail.TourItem.description</textarea>
+                            <textarea class="form-control" style="resize: none;" rows="4" id="descriptionTour" placeholder="Nhập mô tả về tour">@Model.TourDetail.TourItem.description</textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình đại diện</label>
@@ -270,7 +380,7 @@
                                             </div>
                                         </div>
                                         <div class="row" style="margin-top: 20px;">
-                                            <textarea style="resize: none; padding-left: 12px; padding-top: 12px; margin-left: 15px;border-radius: 5px; width: 96%; margin-right: 15px;" rows="4" class="descriptionTour"  placeholder="Nhập mô tả về tour...">@item.description</textarea>
+                                            <textarea style="resize: none; padding-left: 12px; padding-top: 12px; margin-left: 15px;border-radius: 5px; width: 96%; margin-right: 15px;" rows="4" class="descriptionTour" placeholder="Nhập mô tả về tour...">@item.description</textarea>
                                         </div>
                                     </div>
                                     <button href="#" style="margin-left: 0px; margin-top: 10px;" class="btn remove_field btn-warning">Xóa</button>
@@ -281,9 +391,11 @@
                                     var listVehicle = ["Xe máy", "Ô tô", "Máy bay"];
                                     @foreach (var itemPlace in Model.ListProvienWithPlace[i].ListPlaceWithProvince)
                                     {
-                                        @:listPlace.push("@HttpUtility.HtmlEncode(@itemPlace.place_name)");
+                                       // @:listPlace.push("@itemPlace.place_name)");
+                                        @:$(".placeschedule:last").append(new Option("@itemPlace.place_name", "@itemPlace.place_id"));
+                                     
                                     }
-                                   
+
                                     var parent = $(this).parent();
                                     $(".placeschedule:last").select2({
                                         data: listPlace
@@ -293,8 +405,8 @@
                                     });
 
                                 </script>
-                                }
                             }
+                        }
                     </div>
                     <button style="margin-top: -49px; width: 9%; float: right" class="add_field_button btn btn-info btn-block voffset10">Thêm</button>
                 </div>

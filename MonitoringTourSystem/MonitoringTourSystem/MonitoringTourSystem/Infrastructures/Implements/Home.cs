@@ -53,7 +53,7 @@ namespace MonitoringTourSystem.Infrastructures.Implements
                     {
                         listWarning[i].status = StatusWarning.Close.ToString();
                         _dbContextPool.GetContext().SaveChanges();
-
+                    
                     }
                 }
             }

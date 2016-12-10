@@ -15,9 +15,28 @@
 
     });
 
-    $('#datetimepicker2').datetimepicker();
-    $('#datetimepicker1').datetimepicker();
-    $('#datetimepicker3').datetimepicker();
+    //$('#datetimepicker2').datetimepicker();
+    //$('#datetimepicker1').datetimepicker();
+    //$('#datetimepicker3').datetimepicker();
+
+    $('#datetimepicker1').datetimepicker({
+        // format: 'DD/MM/YYYY'
+        locale: 'vi',
+        format: 'YYYY-MM-DD hh:mm',
+    });
+
+    $('#datetimepicker2').datetimepicker({
+        // format: 'DD/MM/YYYY'
+        format: 'YYYY-MM-DD hh:mm',
+        locale: 'vi',
+    });
+
+    $('#datetimepicker3').datetimepicker({
+        //format: 'DD/MM/YYYY'
+        format: 'YYYY-MM-DD hh:mm',
+        locale: 'vi',
+    });
+
     var listPlace = [];
     var listTourGuide = [];
     var listProvince = [];
@@ -132,10 +151,14 @@
 
     function yourfunction() {
         $('.datepicker_init').datetimepicker({
-            format: 'DD/MM/YYYY'
+            //format: 'DD/MM/YYYY'
+            format: 'YYYY-MM-DD hh:mm',
+            locale: 'vi',
         });
         $('.datepicker_end').datetimepicker({
-            format: 'DD/MM/YYYY'
+            //format: 'DD/MM/YYYY'
+            format: 'YYYY-MM-DD hh:mm',
+            locale: 'vi',
         });
     }
     $(add_button).click(function (e) { //on add input button click
@@ -356,11 +379,11 @@ function addNewTour() {
             return;
         }
 
-        //else if(time < startday || time > endday)
-        //{
-        //    swal("Thời gian " + time + " phải nằm trong khoảng thời gian bắt đầu và kết thúc tour");
-        //    isValidSchedule = false;
-        //}
+        else if(time < startday || time > endday)
+        {
+            swal("Thời gian " + time + " phải nằm trong khoảng thời gian bắt đầu và kết thúc tour");
+            isValidSchedule = false;
+        }
         else if (placenameVal == "0") {
             swal("Nhập địa điểm tour!");
             isValidSchedule = false;
