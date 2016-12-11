@@ -1,10 +1,9 @@
-﻿using MonitoringTourSystem.Infrastructures;
+using MonitoringTourSystem.Infrastructures;
 using MonitoringTourSystem.Infrastructures.EntityFramework;
 using MonitoringTourSystem.Infrastructures.Interfaces.Home;
 using MonitoringTourSystem.Models;
 using MonitoringTourSystem.ViewModel;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -114,16 +113,6 @@ namespace MonitoringTourSystem.Controllers
 
         }
 
-        public ActionResult SearchTourByRegion(int id)
-        {
-            string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
-            var result = homeControllerService.SearchTourByRegion(username, id);
-            var model = new HomeViewModel() { ListTourIsProcessing = result };
-            return PartialView("ListTourGuide", model);
-
-        }
-
-
         #endregion
 
         public ActionResult RenderHomeOption(int id)
@@ -223,29 +212,6 @@ namespace MonitoringTourSystem.Controllers
             return null;
         }
 
-        [HttpGet]
-
-        public JsonResult CreateMarkerPlace()
-        {
-            string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
-            return homeControllerService.CreateMarkerPlace(username);
-        }
-
-
-        [HttpGet]
-        public JsonResult GetPointLocation(string id)
-        {
-            var tourguideIdInt = Convert.ToInt32(id);
-            return homeControllerService.GetPointLocation(tourguideIdInt);
-
-        }
-
-        [HttpGet]
-
-        public JsonResult GetTourguideInfo(int id)
-        {
-            return homeControllerService.GetTourGuideInfo(id);
-        }
         #endregion
     }
 }
