@@ -1,4 +1,4 @@
-﻿using MonitoringTourSystem.Infrastructures.Interfaces.Home;
+using MonitoringTourSystem.Infrastructures.Interfaces.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
