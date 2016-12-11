@@ -1,4 +1,4 @@
-﻿using MonitoringTourSystem.Models;
+using MonitoringTourSystem.Models;
 using MonitoringTourSystem.ViewModel;
 using System;
 using System.Collections.Generic;
