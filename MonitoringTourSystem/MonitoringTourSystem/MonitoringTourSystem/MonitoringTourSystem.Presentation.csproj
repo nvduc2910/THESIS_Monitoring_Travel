@@ -274,6 +274,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructures\EntityFramework\notify.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructures\EntityFramework\place.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -284,6 +287,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructures\EntityFramework\tourguide.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructures\EntityFramework\tourguide_help.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructures\EntityFramework\tourist.cs">
@@ -313,6 +319,7 @@
     <Compile Include="Infrastructures\Interfaces\Home\IWarningGroup.cs" />
     <Compile Include="Infrastructures\Interfaces\Home\IWarningPrivate.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\HelpStatus.cs" />
     <Compile Include="Models\HomeOptionModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Province.cs" />
@@ -347,10 +354,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\home\Site1.css" />
     <Content Include="Content\Images\1-thich-ca-Phat-dai.jpg" />
+    <Content Include="Content\Images\anhthu.jpg" />
+    <Content Include="Content\Images\diemmy.jpg" />
     <Content Include="Content\Images\duc_avatar.jpg" />
     <Content Include="Content\Images\duc_avatar.png" />
+    <Content Include="Content\Images\harley.jpg" />
     <Content Include="Content\Images\ic_flag_destination.png" />
     <Content Include="Content\Images\ic_flag_start.png" />
+    <Content Include="Content\Images\ic_marke_help.png" />
     <Content Include="Content\Images\ic_place.png" />
     <Content Include="Content\Images\huy_avatar.png" />
     <Content Include="Content\Images\ic_markerOffline.png" />
@@ -382,6 +393,10 @@
     <Content Include="Content\Images\nam_avatar.jpg" />
     <Content Include="Content\Images\ndq_avatar.jpg" />
     <Content Include="Content\Images\nhat_avatar.png" />
+    <Content Include="Content\Images\sonnguyen.jpg" />
+    <Content Include="Content\Images\tramle.jpg" />
+    <Content Include="Content\Images\tuyetquynh.jpg" />
+    <Content Include="Content\Images\vyle.jpg" />
     <Content Include="Content\loading.gif" />
     <Content Include="Content\processing_small.jpg" />
     <Content Include="Content\process_small.gif" />

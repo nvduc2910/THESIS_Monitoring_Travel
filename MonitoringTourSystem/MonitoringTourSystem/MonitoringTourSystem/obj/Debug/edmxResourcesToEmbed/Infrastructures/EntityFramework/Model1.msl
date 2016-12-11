@@ -181,5 +181,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="notifies">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.notify">
+        <MappingFragment StoreEntitySet="notify">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="notify_url" ColumnName="notify_url" />
+          <ScalarProperty Name="notify_content" ColumnName="notify_content" />
+          <ScalarProperty Name="notify_name" ColumnName="notify_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tourguide_help">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.tourguide_help">
+        <MappingFragment StoreEntitySet="tourguide_help">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="lng" ColumnName="lng" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="receiver_id" ColumnName="receiver_id" />
+          <ScalarProperty Name="sender_id" ColumnName="sender_id" />
+          <ScalarProperty Name="help_content" ColumnName="help_content" />
+          <ScalarProperty Name="help_id" ColumnName="help_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

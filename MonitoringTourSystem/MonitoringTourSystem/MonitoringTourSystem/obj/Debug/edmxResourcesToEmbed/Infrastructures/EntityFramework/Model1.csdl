@@ -174,6 +174,8 @@
     <EntitySet Name="warnings" EntityType="Self.warning" />
     <EntitySet Name="warning_receiver" EntityType="Self.warning_receiver" />
     <EntitySet Name="areas" EntityType="tour_monitoring_v3Model.area" />
+    <EntitySet Name="notifies" EntityType="tour_monitoring_v3Model.notify" />
+    <EntitySet Name="tourguide_help" EntityType="tour_monitoring_v3Model.tourguide_help" />
   </EntityContainer>
   <EntityType Name="area">
     <Key>
@@ -181,5 +183,37 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="notify">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="notify_name" />
+      <PropertyRef Name="notify_content" />
+      <PropertyRef Name="notify_url" />
+      <PropertyRef Name="status" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="notify_name" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="notify_content" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="notify_url" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tourguide_help">
+    <Key>
+      <PropertyRef Name="help_id" />
+      <PropertyRef Name="help_content" />
+      <PropertyRef Name="sender_id" />
+      <PropertyRef Name="receiver_id" />
+      <PropertyRef Name="lat" />
+      <PropertyRef Name="lng" />
+      <PropertyRef Name="status" />
+    </Key>
+    <Property Name="help_id" Type="Int32" Nullable="false" />
+    <Property Name="help_content" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="sender_id" Type="Int32" Nullable="false" />
+    <Property Name="receiver_id" Type="Int32" Nullable="false" />
+    <Property Name="lat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lng" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

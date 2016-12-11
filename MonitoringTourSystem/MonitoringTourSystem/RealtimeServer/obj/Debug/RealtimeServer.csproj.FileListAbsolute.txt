@@ -47,7 +47,6 @@ F:\Ky 9\Khoa Luan\LocalGit\MonitoringTourSystem\RealtimeServer\bin\Newtonsoft.Js
 F:\Ky 9\Khoa Luan\LocalGit\MonitoringTourSystem\RealtimeServer\obj\Debug\RealtimeServer.csprojResolveAssemblyReference.cache
 F:\Ky 9\Khoa Luan\LocalGit\MonitoringTourSystem\RealtimeServer\obj\Debug\RealtimeServer.dll
 F:\Ky 9\Khoa Luan\LocalGit\MonitoringTourSystem\RealtimeServer\obj\Debug\RealtimeServer.pdb
-C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\RealtimeServer\obj\Debug\RealtimeServer.csprojResolveAssemblyReference.cache
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\RealtimeServer\bin\ApplicationInsights.config
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\RealtimeServer\bin\roslyn\csc.exe
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\RealtimeServer\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -94,5 +93,6 @@ C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\Real
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\RealtimeServer\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\RealtimeServer\bin\Microsoft.Owin.Security.xml
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\RealtimeServer\bin\Newtonsoft.Json.xml
+C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\RealtimeServer\obj\Debug\RealtimeServer.csprojResolveAssemblyReference.cache
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\RealtimeServer\obj\Debug\RealtimeServer.dll
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\RealtimeServer\obj\Debug\RealtimeServer.pdb

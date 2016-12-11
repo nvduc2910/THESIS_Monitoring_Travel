@@ -271,6 +271,5 @@ C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\Moni
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\MonitoringTourSystem\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\MonitoringTourSystem\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\MonitoringTourSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\MonitoringTourSystem\obj\Debug\MonitoringTourSystem.Presentation.csprojResolveAssemblyReference.cache
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\MonitoringTourSystem\obj\Debug\MonitoringTourSystem.dll
 C:\Users\LinhMap\Desktop\web_tour\MonitoringTourSystem\MonitoringTourSystem\MonitoringTourSystem\obj\Debug\MonitoringTourSystem.pdb

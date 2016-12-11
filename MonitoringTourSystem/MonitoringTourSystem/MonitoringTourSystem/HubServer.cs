@@ -191,9 +191,7 @@ namespace MonitoringTourSystem
         {
 
             var id = _dbContextPool.GetContext().warnings.Max(x => x.warning_id);
-
             obj.WarningId = id;
-
             var receveriIdStr = "TG_" + receiverId.ToString();
             foreach (var connection in _connections.GetConnections(receveriIdStr))
             {
@@ -219,17 +217,32 @@ namespace MonitoringTourSystem
             {
                 Clients.Client(connection).confirmWarning(sender, warningName);
             }
-        
         }
 
         public void NeedHelp(int tourguideId, string latitude, string longitude, string helpContent, string receiver)
         {
             foreach (var connection in _connections.GetConnections(receiver))
             {
-                Clients.Client(connection).receiverWarning(tourguideId, latitude, longitude, helpContent);
+                Clients.Client(connection).needHelpTourguide(tourguideId, latitude, longitude, helpContent);
+            }
+            using (var context = new monitoring_tour_v3Entities())
+            {
+                var receiverId = Convert.ToInt32(receiver.Replace("MG_", string.Empty));
+
+                var helpRecord = new tourguide_help()
+                {
+                    sender_id = tourguideId,
+                    receiver_id = receiverId,
+                    lat = latitude,
+                    lng = longitude,
+                    help_content = helpContent,
+                    status = HelpStatus.Opening.ToString(),
+                };
+
+                context.tourguide_help.Add(helpRecord);
+                context.SaveChanges();
             }
         }
-
 
         // Write Location Tracking to database 
         private static Dictionary<string, Location> lastLocationUpdate = new Dictionary<string, Location>();

@@ -44,6 +44,22 @@
           <Property Name="status" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="content" Type="text" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.tour_monitoring_v3.notify' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="notify">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="notify_name" />
+            <PropertyRef Name="notify_content" />
+            <PropertyRef Name="notify_url" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="notify_name" Type="text" Nullable="false" />
+          <Property Name="notify_content" Type="text" Nullable="false" />
+          <Property Name="notify_url" Type="text" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="place">
           <Key>
             <PropertyRef Name="place_id" />
@@ -122,6 +138,26 @@
           <Property Name="latitude" Type="double" Nullable="false" />
           <Property Name="longitude" Type="double" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.tour_monitoring_v3.tourguide_help' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tourguide_help">
+          <Key>
+            <PropertyRef Name="help_id" />
+            <PropertyRef Name="help_content" />
+            <PropertyRef Name="sender_id" />
+            <PropertyRef Name="receiver_id" />
+            <PropertyRef Name="lat" />
+            <PropertyRef Name="lng" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="help_id" Type="int" Nullable="false" />
+          <Property Name="help_content" Type="text" Nullable="false" />
+          <Property Name="sender_id" Type="int" Nullable="false" />
+          <Property Name="receiver_id" Type="int" Nullable="false" />
+          <Property Name="lat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lng" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="tourist">
           <Key>
             <PropertyRef Name="tourist_id" />
@@ -186,6 +222,26 @@
           <EntitySet Name="tracking" EntityType="Self.tracking" Schema="tour_monitoring_v3" store:Type="Tables" />
           <EntitySet Name="warning" EntityType="Self.warning" Schema="tour_monitoring_v3" store:Type="Tables" />
           <EntitySet Name="warning_receiver" EntityType="Self.warning_receiver" Schema="tour_monitoring_v3" store:Type="Tables" />
+          <EntitySet Name="notify" EntityType="Self.notify" store:Type="Tables" store:Schema="tour_monitoring_v3">
+            <DefiningQuery>SELECT
+`notify`.`id`, 
+`notify`.`notify_name`, 
+`notify`.`notify_content`, 
+`notify`.`notify_url`, 
+`notify`.`status`
+FROM `notify` AS `notify`</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tourguide_help" EntityType="Self.tourguide_help" store:Type="Tables" store:Schema="tour_monitoring_v3">
+            <DefiningQuery>SELECT
+`tourguide_help`.`help_id`, 
+`tourguide_help`.`help_content`, 
+`tourguide_help`.`sender_id`, 
+`tourguide_help`.`receiver_id`, 
+`tourguide_help`.`lat`, 
+`tourguide_help`.`lng`, 
+`tourguide_help`.`status`
+FROM `tourguide_help` AS `tourguide_help`</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -365,6 +421,8 @@
           <EntitySet Name="warnings" EntityType="Self.warning" />
           <EntitySet Name="warning_receiver" EntityType="Self.warning_receiver" />
           <EntitySet Name="areas" EntityType="tour_monitoring_v3Model.area" />
+          <EntitySet Name="notifies" EntityType="tour_monitoring_v3Model.notify" />
+          <EntitySet Name="tourguide_help" EntityType="tour_monitoring_v3Model.tourguide_help" />
         </EntityContainer>
         <EntityType Name="area">
           <Key>
@@ -372,6 +430,38 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="notify">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="notify_name" />
+            <PropertyRef Name="notify_content" />
+            <PropertyRef Name="notify_url" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="notify_name" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="notify_content" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="notify_url" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tourguide_help">
+          <Key>
+            <PropertyRef Name="help_id" />
+            <PropertyRef Name="help_content" />
+            <PropertyRef Name="sender_id" />
+            <PropertyRef Name="receiver_id" />
+            <PropertyRef Name="lat" />
+            <PropertyRef Name="lng" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="help_id" Type="Int32" Nullable="false" />
+          <Property Name="help_content" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="sender_id" Type="Int32" Nullable="false" />
+          <Property Name="receiver_id" Type="Int32" Nullable="false" />
+          <Property Name="lat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lng" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -556,6 +646,30 @@
               <MappingFragment StoreEntitySet="area">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notifies">
+            <EntityTypeMapping TypeName="tour_monitoring_v3Model.notify">
+              <MappingFragment StoreEntitySet="notify">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="notify_url" ColumnName="notify_url" />
+                <ScalarProperty Name="notify_content" ColumnName="notify_content" />
+                <ScalarProperty Name="notify_name" ColumnName="notify_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tourguide_help">
+            <EntityTypeMapping TypeName="tour_monitoring_v3Model.tourguide_help">
+              <MappingFragment StoreEntitySet="tourguide_help">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="lng" ColumnName="lng" />
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="receiver_id" ColumnName="receiver_id" />
+                <ScalarProperty Name="sender_id" ColumnName="sender_id" />
+                <ScalarProperty Name="help_content" ColumnName="help_content" />
+                <ScalarProperty Name="help_id" ColumnName="help_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
