@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR;
 using MonitoringTourSystem.RealTimeServer.BaseMappingConnection;
 using System;
 using System.Collections.Generic;
@@ -222,14 +222,16 @@ namespace MonitoringTourSystem
         
         }
 
-        public void NeedHelp(int tourguideId, string latitude, string longitude, string helpContent)
+        public void NeedHelp(int tourguideId, string latitude, string longitude, string helpContent, string receiver)
         {
-
+            foreach (var connection in _connections.GetConnections(receiver))
+            {
+                Clients.Client(connection).receiverWarning(tourguideId, latitude, longitude, helpContent);
+            }
         }
 
 
         // Write Location Tracking to database 
-
         private static Dictionary<string, Location> lastLocationUpdate = new Dictionary<string, Location>();
         private static Dictionary<string, Location> tempLocationNow = new Dictionary<string, Location>();
         private static Dictionary<string, DateTime?> lastManagerTime = new Dictionary<string, DateTime?>();
