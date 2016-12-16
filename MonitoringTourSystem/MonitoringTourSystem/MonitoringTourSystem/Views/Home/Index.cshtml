@@ -319,7 +319,7 @@
                                 </div>
 
                                 <div style="height: 100%; float: left; width: 70%;">
-                                    <p id="numberOfHelp" style="color: white; vertical-align:top; font-size: 20px; text-align: right; padding-right: 12px;">0</p>
+                                    <p id="numberOfHelp" style="color: white; vertical-align:top; font-size: 20px; text-align: right; padding-right: 12px;">@Model.ListHelpWithTourInfo.Count</p>
                                     <p style="color: white; font-size: 12px; text-align: right; padding-right: 12px;">Trợ giúp</p>
                                 </div>
                             </div>
@@ -374,8 +374,15 @@
 
                                     </div>
                                     <div id="menu2" class="tab-pane fade" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px;">
-                                        <h3>Menu 2</h3>
-                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                        <div class="alert alert-success" style="margin-top: 10px;">
+                                            Danh sách Trợ giúp
+                                        </div>
+                                        <div id="list-warning-reciver" style="height: 84% ; overflow-y: auto">
+                                            @{
+                                                Html.RenderPartial("ListHelp", Model);
+
+                                            }
+                                        </div>
                                     </div>
 
                                 </div>

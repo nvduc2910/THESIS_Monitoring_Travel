@@ -31,7 +31,10 @@ namespace MonitoringTourSystem.Controllers
             ListTourTestRealtime = moni.tourguides.ToList();
             string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
             var lstTourIsProcess = homeControllerService.GetTourIsProcessing(username);
-            var model = new HomeViewModel() { OptionRenderView = 1, ListTourIsProcessing = lstTourIsProcess, ListWarningWithReceiver = homeControllerService.GetInfoWarning(username), NumberOfTourProcessing = lstTourIsProcess.Count() };
+            var lstHelp = homeControllerService.GetListHelp(username);
+
+            var model = new HomeViewModel() { OptionRenderView = 1, ListTourIsProcessing = lstTourIsProcess, ListWarningWithReceiver = homeControllerService.GetInfoWarning(username), NumberOfTourProcessing = lstTourIsProcess.Count(), ListHelpWithTourInfo = lstHelp };
+
             return View("Index", model);
         }
 

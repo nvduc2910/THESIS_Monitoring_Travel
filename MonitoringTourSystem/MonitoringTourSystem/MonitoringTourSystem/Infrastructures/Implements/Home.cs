@@ -119,7 +119,6 @@ namespace MonitoringTourSystem.Infrastructures.Implements
                                   TourGuideSelect = r,
 
                               }).ToList();
-
             var tourWithTourGuide = new List<TourIsProcessing>();
 
             for (int i = 0; i < tourManage.Count; i++)
@@ -129,7 +128,33 @@ namespace MonitoringTourSystem.Infrastructures.Implements
             return tourWithTourGuide;
         }
 
-        
+
+        public List<HelpViewModel> GetListHelp(string userName)
+        {
+            var userID = _managerServices.GetUserID(userName);
+
+            var listHelpViewModel = new List<HelpViewModel>();
+            var listHelp = (from s in _dbContextPool.GetContext().tourguide_help
+                            where s.status == HelpStatus.Opening.ToString() && s.receiver_id == userID
+                            select s).ToList();
+
+            var listTour = (from s in _dbContextPool.GetContext().tours
+                            where s.manager_id == userID
+                            select s).ToList();
+
+            for (int i = 0; i < listHelp.Count; i++)
+            {
+                for (int j = 0; j < listTour.Count; j++)
+                {
+                    if (listHelp[i].sender_id == listTour[j].tourguide_id)
+                    {
+                        listHelpViewModel.Add(new HelpViewModel() { Help = listHelp[i], TourInfo = listTour[i] });
+                    }
+                }
+            }
+            return listHelpViewModel;
+        }
+
         public List<TourIsProcessing> SearchTourGuide(string username, string id)
         {
             List<TourIsProcessing> listSearch;

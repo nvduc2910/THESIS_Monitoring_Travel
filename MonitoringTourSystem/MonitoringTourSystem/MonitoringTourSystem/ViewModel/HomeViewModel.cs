@@ -9,12 +9,11 @@ namespace MonitoringTourSystem.ViewModel
         public List<TourIsProcessing> ListTourIsProcessing { get; set; }
         public List<WarningWithReceiver> ListWarningWithReceiver { get; set; }
         public int OptionRenderView { get; set; }
-
         public int NumberOfTourProcessing { get; set; }
-
         public int NumberOfSms { get; set; }
-
         public int NumberOfHelp { get; set; }
+
+        public List<HelpViewModel> ListHelpWithTourInfo { get; set; }
     }
 
     public class TourIsProcessing
@@ -27,5 +26,11 @@ namespace MonitoringTourSystem.ViewModel
         public warning Warning { get; set; }
         public List<warning_receiver> ListWarningReceiver { get; set; }
         public int QuanityRecevied { get; set; }
+    }
+
+    public class HelpViewModel
+    {
+        public tourguide_help Help { get; set; }
+        public tour TourInfo { get; set; }
     }
 }

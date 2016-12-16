@@ -30,7 +30,6 @@ namespace MonitoringTourSystem
 
             HandleGroup(position, managerId, userId);
 
-
             if (position == "MG")
             {
                 InformManageOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
@@ -158,17 +157,23 @@ namespace MonitoringTourSystem
         {
             foreach (var connection in _connections.GetConnections(receiver))
             {
-                Clients.Client(connection).receiveLoaction(sender, latitude, longitude);
+                if (receiver.Contains("MG"))
+                {
+                    Clients.Client(connection).receiveLoaction(sender, latitude, longitude);
+
+                    var location = new Location()
+                    {
+                        lat = Convert.ToDouble(latitude),
+                        lng = Convert.ToDouble(longitude),
+                    };
+                    WriteLocationTracking(sender, location, tourId);
+
+                }
+                else if (receiver.Contains("TG"))
+                {
+                    Clients.Client(connection).receiveLoactionTourist(Convert.ToInt32(sender), latitude, longitude);
+                }
             }
-
-
-            var location = new Location()
-            {
-                lat = Convert.ToDouble(latitude),
-                lng = Convert.ToDouble(longitude),
-            };
-            WriteLocationTracking(sender, location, tourId);
-           
         }
 
 
@@ -333,7 +338,6 @@ namespace MonitoringTourSystem
             }
         }
 
-
         double GetDistanceFromLatLonInKm(double lat1, double lon1, double lat2, double lon2)
         {
             var R = 6371d; // Radius of the earth in km
@@ -353,7 +357,6 @@ namespace MonitoringTourSystem
         }
 
         #endregion
-
 
         #region TourGuide
 

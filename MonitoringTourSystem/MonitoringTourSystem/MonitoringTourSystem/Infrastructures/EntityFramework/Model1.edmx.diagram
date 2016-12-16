@@ -18,9 +18,7 @@
         <EntityTypeShape EntityType="tour_monitoring_v3Model.tracking" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="tour_monitoring_v3Model.warning" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="tour_monitoring_v3Model.warning_receiver" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.area" Width="1.5" PointX="9.375" PointY="7.75" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.notify" Width="1.5" PointX="4.75" PointY="10.5" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.tourguide_help" Width="1.5" PointX="9.375" PointY="10.75" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.tourguide_help" Width="1.5" PointX="9.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

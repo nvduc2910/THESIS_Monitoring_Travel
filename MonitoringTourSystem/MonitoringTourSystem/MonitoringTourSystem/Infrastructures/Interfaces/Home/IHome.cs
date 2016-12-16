@@ -25,5 +25,7 @@ namespace MonitoringTourSystem.Infrastructures.Interfaces.Home
         List<TourIsProcessing> SearchTourByRegion(string username, int id);
 
         JsonResult GetTourGuideInfo(int tourguideId);
+
+        List<HelpViewModel> GetListHelp(string username);
     }
 }

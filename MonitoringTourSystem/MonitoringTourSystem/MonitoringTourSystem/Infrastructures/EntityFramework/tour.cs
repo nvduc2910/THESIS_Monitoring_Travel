@@ -30,7 +30,5 @@ namespace MonitoringTourSystem.Infrastructures.EntityFramework
         public int area_id { get; set; }
 
         public List<tour_schedule> ListTourSchedule { get; set; }
-
- 
     }
 }
