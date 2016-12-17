@@ -603,7 +603,8 @@
     }
 
     // var userId;
-    var connection = $.hubConnection('http://192.168.0.106:3407');
+    var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
+    //var connection = $.hubConnection('http://192.168.1.190:3407');
     connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1', 'USER_NAME' : 'DUC NGUYEN' };
     var myHub = connection.createHubProxy('hubServer');
 
@@ -862,13 +863,13 @@
 
 </script>
 <script>
-    // For Warning POPUP GROUP
+    //FOR WARNING POPUP GROUP
     var marker1;
     var map1;
     var geocoder;
     var infowindow;
 
-    // FOR WARNING POPUP PRIVATE
+    //FOR WARNING POPUP PRIVATE
     var userID;
     var marker2;
     var map2;
@@ -887,7 +888,6 @@
     var lagfake = 0.0000000001
     var listPosition = [];
     var listInforwindow = [];
-  
 
     //FOR WARNING PROPERTY
     var Circle = null;
@@ -896,7 +896,6 @@
     var listCircle = new Array();
 
     //FOR PLACE PROPERTY
-
     var listMarkerPlace = [];
     var listInfoWindowPlace = [];
 
@@ -904,6 +903,7 @@
     var _mapPoints = new Array();
     var listMarkerRoute = [];
     var flightPath;
+
     function initAutocomplete() {
 
            directionsService = new google.maps.DirectionsService();
@@ -1460,8 +1460,6 @@
     var listMarkerHelper = new Array();
     var listInforWindowHelper = [];
 
-
-
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGdBwIy95layOTnAy1Ovp07urh0OxQrp4&libraries=places&callback=initAutocomplete" async defer></script>
@@ -1810,7 +1808,6 @@
                 ListTourId: listTourWarning
             },
             success: function (result) {
-
 
                 myHub.invoke('SendWarning', dataWarning);
 
@@ -2451,11 +2448,7 @@
             error: function (xhr) {
                 alert('error');
             }
-        });
-
-      
-
-        
+        });        
     }
 
     //FOR PLACE 
@@ -2542,8 +2535,6 @@
 
        
     }
-
-
     //FOR HELPER
     var indexMarkerHelper = -1;
 

@@ -149,7 +149,18 @@ namespace MonitoringTourSystem
         {
             foreach (var connection in _connections.GetConnections(receiver))
             {
-                Clients.Client(connection).removeUserDisconnection(senderId, sernderUserName);
+
+
+                if (senderId.Contains("TR_"))
+                {
+                    int senderIdInt = Convert.ToInt32(senderId.Replace("TR_", ""));
+                    Clients.Client(connection).removeUserDisconnection(senderIdInt, sernderUserName);
+                }
+                else
+                {
+                    Clients.Client(connection).removeUserDisconnection(senderId, sernderUserName);
+                }
+               
             }
         }
 
@@ -243,7 +254,6 @@ namespace MonitoringTourSystem
                     help_content = helpContent,
                     status = HelpStatus.Opening.ToString(),
                 };
-
                 context.tourguide_help.Add(helpRecord);
                 context.SaveChanges();
             }
@@ -362,20 +372,17 @@ namespace MonitoringTourSystem
 
         // Handle For Tourguid from Tourist
 
-        public void InitTouristConnection(string latitude, string longitude, string receiver, string touristName)
+        public void InitTouristConnection(double latitude, double longitude, string receiver, string touristName, int touristId)
         {
             foreach (var connection in _connections.GetConnections(receiver))
             {
-                Clients.Client(connection).initTouristConnected(latitude, longitude, touristName);
+                Clients.Client(connection).initTouristConnected(latitude, longitude, touristName, touristId);
             }
         }
-
-
         public void WarningForTourist(WarningTourguide warning)
         {
 
         }
-
         #endregion
 
         public void PushAlert(string userIdManager, string message)
@@ -386,8 +393,6 @@ namespace MonitoringTourSystem
                 Clients.Client(connection).pushAlert(message);
             }
         }
-
-
 
         #region Check position and add group
 
