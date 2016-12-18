@@ -186,5 +186,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="notifies">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.notify">
+        <MappingFragment StoreEntitySet="notify">
+          <ScalarProperty Name="notify_type" ColumnName="notify_type" />
+          <ScalarProperty Name="notify_title" ColumnName="notify_title" />
+          <ScalarProperty Name="time_create" ColumnName="time_create" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="notify_receiver" ColumnName="notify_receiver" />
+          <ScalarProperty Name="notify_content" ColumnName="notify_content" />
+          <ScalarProperty Name="notify_id" ColumnName="notify_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

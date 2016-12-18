@@ -37,6 +37,18 @@
           <Property Name="status" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="content" Type="text" Nullable="false" />
         </EntityType>
+        <EntityType Name="notify">
+          <Key>
+            <PropertyRef Name="notify_id" />
+          </Key>
+          <Property Name="notify_id" Type="int" Nullable="false" />
+          <Property Name="notify_content" Type="text" Nullable="false" />
+          <Property Name="notify_receiver" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="time_create" Type="date" Nullable="false" />
+          <Property Name="notify_title" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="notify_type" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="place">
           <Key>
             <PropertyRef Name="place_id" />
@@ -180,6 +192,7 @@
           <EntitySet Name="country" EntityType="Self.country" Schema="tour_monitoring_v3" store:Type="Tables" />
           <EntitySet Name="manager" EntityType="Self.manager" Schema="tour_monitoring_v3" store:Type="Tables" />
           <EntitySet Name="message" EntityType="Self.message" Schema="tour_monitoring_v3" store:Type="Tables" />
+          <EntitySet Name="notify" EntityType="Self.notify" Schema="tour_monitoring_v3" store:Type="Tables" />
           <EntitySet Name="place" EntityType="Self.place" Schema="tour_monitoring_v3" store:Type="Tables" />
           <EntitySet Name="province" EntityType="Self.province" Schema="tour_monitoring_v3" store:Type="Tables" />
           <EntitySet Name="tour" EntityType="Self.tour" Schema="tour_monitoring_v3" store:Type="Tables" />
@@ -370,6 +383,7 @@
           <EntitySet Name="warnings" EntityType="Self.warning" />
           <EntitySet Name="warning_receiver" EntityType="Self.warning_receiver" />
           <EntitySet Name="tourguide_help" EntityType="tour_monitoring_v3Model.tourguide_help" />
+          <EntitySet Name="notifies" EntityType="tour_monitoring_v3Model.notify" />
         </EntityContainer>
         <EntityType Name="tourguide_help">
           <Key>
@@ -382,6 +396,18 @@
           <Property Name="lat" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="lng" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="notify">
+          <Key>
+            <PropertyRef Name="notify_id" />
+          </Key>
+          <Property Name="notify_id" Type="Int32" Nullable="false" />
+          <Property Name="notify_content" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="notify_receiver" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="time_create" Type="DateTime" Nullable="false" />
+          <Property Name="notify_title" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="notify_type" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -571,6 +597,19 @@
                 <ScalarProperty Name="sender_id" ColumnName="sender_id" />
                 <ScalarProperty Name="help_content" ColumnName="help_content" />
                 <ScalarProperty Name="help_id" ColumnName="help_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="notifies">
+            <EntityTypeMapping TypeName="tour_monitoring_v3Model.notify">
+              <MappingFragment StoreEntitySet="notify">
+                <ScalarProperty Name="notify_type" ColumnName="notify_type" />
+                <ScalarProperty Name="notify_title" ColumnName="notify_title" />
+                <ScalarProperty Name="time_create" ColumnName="time_create" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="notify_receiver" ColumnName="notify_receiver" />
+                <ScalarProperty Name="notify_content" ColumnName="notify_content" />
+                <ScalarProperty Name="notify_id" ColumnName="notify_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -33,7 +33,9 @@ namespace MonitoringTourSystem.Controllers
             var lstTourIsProcess = homeControllerService.GetTourIsProcessing(username);
             var lstHelp = homeControllerService.GetListHelp(username);
 
-            var model = new HomeViewModel() { OptionRenderView = 1, ListTourIsProcessing = lstTourIsProcess, ListWarningWithReceiver = homeControllerService.GetInfoWarning(username), NumberOfTourProcessing = lstTourIsProcess.Count(), ListHelpWithTourInfo = lstHelp };
+            var notify = homeControllerService.GetNofity(username);
+
+            var model = new HomeViewModel() { OptionRenderView = 1, ListTourIsProcessing = lstTourIsProcess, ListWarningWithReceiver = homeControllerService.GetInfoWarning(username), NumberOfTourProcessing = lstTourIsProcess.Count(), ListHelpWithTourInfo = lstHelp, Notify = notify };
 
             return View("Index", model);
         }
@@ -169,6 +171,8 @@ namespace MonitoringTourSystem.Controllers
             return Json(jsonString, JsonRequestBehavior.AllowGet);
         }
 
+        
+
 
         [HttpPost]
         public ActionResult GetListWarningRefresh()
@@ -179,6 +183,19 @@ namespace MonitoringTourSystem.Controllers
             var model = new HomeViewModel() { OptionRenderView = 1, ListWarningWithReceiver = listWarningRefresh };
             return View("ListWarning", model);
         }
+
+        [HttpGet]
+
+        public ActionResult GetListNotify()
+        {
+            string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
+            var notify = homeControllerService.GetNofity(username);
+
+            var model = new HomeViewModel() { Notify = notify };
+
+            return View("ListNotify", model);
+        }
+
 
         
         //send waring 

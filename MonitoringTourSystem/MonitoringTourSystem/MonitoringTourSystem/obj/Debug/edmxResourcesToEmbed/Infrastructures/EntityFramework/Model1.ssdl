@@ -32,6 +32,18 @@
     <Property Name="status" Type="varchar" MaxLength="12" Nullable="false" />
     <Property Name="content" Type="text" Nullable="false" />
   </EntityType>
+  <EntityType Name="notify">
+    <Key>
+      <PropertyRef Name="notify_id" />
+    </Key>
+    <Property Name="notify_id" Type="int" Nullable="false" />
+    <Property Name="notify_content" Type="text" Nullable="false" />
+    <Property Name="notify_receiver" Type="int" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="time_create" Type="date" Nullable="false" />
+    <Property Name="notify_title" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="notify_type" Type="varchar" MaxLength="256" Nullable="false" />
+  </EntityType>
   <EntityType Name="place">
     <Key>
       <PropertyRef Name="place_id" />
@@ -175,6 +187,7 @@
     <EntitySet Name="country" EntityType="Self.country" Schema="tour_monitoring_v3" store:Type="Tables" />
     <EntitySet Name="manager" EntityType="Self.manager" Schema="tour_monitoring_v3" store:Type="Tables" />
     <EntitySet Name="message" EntityType="Self.message" Schema="tour_monitoring_v3" store:Type="Tables" />
+    <EntitySet Name="notify" EntityType="Self.notify" Schema="tour_monitoring_v3" store:Type="Tables" />
     <EntitySet Name="place" EntityType="Self.place" Schema="tour_monitoring_v3" store:Type="Tables" />
     <EntitySet Name="province" EntityType="Self.province" Schema="tour_monitoring_v3" store:Type="Tables" />
     <EntitySet Name="tour" EntityType="Self.tour" Schema="tour_monitoring_v3" store:Type="Tables" />

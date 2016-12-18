@@ -22,18 +22,18 @@
     $('#datetimepicker1').datetimepicker({
         // format: 'DD/MM/YYYY'
         locale: 'vi',
-        format: 'YYYY-MM-DD hh:mm',
+        format: 'YYYY-MM-DD HH:mm',
     });
 
     $('#datetimepicker2').datetimepicker({
         // format: 'DD/MM/YYYY'
-        format: 'YYYY-MM-DD hh:mm',
+        format: 'YYYY-MM-DD HH:mm',
         locale: 'vi',
     });
 
     $('#datetimepicker3').datetimepicker({
         //format: 'DD/MM/YYYY'
-        format: 'YYYY-MM-DD hh:mm',
+        format: 'YYYY-MM-DD HH:mm',
         locale: 'vi',
     });
 
@@ -152,12 +152,12 @@
     function yourfunction() {
         $('.datepicker_init').datetimepicker({
             //format: 'DD/MM/YYYY'
-            format: 'YYYY-MM-DD hh:mm',
+            format: 'YYYY-MM-DD HH:mm',
             locale: 'vi',
         });
         $('.datepicker_end').datetimepicker({
             //format: 'DD/MM/YYYY'
-            format: 'YYYY-MM-DD hh:mm',
+            format: 'YYYY-MM-DD HH:mm',
             locale: 'vi',
         });
     }

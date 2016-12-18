@@ -271,6 +271,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructures\EntityFramework\notify.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructures\EntityFramework\place.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -316,7 +319,9 @@
     <Compile Include="Models\HelpStatus.cs" />
     <Compile Include="Models\HomeOptionModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\NotifyType.cs" />
     <Compile Include="Models\Province.cs" />
+    <Compile Include="Models\StatusNotify.cs" />
     <Compile Include="Models\StatusTour.cs" />
     <Compile Include="Models\StatusWarning.cs" />
     <Compile Include="Models\Warning.cs" />
@@ -615,6 +620,7 @@
     <Content Include="Views\HistoryTour\ListTourVietNam.cshtml" />
     <Content Include="Views\HistoryTour\ScheduleTourTimeline.cshtml" />
     <Content Include="Views\Home\ListHelp.cshtml" />
+    <Content Include="Views\Home\ListNotify.cshtml" />
     <None Include="Views\Tracking\index.cshtml" />
     <Content Include="Views\Tracking\simple.html" />
     <Content Include="Web.config">

@@ -203,6 +203,11 @@ namespace MonitoringTourSystem
             }
         }
 
+
+        public void InsertNofity(notify notifyItem)
+        {
+
+        }
         public void SendWarningForUser(Warning obj, int receiverId)
         {
 

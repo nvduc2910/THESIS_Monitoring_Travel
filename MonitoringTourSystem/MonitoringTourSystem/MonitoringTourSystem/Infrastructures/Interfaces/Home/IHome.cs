@@ -27,5 +27,7 @@ namespace MonitoringTourSystem.Infrastructures.Interfaces.Home
         JsonResult GetTourGuideInfo(int tourguideId);
 
         List<HelpViewModel> GetListHelp(string username);
+
+        NotifyViewModel GetNofity(string userName);
     }
 }

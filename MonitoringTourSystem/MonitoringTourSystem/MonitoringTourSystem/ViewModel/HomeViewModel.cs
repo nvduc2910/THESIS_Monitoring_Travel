@@ -13,6 +13,8 @@ namespace MonitoringTourSystem.ViewModel
         public int NumberOfSms { get; set; }
         public int NumberOfHelp { get; set; }
 
+        public NotifyViewModel Notify { get; set; }
+
         public List<HelpViewModel> ListHelpWithTourInfo { get; set; }
     }
 
@@ -32,5 +34,11 @@ namespace MonitoringTourSystem.ViewModel
     {
         public tourguide_help Help { get; set; }
         public tour TourInfo { get; set; }
+    }
+
+    public class NotifyViewModel
+    {
+        public List<notify> Notify { get; set; }
+        public int CountNewNotify { get; set; }
     }
 }

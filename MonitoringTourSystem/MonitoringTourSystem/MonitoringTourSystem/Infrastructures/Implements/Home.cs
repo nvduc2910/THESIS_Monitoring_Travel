@@ -344,5 +344,18 @@ namespace MonitoringTourSystem.Infrastructures.Implements
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public NotifyViewModel GetNofity(string userName)
+        {
+            var userId = _managerServices.GetUserID(userName);
+            var notify = (from x in _dbContextPool.GetContext().notifies
+                          where x.notify_receiver == userId
+                          select x).ToList();
+
+            var newNotify = notify.Where(x => x.status == StatusNotify.New.ToString()).ToList().Count;
+            var notifyViewModel = new NotifyViewModel() { Notify = notify, CountNewNotify = newNotify };
+
+            return notifyViewModel;
+        }
     }
 }

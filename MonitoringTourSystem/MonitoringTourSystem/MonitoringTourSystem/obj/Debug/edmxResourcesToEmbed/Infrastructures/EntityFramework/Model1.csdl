@@ -174,6 +174,7 @@
     <EntitySet Name="warnings" EntityType="Self.warning" />
     <EntitySet Name="warning_receiver" EntityType="Self.warning_receiver" />
     <EntitySet Name="tourguide_help" EntityType="tour_monitoring_v3Model.tourguide_help" />
+    <EntitySet Name="notifies" EntityType="tour_monitoring_v3Model.notify" />
   </EntityContainer>
   <EntityType Name="tourguide_help">
     <Key>
@@ -186,5 +187,17 @@
     <Property Name="lat" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
     <Property Name="lng" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="notify">
+    <Key>
+      <PropertyRef Name="notify_id" />
+    </Key>
+    <Property Name="notify_id" Type="Int32" Nullable="false" />
+    <Property Name="notify_content" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="notify_receiver" Type="Int32" Nullable="false" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="time_create" Type="DateTime" Nullable="false" />
+    <Property Name="notify_title" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="notify_type" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

@@ -1,0 +1,54 @@
+﻿@model MonitoringTourSystem.ViewModel.HomeViewModel
+
+@{
+    if (Model == null || Model.Notify == null || Model.Notify.Notify.Count == 0)
+    {
+
+    }
+    else
+    {
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <span class="top-label label label-warning">@Model.Notify.CountNewNotify</span>  <i class="fa fa-bell fa-1x"></i>
+        </a>
+        <ul id="div-alert" class="dropdown-menu dropdown-alerts">
+           @foreach (var item in Model.Notify.Notify)
+           {
+                <li>
+                    <a href="#">
+                        <div>
+                            @if (@item.notify_type == "Connected")
+                            {
+                                <strong><span class="label label-success">@item.notify_title</span></strong>
+                            }
+                            else if (@item.notify_type == "Disconnected")
+                            {
+                                <strong><span class="label label-warningr">@item.notify_title</span></strong>
+                            }
+                            else if (@item.notify_type == "ConfirmWarning")
+                            {
+                                <strong><span class="label label-info">@item.notify_title</span></strong>
+                            }
+                            else if (@item.notify_type == "NeedHelp")
+                            {
+                                <strong><span class="label label-danger">@item.notify_title</span></strong>
+                            }
+                            <span class="pull-right text-muted">
+                                <em>(@DateTime.Now - @item.time_create)</em>
+                            </span>
+                        </div>
+                        <div>@item.notify_content</div>
+                    </a>
+                </li>
+                <li class="divider"></li>
+           }
+            <li>
+                <a class="text-center" href="#">
+                    <strong>Xem tất cả thông báo</strong>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+            
+        </ul>
+    }
+}
+
