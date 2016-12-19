@@ -132,25 +132,20 @@ namespace MonitoringTourSystem.Infrastructures.Implements
         public List<HelpViewModel> GetListHelp(string userName)
         {
             var userID = _managerServices.GetUserID(userName);
-
             var listHelpViewModel = new List<HelpViewModel>();
+
             var listHelp = (from s in _dbContextPool.GetContext().tourguide_help
                             where s.status == HelpStatus.Opening.ToString() && s.receiver_id == userID
                             select s).ToList();
 
             var listTour = (from s in _dbContextPool.GetContext().tours
-                            where s.manager_id == userID
+                            where s.manager_id == userID && s.status == StatusTour.Running.ToString()
                             select s).ToList();
 
-            for (int i = 0; i < listHelp.Count; i++)
+            foreach (var item in listHelp)
             {
-                for (int j = 0; j < listTour.Count; j++)
-                {
-                    if (listHelp[i].sender_id == listTour[j].tourguide_id)
-                    {
-                        listHelpViewModel.Add(new HelpViewModel() { Help = listHelp[i], TourInfo = listTour[i] });
-                    }
-                }
+                var tour = listTour.Where(x => x.tourguide_id == item.sender_id).FirstOrDefault();
+                listHelpViewModel.Add(new HelpViewModel() { Help = item, TourInfo = tour });
             }
             return listHelpViewModel;
         }

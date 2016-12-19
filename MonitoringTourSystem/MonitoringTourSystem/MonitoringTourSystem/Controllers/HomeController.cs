@@ -32,11 +32,8 @@ namespace MonitoringTourSystem.Controllers
             string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
             var lstTourIsProcess = homeControllerService.GetTourIsProcessing(username);
             var lstHelp = homeControllerService.GetListHelp(username);
-
             var notify = homeControllerService.GetNofity(username);
-
             var model = new HomeViewModel() { OptionRenderView = 1, ListTourIsProcessing = lstTourIsProcess, ListWarningWithReceiver = homeControllerService.GetInfoWarning(username), NumberOfTourProcessing = lstTourIsProcess.Count(), ListHelpWithTourInfo = lstHelp, Notify = notify };
-
             return View("Index", model);
         }
 
@@ -99,7 +96,6 @@ namespace MonitoringTourSystem.Controllers
         }
 
         #endregion
-
 
         #region Select marker tourguide
         [HttpGet]
@@ -171,9 +167,6 @@ namespace MonitoringTourSystem.Controllers
             return Json(jsonString, JsonRequestBehavior.AllowGet);
         }
 
-        
-
-
         [HttpPost]
         public ActionResult GetListWarningRefresh()
         {
@@ -196,8 +189,6 @@ namespace MonitoringTourSystem.Controllers
             return View("ListNotify", model);
         }
 
-
-        
         //send waring 
         public JsonResult SendWarning(Warning obj)
         {
@@ -244,13 +235,11 @@ namespace MonitoringTourSystem.Controllers
         }
 
         [HttpGet]
-
         public JsonResult CreateMarkerPlace()
         {
             string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
             return homeControllerService.CreateMarkerPlace(username);
         }
-
 
         [HttpGet]
         public JsonResult GetPointLocation(string id)
@@ -261,7 +250,6 @@ namespace MonitoringTourSystem.Controllers
         }
 
         [HttpGet]
-
         public JsonResult GetTourguideInfo(int id)
         {
             return homeControllerService.GetTourGuideInfo(id);

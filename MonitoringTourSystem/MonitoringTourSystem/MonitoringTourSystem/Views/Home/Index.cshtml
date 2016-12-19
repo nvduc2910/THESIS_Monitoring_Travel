@@ -310,13 +310,12 @@
                     <div class="col-sm-3" style="height:100%; ">
                         <div style="width:100%; background-color: white; height: 100%; ">
                             <div class="container-tabbar" style="width:100%; height:100%;">
-
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a data-toggle="tab" href="#home">Tour</a></li>
-                                    <li><a data-toggle="tab" href="#menu1">Cảnh báo</a></li>
-                                    <li><a data-toggle="tab" href="#menu2">Trợ giúp</a></li>
+                                    <li><a data-toggle="tab" href="#menu1">Warning</a></li>
+                                    <li><a data-toggle="tab" href="#menu2">Help</a></li>
                                 </ul>
-                                <div class="tab-content" style="border-radius: 3px; border-left: 1px solid #EAEBED; border-right: 1px solid #EAEBED; border-bottom: 1px solid #EAEBED; margin-top: -11px; height: 83%;">
+                                <div class="tab-content" style="border-radius: 3px; border-left: 1px solid #EAEBED; border-right: 1px solid #EAEBED; border-bottom: 1px solid #EAEBED; margin-top: -11px; height: 91.5%;">
                                     <div id="home" class="tab-pane fade in active" style="padding-left: 10px; padding-right: 10px; padding-top: 10px; margin-top: 10px; height: 100%;">
                                         <div id="searchform" style="height: 100%;">
                                             <div class="input-group">
@@ -333,11 +332,11 @@
                                                 </select>
                                             </div>
                                             <div id="DemoAjaxClick" class="alert alert-success" style="margin-top: 10px;">
-                                                Tour Ngày 21.11.2016
+                                                Tour Ngày @DateTime.Now.ToString("yyyy/mm/dd")
                                             </div>
                                             <div id="list-tour" style="height: 65% ; overflow-y: auto">
                                                 @{
-                                                Html.RenderPartial("ListTourGuide", Model);
+                                                    Html.RenderPartial("ListTourGuide", Model);
                                                 }
                                             </div>
                                         </div>
@@ -357,7 +356,7 @@
                                         <div class="alert alert-success" style="margin-top: 10px;">
                                             Danh sách Trợ giúp
                                         </div>
-                                        <div id="list-warning-reciver" style="height: 84% ; overflow-y: auto">
+                                        <div id="list-help" style="height: 75% ; overflow-y: auto">
                                             @{
                                                 Html.RenderPartial("ListHelp", Model);
 
@@ -583,8 +582,8 @@
     }
 
     // var userId;
-    var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
-    //var connection = $.hubConnection('http://192.168.1.190:3407');
+    //var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
+    var connection = $.hubConnection('http://192.168.0.105:3407');
 
     connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1', 'USER_NAME' : 'DUC NGUYEN' };
     var myHub = connection.createHubProxy('hubServer');
@@ -603,7 +602,7 @@
         notify(tourguideName, "Has just connected to system", tourDetail);
 
         // insert notify to database
-        insertNotify("1", tourguideName + "Has just connected to system", tourguideName, "Connected", "New");
+       // insertNotify("1", tourguideName + "Has just connected to system", tourguideName, "Connected", "New");
 
         var pinImage = {
             url: '/Content/Images/ic_markerProfile.png', // image is 512 x 512
@@ -725,13 +724,20 @@
                     var tourguidePhone = this['phone'];
                     var avatar = "/Content/Images/" + this['display_photo'];              
                     var latlng = new google.maps.LatLng(lat, long);
-
                     drawMarkerHelper(tourguideId, latlng, avatar, "/Content/Images/ic_marke_help.png", tourguideName, tourguidePhone, "Tro Giup", helpContent);
-
+                    
                     panTo(lat, long);
 
-                    numberOfHelp = numberOfHelp + 1;
+                    for(i = 0; i < listMarker.length; i++)
+                    {
+                        if (listMarker[i].tourguiderid == tourguideId)
+                        {
+                            listMarker[i].setMap(null);
+                            break;
+                        }
+                    }
 
+                    numberOfHelp = numberOfHelp + 1;
                     $("#numberOfHelp").text(numberOfHelp);
 
                 });
@@ -742,47 +748,26 @@
         });
     });
 
-    function confirmHelp()
+    function confirmHelp(tourguideId)
     {
         numberOfHelp = numberOfHelp - 1;
         $("#numberOfHelp").text(numberOfHelp);
-    }
-    
-    function TestHelpMarker()
-    {
-        $.ajax({
-            url: "/Home/GetTourguideInfo/2",
-            type: "GET",
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            async: true,
-            processData: false,
-            cache: false,
-            success: function (result) {
-                var results = $.parseJSON(result);
-                $(results).each(function (index, value) {
-
-                    var tourguideName = this['tourguide_name'];
-                    var tourguidePhone = this['phone'];
-                    var avatar = "/Content/Images/" + this['display_photo'];  
-
-                    var latlng = new google.maps.LatLng("1.352083", "103.819836");
-
-                    drawMarkerHelper(2, latlng, avatar, "/Content/Images/ic_marke_help.png", tourguideName, tourguidePhone, "TRO GIUP", "To make a search, use the name of a place, city, state, or address, or click the location on the map to find lat long coordinates.");
-
-                    //panTo(lat, long);
-
-                    numberOfHelp = numberOfHelp + 1;
-                    $("#numberOfHelp").text(numberOfHelp);
-                    
-                });
-            },
-            error: function (xhr) {
-                alert('GET TOURGUIDE INFO ERROR');
+        
+        for (i = 0 ; i < listMarkerHelper.length; i++) {
+            if (listMarkerHelper[i].tourguiderid == tourguideId)
+            {
+                listMarkerHelper[i].setMap(null);
             }
-        });
-    }
+        }
 
+        for (j = 0; j < listMarker.length; j++) {
+            if (listMarker[j].tourguiderid == tourguideId) {
+                listMarker[j].setMap(map);
+                break;
+            }
+        }
+    }
+   
     // start connection
     connection.start().done(function () {
        // doing after connected
@@ -1366,8 +1351,6 @@
         setTimeout(function () {
             loadMarkerPlace();
         }, 1000);
-       
-        TestHelpMarker();
     }
     function addMarkerWarning(distance, lat, long)
     {
@@ -2530,7 +2513,7 @@
                     '</div>' +
                     '</div>' +
                     '<div style="height: 10%; margin-top: 10px;">' +
-                    '<a style="float: right" href="#" onClick="confirmHelp();">Xác nhận</a>'
+                    '<a style="float: right" href="#" onClick="confirmHelp(' + tourguideID + ');">Xác nhận</a>'
                     '</div>' +
                     '</div>';
 

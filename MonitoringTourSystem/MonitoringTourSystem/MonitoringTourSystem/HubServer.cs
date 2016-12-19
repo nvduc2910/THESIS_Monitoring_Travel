@@ -120,25 +120,8 @@ namespace MonitoringTourSystem
         }
 
         #region Manager
-        // Handle For Manager From Touguide
-        //public void InitMarkerNewConection(string latitude, string longitude, string receiver, tourguide tourguide, tour tour)
-        //{
-
-        //    var jsonTourguideInfo = JsonConvert.SerializeObject(tourguide);
-        //    var jsonTourInfo = JsonConvert.SerializeObject(tour);
-
-        //    foreach (var connection in _connections.GetConnections(receiver))
-        //    {
-        //        Clients.Client(connection).locationForAddMarker(latitude, longitude, jsonTourguideInfo, jsonTourInfo);
-        //    }
-        //}
-
-
         public void InitMarkerNewConection(string latitude, string longitude, string receiver, string tourguideId, string tourguideName, string tourId)
         {
-
-            //var jsonTourguideInfo = JsonConvert.SerializeObject(tourguide);
-            //var jsonTourInfo = JsonConvert.SerializeObject(tour);
             foreach (var connection in _connections.GetConnections(receiver))
             {
                 Clients.Client(connection).locationForAddMarker(latitude, longitude, tourguideId, tourguideName,tourId);
@@ -149,8 +132,6 @@ namespace MonitoringTourSystem
         {
             foreach (var connection in _connections.GetConnections(receiver))
             {
-
-
                 if (senderId.Contains("TR_"))
                 {
                     int senderIdInt = Convert.ToInt32(senderId.Replace("TR_", ""));
@@ -159,8 +140,7 @@ namespace MonitoringTourSystem
                 else
                 {
                     Clients.Client(connection).removeUserDisconnection(senderId, sernderUserName);
-                }
-               
+                }   
             }
         }
 
@@ -187,7 +167,6 @@ namespace MonitoringTourSystem
             }
         }
 
-
         public void SendWarning(Warning obj)
         {
             var id = _dbContextPool.GetContext().warnings.Max(x => x.warning_id);
@@ -198,7 +177,7 @@ namespace MonitoringTourSystem
             {
                 foreach (var connection in _connections.GetConnections(obj.ListTourGuideId[i]))
                 {
-                    Clients.Client(connection).receiverWarning(obj);
+                    Clients.Client(connection).receiveWarning(obj);
                 }
             }
         }
@@ -216,7 +195,7 @@ namespace MonitoringTourSystem
             var receveriIdStr = "TG_" + receiverId.ToString();
             foreach (var connection in _connections.GetConnections(receveriIdStr))
             {
-                Clients.Client(connection).receiverWarning(obj);
+                Clients.Client(connection).receiveWarning(obj);
             }
         }
 
@@ -384,12 +363,40 @@ namespace MonitoringTourSystem
                 Clients.Client(connection).initTouristConnected(latitude, longitude, touristName, touristId);
             }
         }
-        public void WarningForTourist(WarningTourguide warning)
+        public void WarningForTourist(int sender, double latitude, double longitude, string warningContent)
         {
-
+            var groupName = RoomNameDefine.GROUP_NAME_TOURGUIDE + "TG_" + sender;
+            Clients.Group(groupName).receiveTourguideWarning(sender, latitude, longitude, warningContent);
         }
-        #endregion
 
+
+        public void TouristNeedHelp(int touristId, double latitude, double longitude, string helpContent, string receiver)
+        {
+            foreach (var connection in _connections.GetConnections(receiver))
+            {
+                Clients.Client(connection).receiveTouristHelp(touristId, latitude, longitude, helpContent);
+            }
+            //using (var context = new monitoring_tour_v3Entities())
+            //{
+
+            //    var receiverId = Convert.ToInt32(receiver.Replace("MG_", string.Empty));
+
+            //    //var helpRecord = new tourguide_help()
+            //    //{
+            //    //    sender_id = touristId,
+            //    //    receiver_id = receiverId,
+            //    //    lat = latitude,
+            //    //    lng = longitude,
+            //    //    help_content = helpContent,
+            //    //    status = HelpStatus.Opening.ToString(),
+            //    //};
+            //    //context.tourguide_help.Add(helpRecord);
+            //    //context.SaveChanges();
+            //}
+        }
+
+        #endregion
+    
         public void PushAlert(string userIdManager, string message)
         {
             
