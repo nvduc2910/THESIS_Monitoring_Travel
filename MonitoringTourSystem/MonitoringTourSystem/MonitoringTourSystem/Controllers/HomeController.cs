@@ -254,6 +254,13 @@ namespace MonitoringTourSystem.Controllers
         {
             return homeControllerService.GetTourGuideInfo(id);
         }
+
+        [HttpGet]
+        public JsonResult ReadNotify()
+        {
+            string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
+            return homeControllerService.ReadNotify(username);
+        }
         #endregion
     }
 }

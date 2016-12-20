@@ -162,7 +162,7 @@
                         <!-- end dropdown-tasks -->
                     </li>
 
-                    <li class="dropdown" id="notify-block">
+                    <li class="dropdown" id="notify-block" onclick="readNotify();">
                         @{
                             Html.RenderPartial("ListNotify", Model);
                         }
@@ -582,8 +582,8 @@
     }
 
     // var userId;
-    var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
-    //var connection = $.hubConnection('http://192.168.0.105:3407');
+   // var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
+    var connection = $.hubConnection('http://192.168.0.105:3407');
 
     connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1', 'USER_NAME' : 'DUC NGUYEN' };
     var myHub = connection.createHubProxy('hubServer');
@@ -597,12 +597,13 @@
     myHub.on('locationForAddMarker', function (latitude, longitude, tourguideId, tourguideName, tourId) {
 
         var tourDetail = '/TourDetail/GetDetailTour/' + tourId;
-        
-        //show on screen
-        notify(tourguideName, "Has just connected to system", tourDetail);
 
+        //show on screen
+        notify(tourguideName, "đã kết nối vào hệ thống", tourDetail);
         // insert notify to database
-       // insertNotify("1", tourguideName + "Has just connected to system", tourguideName, "Connected", "New");
+
+       
+        insertNotify("1", tourguideName + " - Đã kết nối vào hệ thống", "Kết Nối", "Connected", "New");
 
         var pinImage = {
             url: '/Content/Images/ic_markerProfile.png', // image is 512 x 512
@@ -613,7 +614,6 @@
 
             if (listMarker[i].tourguiderid == tourguideId) {
 
-               
                 listMarker[i].isActive = "True";
                 updateMarker(i, listMarker[i].avatarProfile, "/Content/Images/ic_markerProfile.png")
                 break;
@@ -636,12 +636,12 @@
        
         $.notify({
             title: '<strong>' +userName + '</strong>',
-            message: 'Have just disconnected'
+            message: 'Đã ngắt kết nối'
         }, {
             type: 'danger'
         })
 
-
+        insertNotify("1", userName + " - Đã ngắt kết nối", "Ngắt kết nối", "Disconnected", "New");
 
         var userIdReplace = userId.replace("TG_", "");
 
@@ -653,7 +653,6 @@
         for (i = 0; i < listMarker.length; i++) {
 
             if (listMarker[i].tourguiderid == userIdReplace) {
-
 
                 listMarker[i].isActive = "True";
                 updateMarker(i, listMarker[i].avatarProfile, "/Content/Images/ic_markerOffline.png")
@@ -702,6 +701,9 @@
             message: tourguideName + " - Đã xác nhận cảnh báo: " + warningName,
             url: "#"
         });
+
+        insertNotify("1", tourguideName + " - Đã xác nhận cảnh báo " + warningName, "Xác nhận cảnh báo", "ConfirmWarning", "New");
+
         getListWarning();
     });
 
@@ -772,6 +774,7 @@
     connection.start().done(function () {
        // doing after connected
     });
+
     // For add marker tourguide first connect
     function notify(user, message, url)
     {
@@ -793,6 +796,29 @@
             notify_type: notifyType,
         };
         myHub.invoke('InsertNofity', dataNotify);
+    }
+
+    function readNotify()
+    {
+        $.ajax({
+            url: "/Home/ReadNotify",
+            type: "GET",
+
+        })
+       .done(function (partialViewResult) {
+           getListNotify();
+       });
+    }
+
+    function getListNotify() {
+        $.ajax({
+            url: "/Home/GetListNotify",
+            type: "GET",
+
+        })
+        .done(function (partialViewResult) {
+            $("#notify-block").html(partialViewResult);
+        });
     }
 
 </script>
@@ -1687,7 +1713,7 @@
         if (distance == null || distance == "")
         {
             distance = 0;
-            warningName = "CẢNH BÁO TOÀN BỘ: " + warningName;
+            warningName = "TOÀN BỘ: " + warningName;
         }
         if (descriptionWarning == null || descriptionWarning == "")
         {
@@ -1777,16 +1803,7 @@
         });
     }
 
-    function getListNotify() {
-        $.ajax({
-            url: "/Home/GetListNotify",
-            type: "GET",
-
-        })
-        .done(function (partialViewResult) {
-            $("#notify-block").html(partialViewResult);
-        });
-    }
+   
 
 
     function loadMarkerWarning()

@@ -29,5 +29,7 @@ namespace MonitoringTourSystem.Infrastructures.Interfaces.Home
         List<HelpViewModel> GetListHelp(string username);
 
         NotifyViewModel GetNofity(string userName);
+
+        JsonResult ReadNotify(string userName);
     }
 }

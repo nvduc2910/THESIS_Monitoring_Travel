@@ -185,7 +185,11 @@ namespace MonitoringTourSystem
 
         public void InsertNofity(notify notifyItem)
         {
-
+            using (var context = new monitoring_tour_v3Entities())
+            {
+                context.notifies.Add(notifyItem);
+                context.SaveChanges();
+            }
         }
         public void SendWarningForUser(Warning obj, int receiverId)
         {

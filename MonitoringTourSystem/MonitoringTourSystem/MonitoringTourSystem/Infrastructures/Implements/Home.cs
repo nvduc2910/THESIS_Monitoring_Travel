@@ -349,8 +349,37 @@ namespace MonitoringTourSystem.Infrastructures.Implements
 
             var newNotify = notify.Where(x => x.status == StatusNotify.New.ToString()).ToList().Count;
             var notifyViewModel = new NotifyViewModel() { Notify = notify, CountNewNotify = newNotify };
-
             return notifyViewModel;
+        }
+
+        public JsonResult ReadNotify(string userName)
+        {
+            try
+            {
+                var userId = _managerServices.GetUserID(userName);
+
+                using (var context = new monitoring_tour_v3Entities())
+                {
+                    var notify = (from x in context.notifies
+                                  where x.notify_receiver == userId
+                                  select x).ToList();
+
+                    var status = StatusNotify.Seen.ToString();
+                    notify.ForEach(x => x.status = status );
+
+                    context.SaveChanges();
+
+                }
+                var result = new { Success = true, Message = "Read All" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                var result = new { Success = false, Message = "UnRead" };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+
         }
     }
 }
