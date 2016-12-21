@@ -107,12 +107,12 @@ namespace MonitoringTourSystem
 
                     if (groupName.Contains(RoomNameDefine.GROUP_NAME_TOURGUIDE))
                     {
-                        var numberOfOnline = (_groups._groups[i].ConnectionId.Count - 1).ToString();
+                        var numberOfOnline = (_groups._groups[i].UserConnection.Count - 1).ToString();
                         Clients.Group(groupName).updateNumberOfOnline(groupName, numberOfOnline);
                     }
                     else
                     {
-                        var numberOfOnline =( _groups._groups[i].ConnectionId.Count).ToString();
+                        var numberOfOnline =( _groups._groups[i].UserConnection.Count).ToString();
                         Clients.Group(groupName).updateNumberOfOnline(groupName, numberOfOnline);
                     }
                 }
@@ -183,11 +183,21 @@ namespace MonitoringTourSystem
         }
 
 
-        public void InsertNofity(notify notifyItem)
+        public void InsertNofity( string notify_content, int notify_receiver, string notify_title, string notify_type)
         {
             using (var context = new monitoring_tour_v3Entities())
             {
-                context.notifies.Add(notifyItem);
+                var item = new notify()
+                {
+                    notify_content = notify_content,
+                    notify_receiver = notify_receiver,
+                    notify_title = notify_title,
+                    notify_type = notify_type,
+                    time_create = DateTime.Now,
+                    status = "New",
+                };
+
+                context.notifies.Add(item);
                 context.SaveChanges();
             }
         }
@@ -371,9 +381,54 @@ namespace MonitoringTourSystem
         {
             var groupName = RoomNameDefine.GROUP_NAME_TOURGUIDE + "TG_" + sender;
             Clients.Group(groupName).receiveTourguideWarning(sender, latitude, longitude, warningContent);
+
+            using (var context = new monitoring_tour_v3Entities())
+            {
+                //insert warning tourguide for tourist
+                var itemWarning = new warning_tourist()
+                {
+                    warning_content = warningContent,
+                    lat = latitude,
+                    lng = longitude,
+                    status = StatusWarning.Opening.ToString(),
+                };
+
+                context.warning_tourist.Add(itemWarning);
+                context.SaveChanges();
+
+
+                //insert warning recevier
+                var listConnectIdTourist = new List<Connection>();
+                for (int i = 0; i < _groups._groups.Count; i++)
+                {
+                    if (_groups._groups[i].GroupName == RoomNameDefine.GROUP_NAME_TOURGUIDE + "TG_" + sender)
+                    {
+                        listConnectIdTourist = _groups._groups[i].UserConnection;
+                        break;
+                    }
+                }
+
+                int warningId = context.warning_tourist.Max(p => p.warning_id);
+
+                for (int j = 0; j < listConnectIdTourist.Count; j++)
+                {
+                    if (listConnectIdTourist[j].UserId.Contains("TR_"))
+                    {
+                        var itemWarningTouristReceiver = new warning_tourist_receiver()
+                        {
+                            sender_id = sender,
+                            receiver_id = Convert.ToInt32(listConnectIdTourist[j].UserId.Replace("TR_", "")),
+                            warning_id = warningId,
+                            status = StatusWarning.Opening.ToString()
+                        };
+                        context.warning_tourist_receiver.Add(itemWarningTouristReceiver);
+                    }
+                }
+                context.SaveChanges();
+            }
         }
 
-
+ 
         public void TouristNeedHelp(int touristId, double latitude, double longitude, string helpContent, string receiver)
         {
             foreach (var connection in _connections.GetConnections(receiver))
@@ -425,11 +480,11 @@ namespace MonitoringTourSystem
             else if (userPosition == "TG")
             {
                 Groups.Add(Context.ConnectionId, RoomNameDefine.GROUP_NAME_MANAGER + managerId);
-                _groups.Add(RoomNameDefine.GROUP_NAME_MANAGER + managerId, Context.ConnectionId);
+                _groups.Add(RoomNameDefine.GROUP_NAME_MANAGER + managerId, Context.ConnectionId, userId);
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + managerId);
 
                 Groups.Add(Context.ConnectionId, RoomNameDefine.GROUP_NAME_TOURGUIDE + userId);
-                _groups.Add(RoomNameDefine.GROUP_NAME_TOURGUIDE + userId, Context.ConnectionId);
+                _groups.Add(RoomNameDefine.GROUP_NAME_TOURGUIDE + userId, Context.ConnectionId, userId);
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_TOURGUIDE + userId);
 
                 _connections.Add(userId, Context.ConnectionId);
@@ -438,7 +493,7 @@ namespace MonitoringTourSystem
             {
                 Groups.Add(Context.ConnectionId, RoomNameDefine.GROUP_NAME_TOURGUIDE + managerId);
                 _connections.Add(userId, Context.ConnectionId);
-                _groups.Add(RoomNameDefine.GROUP_NAME_TOURGUIDE + managerId, Context.ConnectionId);
+                _groups.Add(RoomNameDefine.GROUP_NAME_TOURGUIDE + managerId, Context.ConnectionId, userId);
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_TOURGUIDE + managerId);
             }
         }
@@ -452,17 +507,17 @@ namespace MonitoringTourSystem
             {
                // Groups.Add(Context.ConnectionId, RoomNameDefine.GROUP_NAME_MANAGER + userId);
                 _connections.Remove(userId, Context.ConnectionId);
-                _groups.Remove(RoomNameDefine.GROUP_NAME_MANAGER + userId, Context.ConnectionId);
+                _groups.Remove(RoomNameDefine.GROUP_NAME_MANAGER + userId, Context.ConnectionId, userId);
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
             }
             else if (userPosition == "TG")
             {
                 //Groups.Add(Context.ConnectionId, RoomNameDefine.GROUP_NAME_MANAGER + managerId);
-                _groups.Remove(RoomNameDefine.GROUP_NAME_MANAGER + managerId, Context.ConnectionId);
+                _groups.Remove(RoomNameDefine.GROUP_NAME_MANAGER + managerId, Context.ConnectionId, userId);
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + managerId);
 
                 //Groups.Add(Context.ConnectionId, RoomNameDefine.GROUP_NAME_TOURGUIDE + userId);
-                _groups.Remove(RoomNameDefine.GROUP_NAME_TOURGUIDE + userId, Context.ConnectionId);
+                _groups.Remove(RoomNameDefine.GROUP_NAME_TOURGUIDE + userId, Context.ConnectionId, userId);
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_TOURGUIDE + userId);
 
                 _connections.Remove(userId, Context.ConnectionId);
@@ -471,7 +526,7 @@ namespace MonitoringTourSystem
             {
                // Groups.Add(Context.ConnectionId, RoomNameDefine.GROUP_NAME_TOURGUIDE + managerId);
                 _connections.Remove(userId, Context.ConnectionId);
-                _groups.Remove(RoomNameDefine.GROUP_NAME_TOURGUIDE + managerId, Context.ConnectionId);
+                _groups.Remove(RoomNameDefine.GROUP_NAME_TOURGUIDE + managerId, Context.ConnectionId, userId);
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_TOURGUIDE + managerId);
             }
         }

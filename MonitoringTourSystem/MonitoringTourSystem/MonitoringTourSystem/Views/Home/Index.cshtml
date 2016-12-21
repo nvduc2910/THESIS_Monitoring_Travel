@@ -582,8 +582,8 @@
     }
 
     // var userId;
-    var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
-   // var connection = $.hubConnection('http://192.168.0.105:3407');
+    //var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
+    var connection = $.hubConnection('http://192.168.0.105:3407');
 
     connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1', 'USER_NAME' : 'DUC NGUYEN' };
     var myHub = connection.createHubProxy('hubServer');
@@ -603,7 +603,7 @@
         // insert notify to database
 
        
-        insertNotify("1", tourguideName + " - Đã kết nối vào hệ thống", "Kết Nối", "Connected", "New");
+        insertNotify(1, tourguideName + " - Đã kết nối vào hệ thống", "Kết Nối", "Connected", "New");
 
         var pinImage = {
             url: '/Content/Images/ic_markerProfile.png', // image is 512 x 512
@@ -641,7 +641,7 @@
             type: 'danger'
         })
 
-        insertNotify("1", userName + " - Đã ngắt kết nối", "Ngắt kết nối", "Disconnected", "New");
+        insertNotify(1, userName + " - Đã ngắt kết nối", "Ngắt kết nối", "Disconnected", "New");
 
         var userIdReplace = userId.replace("TG_", "");
 
@@ -702,7 +702,7 @@
             url: "#"
         });
 
-        insertNotify("1", tourguideName + " - Đã xác nhận cảnh báo " + warningName, "Xác nhận cảnh báo", "ConfirmWarning", "New");
+        insertNotify(1, tourguideName + " - Đã xác nhận cảnh báo " + warningName, "Xác nhận cảnh báo", "ConfirmWarning", "New");
 
         getListWarning();
     });
@@ -795,7 +795,13 @@
             notify_title: notifyTitle,
             notify_type: notifyType,
         };
-        myHub.invoke('InsertNofity', dataNotify);
+        myHub.invoke('InsertNofity', notifyContent, notifyReceiver, notifyTitle, notifyType).done(function () {
+            getListNotify();
+        }).fail(function (error) {
+            console.log('Invocation of InsertNofity failed. Error: ' + error);
+        });;
+        
+       
     }
 
     function readNotify()
@@ -1960,6 +1966,7 @@
         }
 
         var dataSend = {
+
             WarningId: 0,
             Lat: latSendWarningPrivate,
             Long: longSendWarningPrivate,
@@ -1967,10 +1974,7 @@
             DescriptionWarning: descriptionWarning,
             CategoryWarnig: categories,
             Distance: distance
-           
         }
-
-       
 
         $.ajax({
             url: "/Home/SendWraningForUser/" + userID,
@@ -1986,9 +1990,6 @@
                 
             },
             success: function (result) {
-
-                
-
                 var message = result.Message;
                 var success = result.Success;
                 if (success == false) {

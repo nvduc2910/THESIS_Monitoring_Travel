@@ -10,7 +10,7 @@ namespace MonitoringTourSystem.RealTimeServer.BaseMappingConnection
     {
         public readonly  List<RoomChat> _groups = new List<RoomChat>();
 
-        public void Add(string key, string connectionId)
+        public void Add(string key, string connectionId, string userId)
         {
 
             lock (_groups)
@@ -19,15 +19,15 @@ namespace MonitoringTourSystem.RealTimeServer.BaseMappingConnection
                 {
                     if(_groups[i].GroupName == key)
                     {
-                        _groups[i].ConnectionId.Add(connectionId);
+                        _groups[i].UserConnection.Add( new Connection() { ConectionId = connectionId, UserId = userId });
                         return;
                     }
                 }
-                _groups.Add(new RoomChat() { GroupName = key, ConnectionId = new List<string>() { connectionId } });
+                _groups.Add(new RoomChat() { GroupName = key, UserConnection = new List<Connection>() { new Connection() { ConectionId = connectionId, UserId = userId } } });
             }
         }
 
-        public void Remove(string key, string connectionId)
+        public void Remove(string key, string connectionId, string userId)
         {
             lock(_groups)
             {
@@ -35,7 +35,7 @@ namespace MonitoringTourSystem.RealTimeServer.BaseMappingConnection
                 {
                     if(_groups[i].GroupName == key)
                     {
-                        var itemRemove = _groups[i].ConnectionId.Remove(connectionId);
+                        var itemRemove = _groups[i].UserConnection.Remove( new Connection() { ConectionId = connectionId, UserId = userId });
                         return;
                     }
                 }

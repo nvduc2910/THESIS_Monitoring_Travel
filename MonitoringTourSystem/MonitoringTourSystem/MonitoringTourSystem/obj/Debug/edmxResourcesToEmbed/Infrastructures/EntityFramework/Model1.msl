@@ -199,5 +199,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="warning_tourist">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.warning_tourist">
+        <MappingFragment StoreEntitySet="warning_tourist">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="lng" ColumnName="lng" />
+          <ScalarProperty Name="lat" ColumnName="lat" />
+          <ScalarProperty Name="warning_content" ColumnName="warning_content" />
+          <ScalarProperty Name="warning_id" ColumnName="warning_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="warning_tourist_receiver">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.warning_tourist_receiver">
+        <MappingFragment StoreEntitySet="warning_tourist_receiver">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="receiver_id" ColumnName="receiver_id" />
+          <ScalarProperty Name="sender_id" ColumnName="sender_id" />
+          <ScalarProperty Name="warning_id" ColumnName="warning_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

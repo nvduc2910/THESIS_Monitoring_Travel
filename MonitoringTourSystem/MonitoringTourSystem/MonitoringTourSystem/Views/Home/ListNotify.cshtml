@@ -11,7 +11,7 @@
             <span class="top-label label label-warning">@Model.Notify.CountNewNotify</span>  <i class="fa fa-bell fa-1x"></i>
         </a>
         <ul id="div-alert" class="dropdown-menu dropdown-alerts">
-           @foreach (var item in Model.Notify.Notify)
+           @foreach (var item in Model.Notify.Notify.AsEnumerable().Reverse())
            {
                 <li>
                     <a href="#">
@@ -22,7 +22,7 @@
                             }
                             else if (@item.notify_type == "Disconnected")
                             {
-                                <strong><span class="label label-warningr">@item.notify_title</span></strong>
+                                <strong><span class="label label-warning">@item.notify_title</span></strong>
                             }
                             else if (@item.notify_type == "ConfirmWarning")
                             {
