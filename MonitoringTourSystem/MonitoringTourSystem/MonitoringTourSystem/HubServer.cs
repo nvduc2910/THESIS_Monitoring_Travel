@@ -377,7 +377,7 @@ namespace MonitoringTourSystem
                 Clients.Client(connection).initTouristConnected(latitude, longitude, touristName, touristId);
             }
         }
-        public void WarningForTourist(int sender, double latitude, double longitude, string warningContent)
+        public void WarningForTourist(int sender, double latitude, double longitude, string warningContent, string warningTitle)
         {
             var groupName = RoomNameDefine.GROUP_NAME_TOURGUIDE + "TG_" + sender;
             Clients.Group(groupName).receiveTourguideWarning(sender, latitude, longitude, warningContent);
@@ -391,6 +391,7 @@ namespace MonitoringTourSystem
                     lat = latitude,
                     lng = longitude,
                     status = StatusWarning.Opening.ToString(),
+                    warning_title = warningTitle,
                 };
 
                 context.warning_tourist.Add(itemWarning);
