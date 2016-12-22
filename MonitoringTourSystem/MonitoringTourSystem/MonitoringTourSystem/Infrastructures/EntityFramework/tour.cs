@@ -28,5 +28,7 @@ namespace MonitoringTourSystem.Infrastructures.EntityFramework
         public string cover_photo { get; set; }
         public int country_id { get; set; }
         public int area_id { get; set; }
+        public List<tour_schedule> ListTourSchedule { get; set; }
+
     }
 }

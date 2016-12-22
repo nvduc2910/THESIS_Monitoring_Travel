@@ -192,6 +192,7 @@
     <Property Name="lat" Type="double" Nullable="false" />
     <Property Name="lng" Type="double" Nullable="false" />
     <Property Name="status" Type="varchar" MaxLength="256" Nullable="false" />
+    <Property Name="warning_title" Type="text" Nullable="false" />
   </EntityType>
   <EntityType Name="warning_tourist_receiver">
     <Key>
