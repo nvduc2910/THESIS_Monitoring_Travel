@@ -380,7 +380,7 @@ namespace MonitoringTourSystem
         public void WarningForTourist(int sender, double latitude, double longitude, string warningContent, string warningTitle)
         {
             var groupName = RoomNameDefine.GROUP_NAME_TOURGUIDE + "TG_" + sender;
-            Clients.Group(groupName).receiveTourguideWarning(sender, latitude, longitude, warningContent);
+            Clients.Group(groupName).receiveTourguideWarning(sender, latitude, longitude, warningContent, warningTitle);
 
             using (var context = new monitoring_tour_v3Entities())
             {
