@@ -388,8 +388,8 @@ namespace MonitoringTourSystem
                 var itemWarning = new warning_tourist()
                 {
                     warning_content = warningContent,
-                    lat = latitude,
-                    lng = longitude,
+                    latitude = latitude,
+                    longitude = longitude,
                     status = StatusWarning.Opening.ToString(),
                     warning_title = warningTitle,
                 };

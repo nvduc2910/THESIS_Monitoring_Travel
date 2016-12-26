@@ -10,7 +10,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <span class="top-label label label-warning">@Model.Notify.CountNewNotify</span>  <i class="fa fa-bell fa-1x"></i>
         </a>
-        <ul id="div-alert" class="dropdown-menu dropdown-alerts">
+        <ul id="div-alert" class="dropdown-menu dropdown-alerts" style="height: 400px; overflow-y: auto;">
            @foreach (var item in Model.Notify.Notify.AsEnumerable().Reverse())
            {
                 <li>

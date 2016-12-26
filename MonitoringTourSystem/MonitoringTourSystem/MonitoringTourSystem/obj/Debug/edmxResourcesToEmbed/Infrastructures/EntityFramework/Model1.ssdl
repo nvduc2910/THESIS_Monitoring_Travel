@@ -189,8 +189,8 @@
     </Key>
     <Property Name="warning_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="warning_content" Type="text" Nullable="false" />
-    <Property Name="lat" Type="double" Nullable="false" />
-    <Property Name="lng" Type="double" Nullable="false" />
+    <Property Name="latitude" Type="double" Nullable="false" />
+    <Property Name="longitude" Type="double" Nullable="false" />
     <Property Name="status" Type="varchar" MaxLength="256" Nullable="false" />
     <Property Name="warning_title" Type="text" Nullable="false" />
   </EntityType>

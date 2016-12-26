@@ -16,8 +16,8 @@ namespace MonitoringTourSystem.Infrastructures.EntityFramework
     {
         public int warning_id { get; set; }
         public string warning_content { get; set; }
-        public double lat { get; set; }
-        public double lng { get; set; }
+        public double latitude { get; set; }
+        public double longitude { get; set; }
         public string status { get; set; }
         public string warning_title { get; set; }
     }

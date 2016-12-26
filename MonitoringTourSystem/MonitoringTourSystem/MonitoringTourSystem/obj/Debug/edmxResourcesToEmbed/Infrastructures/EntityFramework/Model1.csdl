@@ -175,8 +175,8 @@
     <EntitySet Name="warning_receiver" EntityType="Self.warning_receiver" />
     <EntitySet Name="tourguide_help" EntityType="tour_monitoring_v3Model.tourguide_help" />
     <EntitySet Name="notifies" EntityType="tour_monitoring_v3Model.notify" />
-    <EntitySet Name="warning_tourist" EntityType="tour_monitoring_v3Model.warning_tourist" />
     <EntitySet Name="warning_tourist_receiver" EntityType="tour_monitoring_v3Model.warning_tourist_receiver" />
+    <EntitySet Name="warning_tourist" EntityType="tour_monitoring_v3Model.warning_tourist" />
   </EntityContainer>
   <EntityType Name="tourguide_help">
     <Key>
@@ -202,17 +202,6 @@
     <Property Name="notify_title" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
     <Property Name="notify_type" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="warning_tourist">
-    <Key>
-      <PropertyRef Name="warning_id" />
-    </Key>
-    <Property Name="warning_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="warning_content" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
-    <Property Name="lat" Type="Double" Nullable="false" />
-    <Property Name="lng" Type="Double" Nullable="false" />
-    <Property Name="status" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
-    <Property Name="warning_title" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="warning_tourist_receiver">
     <Key>
       <PropertyRef Name="id" />
@@ -222,5 +211,16 @@
     <Property Name="sender_id" Type="Int32" Nullable="false" />
     <Property Name="receiver_id" Type="Int32" Nullable="false" />
     <Property Name="status" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="warning_tourist">
+    <Key>
+      <PropertyRef Name="warning_id" />
+    </Key>
+    <Property Name="warning_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="warning_content" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="latitude" Type="Double" Nullable="false" />
+    <Property Name="longitude" Type="Double" Nullable="false" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="warning_title" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

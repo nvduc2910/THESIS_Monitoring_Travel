@@ -5,23 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="112475ba3e144b4aa925cfc1fa0ba25c" Name="Diagram1">
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.country" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.manager" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.message" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.country" Width="1.5" PointX="0.875" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.manager" Width="1.5" PointX="2.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.message" Width="1.5" PointX="4.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="tour_monitoring_v3Model.place" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="tour_monitoring_v3Model.province" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.tour" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.tour_participants" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.tour_schedule" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.tourguide" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.tourist" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.tracking" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.warning" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.warning_receiver" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.tourguide_help" Width="1.5" PointX="9.375" PointY="7.75" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.notify" Width="1.5" PointX="11.375" PointY="0.75" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.warning_tourist" Width="1.5" PointX="11.375" PointY="4.75" />
-        <EntityTypeShape EntityType="tour_monitoring_v3Model.warning_tourist_receiver" Width="1.5" PointX="5.375" PointY="11.75" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.tour" Width="1.5" PointX="4.875" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.tour_participants" Width="1.5" PointX="6.5" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.tour_schedule" Width="1.5" PointX="6.625" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.tourguide" Width="1.5" PointX="6.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.tourist" Width="1.5" PointX="8.375" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.tracking" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.warning" Width="1.5" PointX="2.875" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.warning_receiver" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.tourguide_help" Width="1.5" PointX="8.75" PointY="8.5" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.notify" Width="1.5" PointX="10.375" PointY="2.375" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.warning_tourist_receiver" Width="1.5" PointX="4.75" PointY="9.25" />
+        <EntityTypeShape EntityType="tour_monitoring_v3Model.warning_tourist" Width="1.5" PointX="0.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

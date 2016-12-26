@@ -33,9 +33,11 @@ namespace MonitoringTourSystem.RealTimeServer.BaseMappingConnection
             {
                 for(int i = 0; i < _groups.Count; i++)
                 {
+
                     if(_groups[i].GroupName == key)
                     {
-                        var itemRemove = _groups[i].UserConnection.Remove( new Connection() { ConectionId = connectionId, UserId = userId });
+                        var itemRemove = _groups[i].UserConnection.Where(x => x.ConectionId == connectionId).First();
+                        _groups[i].UserConnection.Remove(itemRemove);
                         return;
                     }
                 }
