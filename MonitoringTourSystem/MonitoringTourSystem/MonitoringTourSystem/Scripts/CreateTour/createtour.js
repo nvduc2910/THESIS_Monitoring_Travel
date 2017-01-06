@@ -21,8 +21,8 @@
 
     $('#datetimepicker1').datetimepicker({
         // format: 'DD/MM/YYYY'
-        locale: 'vi',
         format: 'YYYY-MM-DD HH:mm',
+        locale: 'vi',
     });
 
     $('#datetimepicker2').datetimepicker({
@@ -158,7 +158,7 @@
         $('.datepicker_end').datetimepicker({
             //format: 'DD/MM/YYYY'
             format: 'YYYY-MM-DD HH:mm',
-            locale: 'vi',
+        locale: 'vi',
         });
     }
     $(add_button).click(function (e) { //on add input button click

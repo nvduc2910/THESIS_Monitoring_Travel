@@ -8,19 +8,19 @@
 
     $('#datetimepicker1').datetimepicker({
         // format: 'DD/MM/YYYY'
+        format: 'YYYY-MM-DD HH:mm',
         locale: 'vi',
-        format: 'YYYY-MM-DD hh:mm',
     });
 
     $('#datetimepicker2').datetimepicker({
         // format: 'DD/MM/YYYY'
-        format: 'YYYY-MM-DD hh:mm',
+        format: 'YYYY-MM-DD HH:mm',
         locale: 'vi',
     });
 
     $('#datetimepicker3').datetimepicker({
         //format: 'DD/MM/YYYY'
-        format: 'YYYY-MM-DD hh:mm',
+        format: 'YYYY-MM-DD HH:mm',
         locale: 'vi',
     });
     var listPlace = [];
@@ -169,11 +169,11 @@
 
     function yourfunction() {
         $('.datepicker_init').datetimepicker({
-            format: 'YYYY-MM-DD hh:mm',
+            format: 'YYYY-MM-DD HH:mm',
             locale: 'vi',
         });
         $('.datepicker_end').datetimepicker({
-            format: 'YYYY-MM-DD hh:mm',
+            format: 'YYYY-MM-DD HH:mm',
             locale: 'vi',
         });
 
