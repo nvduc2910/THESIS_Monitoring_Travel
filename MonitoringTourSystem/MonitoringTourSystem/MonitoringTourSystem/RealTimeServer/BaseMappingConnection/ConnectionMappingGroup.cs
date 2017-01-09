@@ -29,18 +29,25 @@ namespace MonitoringTourSystem.RealTimeServer.BaseMappingConnection
 
         public void Remove(string key, string connectionId, string userId)
         {
-            lock(_groups)
+            try
             {
-                for(int i = 0; i < _groups.Count; i++)
+                lock (_groups)
                 {
-
-                    if(_groups[i].GroupName == key)
+                    for (int i = 0; i < _groups.Count; i++)
                     {
-                        var itemRemove = _groups[i].UserConnection.Where(x => x.ConectionId == connectionId).First();
-                        _groups[i].UserConnection.Remove(itemRemove);
-                        return;
+
+                        if (_groups[i].GroupName == key)
+                        {
+                            var itemRemove = _groups[i].UserConnection.Where(x => x.ConectionId == connectionId).First();
+                            _groups[i].UserConnection.Remove(itemRemove);
+                            return;
+                        }
                     }
                 }
+            }
+            catch
+            {
+
             }
         }
     }
