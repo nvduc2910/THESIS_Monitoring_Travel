@@ -158,6 +158,16 @@
     <Property Name="latitude" Type="double" Nullable="false" />
     <Property Name="longitude" Type="double" Nullable="false" />
   </EntityType>
+  <EntityType Name="tracking_temp">
+    <Key>
+      <PropertyRef Name="tracking_id" />
+    </Key>
+    <Property Name="tracking_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tour_id" Type="int" Nullable="false" />
+    <Property Name="time" Type="timestamp" Precision="0" Nullable="false" />
+    <Property Name="latitude" Type="double" Nullable="false" />
+    <Property Name="longitude" Type="double" Nullable="false" />
+  </EntityType>
   <EntityType Name="warning">
     <Key>
       <PropertyRef Name="warning_id" />
@@ -218,6 +228,7 @@
     <EntitySet Name="tourguide_help" EntityType="Self.tourguide_help" Schema="tour_monitoring_v3" store:Type="Tables" />
     <EntitySet Name="tourist" EntityType="Self.tourist" Schema="tour_monitoring_v3" store:Type="Tables" />
     <EntitySet Name="tracking" EntityType="Self.tracking" Schema="tour_monitoring_v3" store:Type="Tables" />
+    <EntitySet Name="tracking_temp" EntityType="Self.tracking_temp" Schema="tour_monitoring_v3" store:Type="Tables" />
     <EntitySet Name="warning" EntityType="Self.warning" Schema="tour_monitoring_v3" store:Type="Tables" />
     <EntitySet Name="warning_receiver" EntityType="Self.warning_receiver" Schema="tour_monitoring_v3" store:Type="Tables" />
     <EntitySet Name="warning_tourist" EntityType="Self.warning_tourist" Schema="tour_monitoring_v3" store:Type="Tables" />

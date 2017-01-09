@@ -222,5 +222,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tracking_temp">
+      <EntityTypeMapping TypeName="tour_monitoring_v3Model.tracking_temp">
+        <MappingFragment StoreEntitySet="tracking_temp">
+          <ScalarProperty Name="longitude" ColumnName="longitude" />
+          <ScalarProperty Name="latitude" ColumnName="latitude" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="tour_id" ColumnName="tour_id" />
+          <ScalarProperty Name="tracking_id" ColumnName="tracking_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -1,0 +1,86 @@
+﻿
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>DK - Harley Trung</title>
+
+    <!-- For-Mobile-Apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Welcome Back Login Form Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //For-Mobile-Apps -->
+    <!-- Style -->
+    <link rel="stylesheet" href="~/Scripts/styleloginmobile.css" type="text/css" media="all" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/Scripts/jquery.signalR-2.2.0.js"></script>
+
+
+    <!-- Web-Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <!-- //Web-Fonts -->
+    <script>
+
+        //var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
+
+        var connection = $.hubConnection('http://localhost:3407/');
+        connection.qs = { 'USER_POSITION': 'TR', 'MANAGER_ID': 'TG_3', 'USER_ID': 'TR_6', 'USER_NAME': 'Harley Trung' };
+        var myHub = connection.createHubProxy('hubServer');
+
+        // start connection
+        connection.start().done(function () {
+            alert("Connected");
+            myHub.invoke('initTouristConnection', 13.756473, 100.501652, "TG_3", "Harley Trung", 6).done(function () {
+               // alert("Khởi tạo location thành công");
+            }).fail(function (error) {
+                alert("Khởi tạo location thất bại");
+            });;
+        });
+
+        myHub.on("confirmWarning", function (tourguideName, warningName) {
+
+        });
+
+        function disconect() {
+            connection.stop();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+
+        <div class="image">
+            <img src="~/Content/Images/ndq_avatar.jpg" alt="Welcome">
+        </div>
+        <h4>Du Khách</h4>
+        <h2>Harley Trung</h2>
+        <h3>Đã đăng nhập thành công</h3>
+
+        <div class="signin">
+            <form >
+                <input type="submit" style="visibility: hidden" value="LOGIN" />
+                
+            </form>
+            <input type="submit" value="DISCONECT" onclick="disconect()" />
+        </div>
+        <br>
+        <div class="social">
+            <ul class="social-icons slideanim">
+                <li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>
+                <li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>
+                <li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

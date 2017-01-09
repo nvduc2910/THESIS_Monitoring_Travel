@@ -30,6 +30,7 @@ namespace MonitoringTourSystem.Controllers
             var listPlace = MonitoringTourSystem.places.ToList();
             var listTourVietNam = listTour.Where(x => x.country_id == 84).ToList();
             var listTourForeign = listTour.Where(x => x.country_id != 84).ToList();
+            
             var model = new TourDetailViewModel() { ListTour = listTour, ListTourVietNam = listTourVietNam, ListTourForeign = listTourForeign, ListScheduleDay = null, TourGuideName = null, TourItem = null };
             return View("Index", model);
         }
@@ -57,7 +58,6 @@ namespace MonitoringTourSystem.Controllers
                 var result = new { Success = false, Message = "Get Fail" };
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
-
         }
 
         [HttpGet]

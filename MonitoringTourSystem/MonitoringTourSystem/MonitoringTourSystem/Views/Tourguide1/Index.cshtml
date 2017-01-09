@@ -1,0 +1,129 @@
+﻿
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>HDV - Đức Nguyễn</title>
+
+    <!-- For-Mobile-Apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Hướng Dẫn Viên" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //For-Mobile-Apps -->
+    <!-- Style -->
+    <link rel="stylesheet" href="~/Scripts/styleloginmobile.css" type="text/css" media="all" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/Scripts/jquery.signalR-2.2.0.js"></script>
+
+
+    <!-- Web-Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <!-- //Web-Fonts -->
+   
+
+
+    <script>
+
+        // var userId;
+        //var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
+        // var connection = $.hubConnection('http://192.168.0.104:3407');
+
+        var connection = $.hubConnection('http://localhost:3407/');
+        connection.qs = { 'USER_POSITION': 'TG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'TG_1', 'USER_NAME': 'Đức Nguyễn' };
+        var myHub = connection.createHubProxy('hubServer');
+        // for listening
+        myHub.on("confirmWarning", function (tourguideName, warningName) {
+
+        });
+
+        // start connection
+        connection.start().done(function () {
+            myHub.invoke('initMarkerNewConection', 10.776097, 106.699337, "MG_1", 1, "Đức Nguyễn", 32).done(function () {
+            }).fail(function (error) {
+                alert("Khởi tạo location thất bại");
+            });;
+        });
+        function getLocation() {
+            $.ajax({
+                url: "/Tourguide1/GetLocation/",
+                type: "GET",
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                async: true,
+                processData: false,
+                cache: false,
+                success: function (result) {
+
+                    var results = $.parseJSON(result);
+                    var flag = false;
+                    $(results).each(function (index, value) {
+
+                        var lat = this['latitude'];
+                        var lng = this['longitude'];
+
+                        (function (index) {
+
+                            setTimeout(function () {
+                                myHub.invoke('updatePositionTourGuide', 1, 32, lat, lng, "MG_1").done(function () {
+
+                                }).fail(function (error) {
+                                    alert("gui location that bai");
+                                });;
+
+                            }, index * 2000);
+                        })(index);
+
+
+                    });
+                },
+                error: function (xhr) {
+                    alert('Get location fail');
+                }
+            });
+        }
+
+        function disconect() {
+
+            connection.stop();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h4>Hướng Dẫn Viên</h4>
+        <div class="image">
+            <img src="~/Content/Images/duc_avatar.jpg" alt="Welcome">
+        </div>
+        
+        <h2>Đức Nguyễn</h2>
+        <h3>Đã đăng nhập thành công</h3>
+
+        <div class="signin">
+            <form >
+                
+                <input type="submit" value="DISCONECT" onclick="disconect()" />
+            </form>
+
+            <input type="submit" value="FAKE LOCATION" onclick="getLocation()" />
+        </div>
+        <br>
+        <div class="social">
+            <ul class="social-icons slideanim">
+                <li><a href="#" class="facebook" title="Go to Our Facebook Page"></a></li>
+                <li><a href="#" class="twitter" title="Go to Our Twitter Account"></a></li>
+                <li><a href="#" class="googleplus" title="Go to Our Google Plus Account"></a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

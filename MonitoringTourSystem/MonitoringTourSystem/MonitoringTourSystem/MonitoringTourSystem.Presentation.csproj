@@ -239,6 +239,13 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CreateTourController.cs" />
     <Compile Include="Controllers\EditTourController.cs" />
+    <Compile Include="Controllers\FakeTourguide\Tourguide1Controller.cs" />
+    <Compile Include="Controllers\FakeTourguide\Tourguide2Controller.cs" />
+    <Compile Include="Controllers\FakeTourist\FakeTouristIndexController.cs" />
+    <Compile Include="Controllers\FakeTourist\Tourist1Controller.cs" />
+    <Compile Include="Controllers\FakeTourist\Tourist2Controller.cs" />
+    <Compile Include="Controllers\FakeTourist\Tourist3Controller.cs" />
+    <Compile Include="Controllers\FakeTourist\Tourist4Controller.cs" />
     <Compile Include="Controllers\HistoryTourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TourDetailController.cs" />
@@ -299,6 +306,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructures\EntityFramework\tracking.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructures\EntityFramework\tracking_temp.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Infrastructures\EntityFramework\warning.cs">
@@ -452,6 +462,7 @@
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
     <Content Include="Scripts\markerclusterer.js" />
+    <Content Include="Scripts\styleloginmobile.css" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\TourDetail\css\timelineSchedule.css" />
@@ -633,6 +644,13 @@
     <Content Include="Views\HistoryTour\ScheduleTourTimeline.cshtml" />
     <Content Include="Views\Home\ListHelp.cshtml" />
     <Content Include="Views\Home\ListNotify.cshtml" />
+    <Content Include="Views\Tourist1\Index.cshtml" />
+    <Content Include="Views\Tourist2\Index.cshtml" />
+    <Content Include="Views\Tourist3\Index.cshtml" />
+    <Content Include="Views\Tourist4\Index.cshtml" />
+    <Content Include="Views\FakeTouristIndex\Index.cshtml" />
+    <Content Include="Views\Tourguide1\Index.cshtml" />
+    <Content Include="Views\Tourguide2\Index.cshtml" />
     <None Include="Views\Tracking\index.cshtml" />
     <Content Include="Views\Tracking\simple.html" />
     <Content Include="Web.config">

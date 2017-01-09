@@ -42,5 +42,6 @@ namespace MonitoringTourSystem.Infrastructures.EntityFramework
         public virtual DbSet<notify> notifies { get; set; }
         public virtual DbSet<warning_tourist_receiver> warning_tourist_receiver { get; set; }
         public virtual DbSet<warning_tourist> warning_tourist { get; set; }
+        public virtual DbSet<tracking_temp> tracking_temp { get; set; }
     }
 }

@@ -177,6 +177,7 @@
     <EntitySet Name="notifies" EntityType="tour_monitoring_v3Model.notify" />
     <EntitySet Name="warning_tourist_receiver" EntityType="tour_monitoring_v3Model.warning_tourist_receiver" />
     <EntitySet Name="warning_tourist" EntityType="tour_monitoring_v3Model.warning_tourist" />
+    <EntitySet Name="tracking_temp" EntityType="tour_monitoring_v3Model.tracking_temp" />
   </EntityContainer>
   <EntityType Name="tourguide_help">
     <Key>
@@ -222,5 +223,15 @@
     <Property Name="longitude" Type="Double" Nullable="false" />
     <Property Name="status" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
     <Property Name="warning_title" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tracking_temp">
+    <Key>
+      <PropertyRef Name="tracking_id" />
+    </Key>
+    <Property Name="tracking_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tour_id" Type="Int32" Nullable="false" />
+    <Property Name="time" Type="DateTime" Nullable="false" />
+    <Property Name="latitude" Type="Double" Nullable="false" />
+    <Property Name="longitude" Type="Double" Nullable="false" />
   </EntityType>
 </Schema>
