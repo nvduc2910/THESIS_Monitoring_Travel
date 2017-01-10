@@ -597,12 +597,12 @@
     }
 
     // var userId;
-    //var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
+    var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
     // var connection = $.hubConnection('http://192.168.0.104:3407');
 
     
 
-    var connection = $.hubConnection('http://localhost:3407/');
+    //var connection = $.hubConnection('http://localhost:3407/');
 
     connection.qs = { 'USER_POSITION': 'MG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'MG_1', 'USER_NAME' : 'DUC NGUYEN' };
 
@@ -612,7 +612,6 @@
     myHub.on('updateNumberOfOnline', function (groupName, numberOfOnline) {
 
         $("#numberofuseronline").text(numberOfOnline);
-
     });
     myHub.on('locationForAddMarker', function (latitude, longitude, tourguideId, tourguideName, tourId) {
 
@@ -1807,6 +1806,10 @@
                     getListWarning();
                 }
                 document.getElementById("processwaning").style.display = "none";
+
+                var numberOfWarningTxt = $("#numberOfWarning").text();
+                var numberOfWarningFreshe = parseInt(numberOfWarningTxt);
+                $("#numberOfWarning").text(numberOfWarningFreshe);
             },
             error: function (xhr) {
                 sweetAlert("Oops...", "Gửi cảnh báo thất bại, vui lòng thử lại", "error");

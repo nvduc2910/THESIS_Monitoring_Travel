@@ -174,9 +174,7 @@ namespace MonitoringTourSystem
         public void SendWarning(Warning obj)
         {
             var id = _dbContextPool.GetContext().warnings.Max(x => x.warning_id);
-
             obj.WarningId = id;
-
             for (int i = 0; i < obj.ListTourGuideId.Count; i++)
             {
                 foreach (var connection in _connections.GetConnections(obj.ListTourGuideId[i]))
@@ -184,10 +182,11 @@ namespace MonitoringTourSystem
                     Clients.Client(connection).receiveWarning(obj);
                 }
             }
-            PushNotification("Cảnh báo: " + obj.WarningName);
+            PushNotification(obj);
+
         }
 
-        void PushNotification(string message)
+        void PushNotification(Warning warningContent)
         {
             var request = WebRequest.Create("https://onesignal.com/api/v1/notifications") as HttpWebRequest;
 
@@ -201,11 +200,10 @@ namespace MonitoringTourSystem
             var obj = new
             {
                 app_id = "c9d7165c-3270-4477-8bdb-894c25d858a2",
-                contents = new { en = message },
+                data = new { id = warningContent.WarningId, category = warningContent.CategoryWarnig, distance = warningContent.Distance, lat = warningContent.Lat, lng = warningContent.Long, warningName = warningContent.WarningName, description = warningContent.DescriptionWarning },
+                contents = new { en = "Cảnh báo: " + warningContent.WarningName },
                 include_player_ids = new string[] { "e19d1e8c-1b84-47c4-85db-d64ab247c630" }
             };
-
-
 
             var param = serializer.Serialize(obj);
             byte[] byteArray = Encoding.UTF8.GetBytes(param);

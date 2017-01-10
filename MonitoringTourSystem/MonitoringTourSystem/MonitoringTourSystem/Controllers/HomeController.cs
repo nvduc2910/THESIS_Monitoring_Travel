@@ -28,7 +28,7 @@ namespace MonitoringTourSystem.Controllers
 
         public ActionResult Index()
         {
-            ListTourTestRealtime = moni.tourguides.ToList();
+           // ListTourTestRealtime = moni.tourguides.ToList();
             string username = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value).Name;
             var lstTourIsProcess = homeControllerService.GetTourIsProcessing(username);
             var lstHelp = homeControllerService.GetListHelp(username);

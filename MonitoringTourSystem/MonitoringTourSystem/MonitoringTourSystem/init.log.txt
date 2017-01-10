@@ -1534,3 +1534,43 @@ SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from ass
 Original exception type: ReflectionTypeLoadException
 Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
 
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "MySql.Web, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" could Not be loaded when searching for Hubs. [C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\MySql.Web\v4.0_6.9.9.0__c5687fc88969c44d\MySql.Web.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Users\Duc KaKa\AppData\Local\Temp\Temporary ASP.NET Files\root\025d0378\2f7339f7\assembly\dl3\b00c0bb8\ac6b24d9_6f57d201\Microsoft.AspNet.Identity.Owin.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "MySql.Web, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" could Not be loaded when searching for Hubs. [C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\MySql.Web\v4.0_6.9.9.0__c5687fc88969c44d\MySql.Web.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Users\Duc KaKa\AppData\Local\Temp\Temporary ASP.NET Files\root\025d0378\2f7339f7\assembly\dl3\b00c0bb8\ac6b24d9_6f57d201\Microsoft.AspNet.Identity.Owin.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "MySql.Web, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" could Not be loaded when searching for Hubs. [C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\MySql.Web\v4.0_6.9.9.0__c5687fc88969c44d\MySql.Web.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Users\Duc KaKa\AppData\Local\Temp\Temporary ASP.NET Files\root\025d0378\2f7339f7\assembly\dl3\b00c0bb8\ac6b24d9_6f57d201\Microsoft.AspNet.Identity.Owin.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "MySql.Web, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" could Not be loaded when searching for Hubs. [C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\MySql.Web\v4.0_6.9.9.0__c5687fc88969c44d\MySql.Web.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Users\Duc KaKa\AppData\Local\Temp\Temporary ASP.NET Files\root\025d0378\2f7339f7\assembly\dl3\b00c0bb8\ac6b24d9_6f57d201\Microsoft.AspNet.Identity.Owin.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "MySql.Web, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" could Not be loaded when searching for Hubs. [C:\WINDOWS\Microsoft.Net\assembly\GAC_MSIL\MySql.Web\v4.0_6.9.9.0__c5687fc88969c44d\MySql.Web.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Users\Duc KaKa\AppData\Local\Temp\Temporary ASP.NET Files\root\025d0378\2f7339f7\assembly\dl3\b00c0bb8\ac6b24d9_6f57d201\Microsoft.AspNet.Identity.Owin.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.
+
