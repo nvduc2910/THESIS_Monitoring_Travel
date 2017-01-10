@@ -35,10 +35,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script>
 
         // var userId;
-        //var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
+        var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
         // var connection = $.hubConnection('http://192.168.0.104:3407');
 
-        var connection = $.hubConnection('http://localhost:3407/');
+        //var connection = $.hubConnection('http://localhost:3407/');
         connection.qs = { 'USER_POSITION': 'TG', 'MANAGER_ID': 'MG_1', 'USER_ID': 'TG_1', 'USER_NAME': 'Đức Nguyễn' };
         var myHub = connection.createHubProxy('hubServer');
         // for listening
@@ -109,12 +109,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <h3>Đã đăng nhập thành công</h3>
 
         <div class="signin">
+
+            <input type="submit" value="FAKE LOCATION" onclick="getLocation()" />
             <form >
-                
                 <input type="submit" value="DISCONECT" onclick="disconect()" />
             </form>
 
-            <input type="submit" value="FAKE LOCATION" onclick="getLocation()" />
         </div>
         <br>
         <div class="social">

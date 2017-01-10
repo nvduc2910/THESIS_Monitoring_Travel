@@ -26,14 +26,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
     <!-- Web-Fonts -->
-    <link href='//fonts.googleapis.com/css?family=Raleway:400,500,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+
     <!-- //Web-Fonts -->
     <script>
 
-        //var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
-
-        var connection = $.hubConnection('http://localhost:3407/');
+        var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
+        //var connection = $.hubConnection('http://localhost:3407/');
         connection.qs = { 'USER_POSITION': 'TR', 'MANAGER_ID': 'TG_3', 'USER_ID': 'TR_6', 'USER_NAME': 'Harley Trung' };
         var myHub = connection.createHubProxy('hubServer');
 
@@ -58,11 +56,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body>
     <div class="container">
-
+        <h4>Du Khách</h4>
         <div class="image">
             <img src="~/Content/Images/ndq_avatar.jpg" alt="Welcome">
         </div>
-        <h4>Du Khách</h4>
+       
         <h2>Harley Trung</h2>
         <h3>Đã đăng nhập thành công</h3>
 
