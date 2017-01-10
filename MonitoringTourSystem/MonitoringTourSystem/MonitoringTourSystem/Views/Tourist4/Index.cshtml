@@ -33,13 +33,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
         //var connection = $.hubConnection('http://localhost:3407/');
 
-        connection.qs = { 'USER_POSITION': 'TR', 'MANAGER_ID': 'TG_3', 'USER_ID': 'TR_7', 'USER_NAME': 'Harley Trung' };
+        connection.qs = { 'USER_POSITION': 'TR', 'MANAGER_ID': 'TG_2', 'USER_ID': 'TR_7', 'USER_NAME': 'Sơn Nguyễn' };
         var myHub = connection.createHubProxy('hubServer');
 
         // start connection
         connection.start().done(function () {
            // alert("Connected");
-            myHub.invoke('initTouristConnection', 13.756259, 100.501796, "TG_3", "Harley Trung", 7).done(function () {
+            myHub.invoke('initTouristConnection', 1.283124, 103.863644, "TG_2", "Sơn Nguyễn", 7).done(function () {
                // alert("Khởi tạo location thành công");
             }).fail(function (error) {
                 alert("Khởi tạo location thất bại");
@@ -62,7 +62,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <img src="~/Content/Images/sonnguyen.jpg" alt="Welcome">
         </div>
      
-        <h2>Sơn Nguyễna</h2>
+        <h2>Sơn Nguyễn</h2>
         <h3>Đã đăng nhập thành công</h3>
 
         <div class="signin">

@@ -32,13 +32,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
         var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
         //var connection = $.hubConnection('http://localhost:3407/');
-        connection.qs = { 'USER_POSITION': 'TR', 'MANAGER_ID': 'TG_3', 'USER_ID': 'TR_6', 'USER_NAME': 'Harley Trung' };
+        connection.qs = { 'USER_POSITION': 'TR', 'MANAGER_ID': 'TG_2', 'USER_ID': 'TR_6', 'USER_NAME': 'Harley Trung' };
         var myHub = connection.createHubProxy('hubServer');
 
         // start connection
         connection.start().done(function () {
-            alert("Connected");
-            myHub.invoke('initTouristConnection', 13.756473, 100.501652, "TG_3", "Harley Trung", 6).done(function () {
+            //alert("Connected");
+            myHub.invoke('initTouristConnection', 1.282717, 103.864582, "TG_2", "Harley Trung", 6).done(function () {
                // alert("Khởi tạo location thành công");
             }).fail(function (error) {
                 alert("Khởi tạo location thất bại");
@@ -58,7 +58,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="container">
         <h4>Du Khách</h4>
         <div class="image">
-            <img src="~/Content/Images/ndq_avatar.jpg" alt="Welcome">
+            <img src="~/Content/Images/harley.jpg" alt="Welcome">
         </div>
        
         <h2>Harley Trung</h2>

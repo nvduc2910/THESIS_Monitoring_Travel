@@ -57,7 +57,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
         // var connection = $.hubConnection('http://192.168.0.104:3407');
         //var connection = $.hubConnection('http://localhost:3407/');
-        connection.qs = { 'USER_POSITION': 'TR', 'MANAGER_ID': 'TG_3', 'USER_ID': 'TR_4', 'USER_NAME': 'Anh Thư' };
+        connection.qs = { 'USER_POSITION': 'TR', 'MANAGER_ID': 'TG_2', 'USER_ID': 'TR_4', 'USER_NAME': 'Anh Thư' };
         var myHub = connection.createHubProxy('hubServer');
 
         // for listening
@@ -68,7 +68,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         });
         // start connection
         connection.start().done(function () {
-            myHub.invoke('initTouristConnection', 13.756331, 100.501765, "TG_3", "Anh Thư", 4).done(function () {
+            myHub.invoke('initTouristConnection', 1.282947, 103.864786, "TG_2", "Anh Thư", 4).done(function () {
                 //alert("Khởi tạo location thành công");
             }).fail(function (error) {
                 alert("Khởi tạo location thất bại");

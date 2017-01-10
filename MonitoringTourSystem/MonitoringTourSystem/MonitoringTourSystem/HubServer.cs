@@ -1,4 +1,4 @@
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 using MonitoringTourSystem.RealTimeServer.BaseMappingConnection;
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,10 @@ using MonitoringTourSystem.RealTimeServer.Model;
 using Newtonsoft.Json;
 using MonitoringTourSystem.Models;
 using MonitoringTourSystem.Infrastructures;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Web.Script.Serialization;
 
 namespace MonitoringTourSystem
 {
@@ -35,7 +39,7 @@ namespace MonitoringTourSystem
                 InformManageOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
                 UpdateCountUserOnline(RoomNameDefine.GROUP_NAME_MANAGER + userId);
             }
-           
+
             return base.OnConnected();
         }
 
@@ -99,7 +103,7 @@ namespace MonitoringTourSystem
         // Update Number of user online
         public void UpdateCountUserOnline(string groupName)
         {
-            
+
             for (int i = 0; i < _groups._groups.Count; i++)
             {
                 if (_groups._groups[i].GroupName == groupName)
@@ -112,7 +116,7 @@ namespace MonitoringTourSystem
                     }
                     else
                     {
-                        var numberOfOnline =( _groups._groups[i].UserConnection.Count).ToString();
+                        var numberOfOnline = (_groups._groups[i].UserConnection.Count).ToString();
                         Clients.Group(groupName).updateNumberOfOnline(groupName, numberOfOnline);
                     }
                 }
@@ -124,7 +128,7 @@ namespace MonitoringTourSystem
         {
             foreach (var connection in _connections.GetConnections(receiver))
             {
-                Clients.Client(connection).locationForAddMarker(latitude, longitude, tourguideId, tourguideName,tourId);
+                Clients.Client(connection).locationForAddMarker(latitude, longitude, tourguideId, tourguideName, tourId);
             }
         }
 
@@ -140,7 +144,7 @@ namespace MonitoringTourSystem
                 else
                 {
                     Clients.Client(connection).removeUserDisconnection(senderId, sernderUserName);
-                }   
+                }
             }
         }
 
@@ -180,6 +184,56 @@ namespace MonitoringTourSystem
                     Clients.Client(connection).receiveWarning(obj);
                 }
             }
+            PushNotification("Cảnh báo: " + obj.WarningName);
+        }
+
+        void PushNotification(string message)
+        {
+            var request = WebRequest.Create("https://onesignal.com/api/v1/notifications") as HttpWebRequest;
+
+            request.KeepAlive = true;
+            request.Method = "POST";
+            request.ContentType = "application/json; charset=utf-8";
+
+            request.Headers.Add("authorization", "Basic YjU4Y2E5MWEtMWFhZS00NjVmLThiNTItMzViYTBkNjg4ODkw");
+
+            var serializer = new JavaScriptSerializer();
+            var obj = new
+            {
+                app_id = "c9d7165c-3270-4477-8bdb-894c25d858a2",
+                contents = new { en = message },
+                include_player_ids = new string[] { "e19d1e8c-1b84-47c4-85db-d64ab247c630" }
+            };
+
+
+
+            var param = serializer.Serialize(obj);
+            byte[] byteArray = Encoding.UTF8.GetBytes(param);
+
+            string responseContent = null;
+
+            try
+            {
+                using (var writer = request.GetRequestStream())
+                {
+                    writer.Write(byteArray, 0, byteArray.Length);
+                }
+
+                using (var response = request.GetResponse() as HttpWebResponse)
+                {
+                    using (var reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        responseContent = reader.ReadToEnd();
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                System.Diagnostics.Debug.WriteLine(new StreamReader(ex.Response.GetResponseStream()).ReadToEnd());
+            }
+
+            System.Diagnostics.Debug.WriteLine(responseContent);
         }
 
 

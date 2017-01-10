@@ -32,12 +32,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         var connection = $.hubConnection('http://tourtrackingv2.azurewebsites.net/');
 
         //var connection = $.hubConnection('http://localhost:3407/');
-        connection.qs = { 'USER_POSITION': 'TR', 'MANAGER_ID': 'TG_3', 'USER_ID': 'TR_5', 'USER_NAME': 'Trâm Lê' };
+        connection.qs = { 'USER_POSITION': 'TR', 'MANAGER_ID': 'TG_2', 'USER_ID': 'TR_5', 'USER_NAME': 'Trâm Lê' };
         var myHub = connection.createHubProxy('hubServer');
 
         // start connection
         connection.start().done(function () {
-            myHub.invoke('initTouristConnection', 13.756382, 100.501973, "TG_3", "Trâm Lê", 5).done(function () {
+            myHub.invoke('initTouristConnection', 1.282937, 103.864073, "TG_2", "Trâm Lê", 5).done(function () {
                 //alert("Khởi tạo location thành công");
             }).fail(function (error) {
                 alert("Khởi tạo location thất bại");
