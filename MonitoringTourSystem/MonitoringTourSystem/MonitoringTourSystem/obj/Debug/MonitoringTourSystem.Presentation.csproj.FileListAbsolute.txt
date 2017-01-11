@@ -365,3 +365,4 @@ F:\Ky 9\Khoa Luan\web_v2\MonitoringTourSystem\MonitoringTourSystem\MonitoringTou
 F:\Ky 9\Khoa Luan\web_v2\MonitoringTourSystem\MonitoringTourSystem\MonitoringTourSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 F:\Ky 9\Khoa Luan\web_v2\MonitoringTourSystem\MonitoringTourSystem\MonitoringTourSystem\obj\Debug\MonitoringTourSystem.dll
 F:\Ky 9\Khoa Luan\web_v2\MonitoringTourSystem\MonitoringTourSystem\MonitoringTourSystem\obj\Debug\MonitoringTourSystem.pdb
+F:\Ky 9\Khoa Luan\web_v2\MonitoringTourSystem\MonitoringTourSystem\MonitoringTourSystem\obj\Debug\MonitoringTourSystem.Presentation.csprojResolveAssemblyReference.cache
